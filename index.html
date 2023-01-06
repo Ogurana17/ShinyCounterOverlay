@@ -7,22 +7,35 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
   <link rel="stylesheet" href="css/ShinyProbability.css" defer type="text/css">
   <!-- GoogleFontsからの読み込み -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Sans+JP:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
   <script src="js/shinyProbability.js" defer type="text/js"></script>
 </head>
 
 <body>
+<!--
+    次に色違いが出る確率
+    試行回数を考慮した確率
+-->
 <div class="nextShinyProbability">
     <label class="nextShinyProbabilityTitle">次に色違いが出る確率</label>
     <p>✨0.00%✨</p>
 </div>
+<!--
+    試行回数
+    出会うまでに繰り返した数
+-->
 <div class="traials">
     <label class="traialsTitle">試行回数</label>
-    <p>🏋‍♂0回🏋‍♀</p>
+    <p>🏋‍♂<input type="button" class="traialsInput" minlength="1" maxlength="6" size="7"  value="0">回🏋‍♀</p>
 </div>
+
+<!--
+    単一の確率
+    国際孵化なら1/512等
+-->
 <div class="shingleShinyProbability">
     <label class="shingleShinyProbabilityTitle">単一の確率</label>
-    <p>1/<input type="text" class="shingleShinyProbabilityInput" minlength="1" maxlength="4" size="5" value="4096"></p>
+    <p>1 / <input type="text" class="shingleShinyProbabilityInput" minlength="1" maxlength="4" size="5" value="4096"></p>
 </div>
 </body>
 

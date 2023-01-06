@@ -3,12 +3,19 @@
 @charset "utf-8";
 
 body {
-    font-family: 'Noto Color Emoji', 'Zen Maru Gothic', sans-serif;
+    font-family: 'Open Sans', 'Zen Maru Gothic', 'Noto Color Emoji', sans-serif;
     font-size: 16px;
+    font-weight: 700;
     color: #333;
+    text-size-adjust: 100%;
+    font-feature-settings: "palt" 1;
     background-color: #0F0;
     width: 400px;
     height: auto;
+}
+
+p {
+    font-size: 1.25em;
 }
 
 .nextShinyProbability,
@@ -23,20 +30,31 @@ body {
     border-radius: 6px;
 }
 
-.nextShinyProbabilityTitle,
-.traialsTitle,
-.shingleShinyProbabilityTitle {
-    font-weight: 700;
+.nextShinyProbability > p,
+.traials > p,
+.shingleShinyProbability > p,
+.traialsInput,
+.shingleShinyProbabilityInput {
+    font-size: 1.25em;
 }
 
 .nextShinyProbability,
 .traials,
 .shingleShinyProbability,
+.traialsInput,
 .shingleShinyProbabilityInput {
     text-align: center;
     margin: .5em 0;
+    color: #333;
 }
 
-.shingleShinyProbability > p {
+.traialsInput {
+    width: 4em;
+    height: 1.5em;
+}
+
+.shingleShinyProbability > p,
+.traials > p {
     margin: .5em;
+    color: #333;
 }
