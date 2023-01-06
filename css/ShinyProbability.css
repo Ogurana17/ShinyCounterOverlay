@@ -1,1 +1,42 @@
 /* ShinyProbability */
+
+@charset "utf-8";
+
+body {
+    font-family: 'Noto Color Emoji', 'Zen Maru Gothic', sans-serif;
+    font-size: 16px;
+    color: #333;
+    background-color: #0F0;
+    width: 400px;
+    height: auto;
+}
+
+.nextShinyProbability,
+.traials,
+.shingleShinyProbability {
+    width: 200px;
+    box-sizing: border-box;
+    border: solid 1px rgba(33,33,33,.5);
+    background-color: #fff;
+    margin: .5em 0;
+    padding: .25em;
+    border-radius: 6px;
+}
+
+.nextShinyProbabilityTitle,
+.traialsTitle,
+.shingleShinyProbabilityTitle {
+    font-weight: 700;
+}
+
+.nextShinyProbability,
+.traials,
+.shingleShinyProbability,
+.shingleShinyProbabilityInput {
+    text-align: center;
+    margin: .5em 0;
+}
+
+.shingleShinyProbability > p {
+    margin: .5em;
+}

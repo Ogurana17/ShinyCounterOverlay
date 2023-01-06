@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
   <meta charset="utf-8">
   <title>Shiny Counter Overlay</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+  <link rel="stylesheet" href="css/ShinyProbability.css" defer type="text/css">
+  <!-- GoogleFontsからの読み込み -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+  <script src="js/shinyProbability.js" defer type="text/js"></script>
 </head>
 
 <body>
 <div class="nextShinyProbability">
-    <p>次に色違いが出る確率</p>
-    <p>0.00%</p>
+    <label class="nextShinyProbabilityTitle">次に色違いが出る確率</label>
+    <p>✨0.00%✨</p>
 </div>
 <div class="traials">
-    <p>試行回数</p>
-    <p></p>
+    <label class="traialsTitle">試行回数</label>
+    <p>🏋‍♂0回🏋‍♀</p>
 </div>
 <div class="shingleShinyProbability">
-    <p>単一の確率</p>
-    <p>0.00%</p>
+    <label class="shingleShinyProbabilityTitle">単一の確率</label>
+    <p>1/<input type="text" class="shingleShinyProbabilityInput" minlength="1" maxlength="4" size="5" value="4096"></p>
 </div>
-
 </body>
 
 </html>
