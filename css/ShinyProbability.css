@@ -6,12 +6,12 @@ body {
     font-family: 'Open Sans', 'Zen Maru Gothic', 'Noto Color Emoji', sans-serif;
     font-size: 16px;
     font-weight: 700;
-    color: #333;
+    color: #fff;
     text-size-adjust: 100%;
     font-feature-settings: "palt" 1;
     /* 背景色:緑 */
     /* background-color: #0F0; */
-    background-color: #111;
+    background-color: #222;
     width: 100%;
     height: auto;
     margin: auto;
@@ -33,8 +33,8 @@ p {
 .shingleShinyProbability {
     width: 180px;
     box-sizing: border-box;
-    border: solid 1px rgba(33,33,33,.5);
-    background-color: #fff;
+    /* border: solid 1px rgba(33,33,33,.5); */
+    background-color: rgba(0, 0, 0, .65);
     padding: .25em;
     border-radius: 6px;
 }
@@ -55,7 +55,7 @@ p {
 .shingleShinyProbabilityInput {
     text-align: center;
     margin: .25em auto;
-    color: #333;
+    /* color: #333; */
 }
 
 .traialsInput,
@@ -70,10 +70,26 @@ p {
     height: 1.5em;
 }
 
+.traialsInput,
+.shingleShinyProbabilityInput,
+.traialsInputButton {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0 0 0 1px #ccc inset;
+    border: none;
+    border-radius: 6px;
+}
+
+.traialsInput:focus,
+.shingleShinyProbabilityInput:focus,
+.traialsInputButton:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
+}
 .shingleShinyProbability > p,
 .traials > p {
     margin: .25em;
-    color: #333;
+    /* color: #333; */
 }
 
 /*
@@ -90,7 +106,7 @@ input[type="number"]::-webkit-inner-spin-button {
 } */
 
 hr{
-    border: solid .1px#333;
+    /* border: solid .1px#333; */
     width: 80%;
     margin: .1em auto;
 }
