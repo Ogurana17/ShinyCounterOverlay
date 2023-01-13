@@ -2,6 +2,11 @@
 
 @charset "utf-8";
 
+body>* {
+    /* ダブルタップでの動作を止める */
+    touch-action: manipulation;
+}
+
 body {
     font-family: 'Open Sans', 'Zen Maru Gothic', 'Noto Color Emoji', sans-serif;
     font-size: 16px;
@@ -24,9 +29,6 @@ body {
     */
     /* position: absolute;
     top: calc(50% - (301.2px) / 2); */
-
-    /* ダブルタップでの動作を止める */
-    touch-action: manipulation;
 }
 
 p {
