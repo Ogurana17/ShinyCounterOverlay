@@ -1,6 +1,6 @@
 # Shiny Counter Overlay
 
-![screenshot](src/screenshot2023-01-13_230948.png)
+![screenshot](src/2023-01-13_23-23-08.mkv_snapshot_00.01.027.jpg)
 
 ポケットモンスターシリーズの色違いのポケモンが出現する確率をOBS等のオーバーレイとして表示するためのリポジトリ。
 GitHubPagesを利用して動かします。
