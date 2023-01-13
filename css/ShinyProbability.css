@@ -12,6 +12,7 @@ html {
     -webkit-appearance: none;
     appearance: none;
     transform: translateZ(0);
+
 }
 
 body {
@@ -108,7 +109,8 @@ p {
 .shingleShinyProbabilityInput:focus,
 .traialsInputButton:focus {
     outline: 0;
-    box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
+    /* box-shadow: 0 0 0 2px rgb(33, 150, 243) inset; */
+    filter: drop-shadow(0px 0px 4px rgba(33,150,243,0.6));
 }
 .shingleShinyProbability > p,
 .traials > p {
