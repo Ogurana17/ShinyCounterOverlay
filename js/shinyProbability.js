@@ -38,6 +38,8 @@ document.getElementById('shingleShinyProbabilityDenominator').oninput = function
 }
 
 //カーソルが外れたら再計算
+//対象はinputNumberのみ（増えるとカウンターボタンからの再計算は過剰と判断）
+//似た動作なのでイベントをまとめたい
 document.getElementById('traialsInput').onblur = function reCalc() {
     shinyProbability();
 }
