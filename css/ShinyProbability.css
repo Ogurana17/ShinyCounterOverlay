@@ -11,6 +11,7 @@ html {
     */
     -webkit-appearance: none;
     appearance: none;
+    transform: translateZ(0);
 }
 
 body {
