@@ -3,48 +3,44 @@
 @charset "utf-8";
 
 html {
-    /* ダブルタップでの動作を止める */
-    touch-action: manipulation;
+  /* ダブルタップでの動作を止める */
+  touch-action: manipulation;
 }
 
 body {
-    font-family: 'Open Sans', 'Zen Maru Gothic', 'Noto Color Emoji', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
-    text-size-adjust: 100%;
-    -webkit-text-size-adjust:100%;
-    font-feature-settings: "palt" 1;
+  font-family: "Open Sans", "Zen Maru Gothic", "Noto Color Emoji", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-feature-settings: "palt" 1;
 
-    /* 背景色:緑 */
-    /* background-color: #0F0; */
-    background-color: #222;
-    width: 100%;
-    height: auto;
-    margin: auto;
+  /* 背景色:緑 */
+  /* background-color: #0F0; */
+  background-color: #222;
+  width: 100%;
+  height: auto;
+  margin: auto;
 
-    /* 画面の中央になるように設定
+  /* 画面の中央になるように設定
     `343.2px`はbodyのheight値
     ※OBS側で元の確率を隠せなくなったので廃止
     */
-    /* position: absolute;
+  /* position: absolute;
     top: calc(50% - (301.2px) / 2); */
-}
-
-p {
-    font-size: 1.25em;
 }
 
 .nextShinyProbability,
 .traials,
 .shingleShinyProbability {
-    width: 180px;
-    position: relative;
-    box-sizing: border-box;
-    /* border: solid 1px rgba(33,33,33,.5); */
-    background-color: rgba(0, 0, 0, .65);
-    padding: .25em;
-    border-radius: 6px;
+  width: 180px;
+  position: relative;
+  box-sizing: border-box;
+  /* border: solid 1px rgba(33,33,33,.5); */
+  background-color: rgba(0, 0, 0, 0.65);
+  padding: 0.25em;
+  border-radius: 6px;
 }
 
 .nextShinyProbability > p,
@@ -53,7 +49,7 @@ p {
 .traialsInput,
 .traialsInputButton,
 .shingleShinyProbabilityInput {
-    font-size: 1.25em;
+  font-size: 1.25em;
 }
 
 .nextShinyProbability,
@@ -61,55 +57,54 @@ p {
 .shingleShinyProbability,
 .traialsInput,
 .shingleShinyProbabilityInput {
-    text-align: center;
-    margin: .25em auto;
-    /* color: #333; */
+  text-align: center;
+  margin: 0.25em auto;
+  /* color: #333; */
 }
 
 .traialsInput,
 .shingleShinyProbabilityInput {
-    width: 100px;
-    height: 1.25em;
+  width: 100px;
+  height: 1.25em;
 }
 
 .traialsInputButton {
-    /* -3emで調整 */
-    width: calc((180px - 2.5em)/2);
-    height: 1.5em;
+  /* -3emで調整 */
+  width: calc((180px - 2.5em) / 2);
+  height: 1.5em;
 }
 
 .traialsInput,
 .shingleShinyProbabilityInput,
 .traialsInputButton {
-    color: #fff;
-    background-color: rgba(33, 33, 33, .65);
-    /* box-shadow: 0 0 0 1px #aaa inset; */
-    border: none;
+  color: #fff;
+  background-color: rgba(33, 33, 33, 0.65);
+  /* box-shadow: 0 0 0 1px #aaa inset; */
+  border: none;
 }
 
 .traialsInput,
 .shingleShinyProbabilityInput {
-    border-radius: 6px;
+  border-radius: 6px;
 }
 
-
 .traialsInputButton {
-    position: relative;
-    box-shadow: 0 0 0 1px #aaa inset;
-    border-radius: 1em;
+  position: relative;
+  box-shadow: 0 0 0 1px #aaa inset;
+  border-radius: 1em;
 }
 
 .traialsInput:focus,
 .shingleShinyProbabilityInput:focus,
 .traialsInputButton:focus {
-    outline: 0;
-    box-shadow: 0 0 0 1.5px rgb(33, 150, 243) inset;
-    filter: drop-shadow(0px 0px 2px rgba(33,150,243,.6));
+  outline: 0;
+  box-shadow: 0 0 0 1.25px rgb(33, 150, 243) inset;
+  filter: drop-shadow(0px 0px 2px rgba(33, 150, 243, 0.6));
 }
 .shingleShinyProbability > p,
 .traials > p {
-    margin: .25em;
-    /* color: #333; */
+  margin: 0.25em;
+  /* color: #333; */
 }
 
 /*
@@ -125,17 +120,17 @@ input[type="number"]::-webkit-inner-spin-button {
   -moz-appearance:textfield;
 } */
 
-hr{
-    /* border: solid .1px#333; */
-    width: 80%;
-    margin: .1em auto;
+hr {
+  /* border: solid .1px#333; */
+  width: 80%;
+  margin: 0.1em auto;
 }
 
 /* `nextShinyProbabilityTitle`はクラスとidで別もの */
-.nextShinyProbabilityTitle>p {
-    font-size: 1rem;
+.nextShinyProbabilityTitle > p {
+  font-size: 1rem;
 }
 
 #nextShinyProbabilityTitle {
-    font-size: 2rem;
+  font-size: 2rem;
 }
