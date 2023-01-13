@@ -52,6 +52,45 @@ document.getElementById('shingleShinyProbabilityDenominator').onblur = function 
     shinyProbability();
 }
 
+//起動時にcookie読み込んで反映
+window.onload = function onload() {
+    //cookieの内容を`;'で分割
+    //(キー1)=(値1); (キー2)=(値2);
+    //↓
+    //cookieItem[0] = '(キー1)=(値1)'
+    //cookieItem[2] = '(キー2)=(値2)'
+    var cookies = document.cookie;
+    var cookieItem = cookies.split(';');
+
+    //cookieItemを`=`で区切る
+    //elem[0]とemem[1]でペア、elem[2]とelem[3]でペア...
+    var cookieValue = '';
+    for (i = 0; i < cookieItem.length; i++) {
+        var elem = cookieItem[i].split('=');
+        //
+        if (elem[0].trim() == 'traialsInput') {
+            cookieValue = unescape(elem[1]);
+            //試行回数をページに反映
+            traialsInput.value = decodeURIComponent(cookieValue);
+            console.log('cookie試行回数: ' + cookieValue);
+        } else if (elem[0].trim() == 'shingleShinyProbabilityNumerator') {
+            cookieValue = unescape(elem[1]);
+            //分子をページに反映
+            shingleShinyProbabilityNumerator.value = decodeURIComponent(cookieValue);
+            console.log('cookie分子: ' + cookieValue);
+        } else if (elem[0].trim() == 'shingleShinyProbabilityDenominator') {
+            cookieValue = unescape(elem[1]);
+            //分母をページに反映
+            shingleShinyProbabilityDenominator.value = decodeURIComponent(cookieValue);
+            console.log('cookie分母: ' + cookieValue);
+        } else {
+            continue;
+      }
+    }
+    //確率計算を行って反映
+    shinyProbability()
+  }
+
 function shinyProbability() {
     //HTML要素から要素を読み込み
     const nextShinyProbabilityTitle = document.getElementById('nextShinyProbabilityTitle');
@@ -63,8 +102,14 @@ function shinyProbability() {
     //計算部分と文字処理部分を分割したい
     nextShinyProbabilityTitle.innerHTML = '✨' + ((1 - (Math.pow(1 - (shingleShinyProbabilityNumerator.value / shingleShinyProbabilityDenominator.value), traialsInput.value)))*100).toFixed(3) + '%✨';
 
+    //cookie書き込み
+    //cookieの有効期限は1年（これが妥当かは分かりかねますが...）
+    document.cookie = 'traialsInput=' + encodeURIComponent(traialsInput.value) + '; max-age=' + 60 * 60 * 24 * 365;
+    document.cookie = 'shingleShinyProbabilityNumerator=' + encodeURIComponent(shingleShinyProbabilityNumerator.value) + '; max-age=' + 60 * 60 * 24 * 365;
+    document.cookie = 'shingleShinyProbabilityDenominator=' + encodeURIComponent(shingleShinyProbabilityDenominator.value) + '; max-age=' + 60 * 60 * 24 * 365;
+
     //log書き込み
     //consoleで確認する用途
-    console.log('試行回数 : ' + traialsInput.value);
-    console.log('次に色違いが出る確率' + nextShinyProbabilityTitle.innerHTML);
+    console.log('試行回数: ' + traialsInput.value);
+    console.log('次に色違いが出る確率: ' + nextShinyProbabilityTitle.innerHTML);
 }
