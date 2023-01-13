@@ -8,18 +8,23 @@ body {
     font-weight: 700;
     color: #fff;
     text-size-adjust: 100%;
+    -webkit-text-size-adjust:100%;
     font-feature-settings: "palt" 1;
+
     /* 背景色:緑 */
     /* background-color: #0F0; */
     background-color: #222;
     width: 100%;
     height: auto;
     margin: auto;
+
     /* 画面の中央になるように設定
     `343.2px`はbodyのheight値
+    ※OBS側で元の確率を隠せなくなったので廃止
     */
-    position: absolute;
-    top: calc(50% - (343.2px) / 2);
+    /* position: absolute;
+    top: calc(50% - (301.2px) / 2); */
+
     /* ダブルタップでの動作を止める */
     touch-action: manipulation;
 }
@@ -75,9 +80,19 @@ p {
 .traialsInputButton {
     color: #fff;
     background-color: rgba(33, 33, 33, .65);
-    /* box-shadow: 0 0 0 1px #fff inset; */
+    /* box-shadow: 0 0 0 1px #aaa inset; */
     border: none;
+}
+
+.traialsInput,
+.shingleShinyProbabilityInput {
     border-radius: 6px;
+}
+
+
+.traialsInputButton {
+    box-shadow: 0 0 0 1px #aaa inset;
+    border-radius: 1em;
 }
 
 .traialsInput:focus,
@@ -109,4 +124,13 @@ hr{
     /* border: solid .1px#333; */
     width: 80%;
     margin: .1em auto;
+}
+
+/* `nextShinyProbabilityTitle`はクラスとidで別もの */
+.nextShinyProbabilityTitle>p {
+    font-size: 1rem;
+}
+
+#nextShinyProbabilityTitle {
+    font-size: 2rem;
 }

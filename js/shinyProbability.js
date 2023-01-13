@@ -98,11 +98,10 @@ function shinyProbability() {
     const shingleShinyProbabilityDenominator = document.getElementById('shingleShinyProbabilityDenominator');
 
     //演算
-    //本当は文字列と数字で分裂させたい
-    //計算部分と文字処理部分を分割したい
+    //計算部分と有効桁処理部分を分割したい
     //toFixedは四捨五入するので使用しない
     //Math.floor前に`1000倍`して処理後に`1/1000`する
-    nextShinyProbabilityTitle.innerHTML = '✨' + Math.floor(((1 - (Math.pow(1 - (shingleShinyProbabilityNumerator.value / shingleShinyProbabilityDenominator.value), traialsInput.value))) * 100) * 1000) / 1000 + '%✨';
+    nextShinyProbabilityTitle.innerHTML = Math.floor(((1 - (Math.pow(1 - (shingleShinyProbabilityNumerator.value / shingleShinyProbabilityDenominator.value), traialsInput.value))) * 100) * 1000) / 1000;
 
     //cookie書き込み
     //cookieの有効期限は1年（これが妥当かは分かりかねますが...）
