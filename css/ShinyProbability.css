@@ -21,7 +21,7 @@ p {
 .nextShinyProbability,
 .traials,
 .shingleShinyProbability {
-    width: 200px;
+    width: 250px;
     box-sizing: border-box;
     border: solid 1px rgba(33,33,33,.5);
     background-color: #fff;
@@ -56,7 +56,8 @@ p {
 }
 
 .traialsInputButton {
-    width: auto;
+    /* -3emで調整 */
+    width: calc((250px - 4em - 3em)/2);
     height: 1.5em;
 }
 
