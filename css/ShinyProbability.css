@@ -9,9 +9,12 @@ body {
     color: #333;
     text-size-adjust: 100%;
     font-feature-settings: "palt" 1;
-    background-color: #0F0;
-    width: 400px;
+    /* 背景色:緑 */
+    /* background-color: #0F0; */
+    background-color: #111;
+    width: 100%;
     height: auto;
+    margin: 0 auto;
 }
 
 p {
@@ -25,7 +28,6 @@ p {
     box-sizing: border-box;
     border: solid 1px rgba(33,33,33,.5);
     background-color: #fff;
-    margin: .25em 0;
     padding: .25em;
     border-radius: 6px;
 }
@@ -45,7 +47,7 @@ p {
 .traialsInput,
 .shingleShinyProbabilityInput {
     text-align: center;
-    margin: .25em 0;
+    margin: .25em auto;
     color: #333;
 }
 
