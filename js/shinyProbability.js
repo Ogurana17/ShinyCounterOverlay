@@ -82,7 +82,7 @@ window.onload = function onload() {
             cookieValue = unescape(elem[1]);
             //分母をページに反映
             shingleShinyProbabilityDenominator.value = decodeURIComponent(cookieValue);
-            console.log('cookie分母: ' + cookieValue);
+            console.log('cookie_分母: ' + cookieValue);
         } else {
             continue;
       }
@@ -100,7 +100,9 @@ function shinyProbability() {
     //演算
     //本当は文字列と数字で分裂させたい
     //計算部分と文字処理部分を分割したい
-    nextShinyProbabilityTitle.innerHTML = '✨' + ((1 - (Math.pow(1 - (shingleShinyProbabilityNumerator.value / shingleShinyProbabilityDenominator.value), traialsInput.value)))*100).toFixed(3) + '%✨';
+    //toFixedは四捨五入するので使用しない
+    //Math.floor前に`1000倍`して処理後に`1/1000`する
+    nextShinyProbabilityTitle.innerHTML = '✨' + Math.floor(((1 - (Math.pow(1 - (shingleShinyProbabilityNumerator.value / shingleShinyProbabilityDenominator.value), traialsInput.value))) * 100) * 1000) / 1000 + '%✨';
 
     //cookie書き込み
     //cookieの有効期限は1年（これが妥当かは分かりかねますが...）
