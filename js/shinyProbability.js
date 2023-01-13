@@ -29,22 +29,40 @@ document.getElementById('traialsInput').oninput = function sliceMaxLength() {
     traialsInput.value = traialsInput.value.slice(0, 6);
 }
 
-document.getElementById('shingleShinyProbabilityInput').oninput = function sliceMaxLength() {
-    shingleShinyProbabilityInput.value = shingleShinyProbabilityInput.value.slice(0, 6);
+document.getElementById('shingleShinyProbabilityNumerator').oninput = function sliceMaxLength() {
+    shingleShinyProbabilityNumerator.value = shingleShinyProbabilityNumerator.value.slice(0, 6);
+}
+
+document.getElementById('shingleShinyProbabilityDenominator').oninput = function sliceMaxLength() {
+    shingleShinyProbabilityDenominator.value = shingleShinyProbabilityDenominator.value.slice(0, 6);
+}
+
+//カーソルが外れたら再計算
+document.getElementById('traialsInput').onblur = function reCalc() {
+    shinyProbability();
+}
+
+document.getElementById('shingleShinyProbabilityNumerator').onblur = function reCalc() {
+    shinyProbability();
+}
+
+document.getElementById('shingleShinyProbabilityDenominator').onblur = function reCalc() {
+    shinyProbability();
 }
 
 function shinyProbability() {
     //HTML要素から要素を読み込み
     const nextShinyProbabilityTitle = document.getElementById('nextShinyProbabilityTitle');
-    const shingleShinyProbabilityInput = document.getElementById('shingleShinyProbabilityInput');
+    const shingleShinyProbabilityNumerator = document.getElementById('shingleShinyProbabilityNumerator');
+    const shingleShinyProbabilityDenominator = document.getElementById('shingleShinyProbabilityDenominator');
 
     //演算
     //本当は文字列と数字で分裂させたい
     //計算部分と文字処理部分を分割したい
-    nextShinyProbabilityTitle.innerHTML = '✨' + ((1 - (Math.pow(1 - (1 / shingleShinyProbabilityInput.value), traialsInput.value)))*100).toFixed(3) + '%✨';
+    nextShinyProbabilityTitle.innerHTML = '✨' + ((1 - (Math.pow(1 - (shingleShinyProbabilityNumerator.value / shingleShinyProbabilityDenominator.value), traialsInput.value)))*100).toFixed(3) + '%✨';
 
     //log書き込み
     //consoleで確認する用途
-    console.log(traialsInput.value);
-    console.log(nextShinyProbabilityTitle.innerHTML);
+    console.log('試行回数 : ' + traialsInput.value);
+    console.log('次に色違いが出る確率' + nextShinyProbabilityTitle.innerHTML);
 }
