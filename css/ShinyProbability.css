@@ -5,14 +5,6 @@
 html {
     /* ダブルタップでの動作を止める */
     touch-action: manipulation;
-
-    /* ブラウザ指定のデザインを無効
-    iOSのinputにbox-shadowを適用させる
-    */
-    -webkit-appearance: none;
-    appearance: none;
-    transform: translateZ(0);
-
 }
 
 body {
@@ -48,8 +40,7 @@ p {
 .shingleShinyProbability {
     width: 180px;
     position: relative;
-    position: relative;box-sizing: border-
-    box;
+    box-sizing: border-box;
     /* border: solid 1px rgba(33,33,33,.5); */
     background-color: rgba(0, 0, 0, .65);
     padding: .25em;
@@ -92,8 +83,7 @@ p {
 .traialsInputButton {
     color: #fff;
     background-color: rgba(33, 33, 33, .65);
-    position: relative;/* 
-    box-shadow: 0 0 0 1px #aaa inset; */
+    /* box-shadow: 0 0 0 1px #aaa inset; */
     border: none;
 }
 
@@ -113,9 +103,8 @@ p {
 .shingleShinyProbabilityInput:focus,
 .traialsInputButton:focus {
     outline: 0;
-    position: relative;/* 
-    box-shadow: 0 0 0 2px rgb(33, 150, 243) inset; */
-    filter: drop-shadow(0px 0px 4px rgba(33,150,243,.6));
+    box-shadow: 0 0 0 1.5px rgb(33, 150, 243) inset;
+    filter: drop-shadow(0px 0px 2px rgba(33,150,243,.6));
 }
 .shingleShinyProbability > p,
 .traials > p {
