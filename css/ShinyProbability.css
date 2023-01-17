@@ -9,38 +9,39 @@ html {
 
 body {
   font-family: "Open Sans", "Zen Maru Gothic", "Noto Color Emoji", sans-serif;
-  font-size: 16px;
+  /* width:180pxで16pxと同等。文字のはみ出しは70vminで調整 */
+  font-size: calc((16 / 180) * 70vmin);
   font-weight: 700;
   color: #fff;
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   font-feature-settings: "palt" 1;
 
-  /* 背景色:緑 */
-  /* background-color: #0F0; */
+  /* OBSではここの背景色は反映されない */
   background-color: #222;
   width: 100%;
   height: auto;
   margin: auto;
 
-  /* 画面の中央になるように設定
-    `343.2px`はbodyのheight値
-    ※OBS側で元の確率を隠せなくなったので廃止
-    */
+  /*
+    画面の中央になるように設定
+    環境によって見切れる場合があるので廃止
+  */
   /* position: absolute;
-    top: calc(50% - (301.2px) / 2); */
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%); */
 }
 
 .nextShinyProbability,
 .traials,
 .shingleShinyProbability {
-  width: 180px;
+  width: 80vmin;
   position: relative;
   box-sizing: border-box;
-  /* border: solid 1px rgba(33,33,33,.5); */
   background-color: rgba(0, 0, 0, 0.65);
   padding: 0.25em;
-  border-radius: 6px;
+  border-radius: .375em;
 }
 
 .nextShinyProbability > p,
@@ -59,18 +60,24 @@ body {
 .shingleShinyProbabilityInput {
   text-align: center;
   margin: 0.25em auto;
-  /* color: #333; */
 }
 
 .traialsInput,
 .shingleShinyProbabilityInput {
-  width: 100px;
+  /*
+    70vminはbodyのフォントのvminに合わせる
+    6桁の数字が入る大きさにしておく必要がある
+  */
+  width: calc(70vmin / 2);
   height: 1.25em;
 }
 
 .traialsInputButton {
-  /* -3emで調整 */
-  width: calc((180px - 2.5em) / 2);
+  /*
+    70vminはbodyのフォントのvminに合わせる
+    ある程度大きくないと押しづらい
+  */
+  width: calc((70vmin) / 2);
   height: 1.5em;
 }
 
@@ -79,13 +86,12 @@ body {
 .traialsInputButton {
   color: #fff;
   background-color: rgba(33, 33, 33, 0.65);
-  /* box-shadow: 0 0 0 1px #aaa inset; */
   border: none;
 }
 
 .traialsInput,
 .shingleShinyProbabilityInput {
-  border-radius: 6px;
+  border-radius: .375em;
 }
 
 .traialsInputButton {
@@ -106,13 +112,12 @@ body {
   appearance: none;
 
   outline: 0;
-  filter: drop-shadow(0px 0px 2px rgba(33, 150, 243, 0.6));
+  filter: drop-shadow(0px 0px 0.125em rgba(33, 150, 243, 0.6));
   box-shadow: 0 0 0 1.25px rgb(33, 150, 243) inset;
 }
 .shingleShinyProbability > p,
 .traials > p {
   margin: 0.25em;
-  /* color: #333; */
 }
 
 /*
@@ -124,21 +129,16 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* input[type="number"] {
-  -moz-appearance:textfield;
-} */
-
 hr {
-  /* border: solid .1px#333; */
   width: 80%;
   margin: 0.1em auto;
 }
 
 /* `nextShinyProbabilityTitle`はクラスとidで別もの */
 .nextShinyProbabilityTitle > p {
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 #nextShinyProbabilityTitle {
-  font-size: 2rem;
+  font-size: 2em;
 }
