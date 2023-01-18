@@ -195,7 +195,7 @@ body {
     `- (1vh / 3) * 4`は、marginの値
     ある程度大きくないと押しづらい
   */
-  width: calc((60vh / 2) - (1vh / 3) * 4);
+  width: calc((60dvh / 2) - (1dvh / 3) * 4);
   max-width: 70dvw;
 }
 
