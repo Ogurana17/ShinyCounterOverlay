@@ -69,9 +69,8 @@ body {
     70dvhはbodyのフォントのdvhに合わせる
     6桁の数字が入る大きさにしておく必要がある
     ボタンの数で割る数を決める
-    -3dvhでpadding分を調整
   */
-  width: calc(70dvh / 2 - 3dvh);
+  width: calc(70dvh / 2);
   height: 1.2em;
 }
 

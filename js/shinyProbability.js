@@ -26,15 +26,15 @@ document.getElementById('traialsDecrementButton').onclick = function subCnt () {
 //足を切り捨てする動作
 //似た動作なのでイベントをまとめたい
 document.getElementById('traialsInput').oninput = function sliceMaxLength() {
-    traialsInput.value = traialsInput.value.slice(0, 6);
+    traialsInput.value = traialsInput.value.slice(0, 9);
 }
 
 document.getElementById('shingleShinyProbabilityNumerator').oninput = function sliceMaxLength() {
-    shingleShinyProbabilityNumerator.value = shingleShinyProbabilityNumerator.value.slice(0, 6);
+    shingleShinyProbabilityNumerator.value = shingleShinyProbabilityNumerator.value.slice(0, 9);
 }
 
 document.getElementById('shingleShinyProbabilityDenominator').oninput = function sliceMaxLength() {
-    shingleShinyProbabilityDenominator.value = shingleShinyProbabilityDenominator.value.slice(0, 6);
+    shingleShinyProbabilityDenominator.value = shingleShinyProbabilityDenominator.value.slice(0, 9);
 }
 
 //カーソルが外れたら再計算
@@ -98,10 +98,10 @@ function shinyProbability() {
     const shingleShinyProbabilityDenominator = document.getElementById('shingleShinyProbabilityDenominator');
 
     //演算
-    //計算部分と有効桁処理部分を分割したい
-    //toFixedは四捨五入するので使用しない
-    //Math.floor前に`1000倍`して処理後に`1/1000`する
-    nextShinyProbabilityTitle.innerHTML = Math.floor(((1 - (Math.pow(1 - (shingleShinyProbabilityNumerator.value / shingleShinyProbabilityDenominator.value), traialsInput.value))) * 100) * 1000) / 1000;
+    //toLocaleStringで小数点以下の有効桁数を3桁に制限
+    var shinyProbabilityNum = ((1 - (Math.pow(1 - (shingleShinyProbabilityNumerator.value / shingleShinyProbabilityDenominator.value), traialsInput.value))) * 100);
+    var shinyProbabilityValue = shinyProbabilityNum.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+    nextShinyProbabilityTitle.innerHTML = shinyProbabilityValue;
 
     //cookie書き込み
     //cookieの有効期限は1年（これが妥当かは分かりかねますが...）
