@@ -10,7 +10,7 @@ html {
 body {
   font-family: "Open Sans", "Zen Maru Gothic", "Noto Color Emoji", sans-serif;
   /* height:300pxで16pxと同等。 */
-  font-size: calc((16 / 300) * 100vh);
+  font-size: calc((16 / 300) * 100dvh);
   font-weight: 700;
   color: #fff;
   text-size-adjust: 100%;
@@ -36,8 +36,8 @@ body {
 .nextShinyProbability,
 .traials,
 .shingleShinyProbability {
-  /* font-sizeよりも+10vh大きくして置く */
-  width: 70vh;
+  /* font-sizeよりも+10dvh大きくして置く */
+  width: 70dvh;
   position: relative;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.65);
@@ -66,21 +66,21 @@ body {
 .traialsInput,
 .shingleShinyProbabilityInput {
   /*
-    70vhはbodyのフォントのvhに合わせる
+    70dvhはbodyのフォントのdvhに合わせる
     6桁の数字が入る大きさにしておく必要がある
     ボタンの数で割る数を決める
-    -3vhでpadding分を調整
+    -3dvhでpadding分を調整
   */
-  width: calc(70vh / 2 - 3vh);
+  width: calc(70dvh / 2 - 3dvh);
   height: 1.2em;
 }
 
 .traialsInputButton {
   /*
-    60vhはbodyのフォントのvhに合わせる
+    60dvhはbodyのフォントのdvhに合わせる
     ある程度大きくないと押しづらい
   */
-  width: calc((60vh) / 2);
+  width: calc((60dvh) / 2);
   height: 1.5em;
 }
 
@@ -103,7 +103,7 @@ body {
   appearance: none;
 
   position: relative;
-  box-shadow: 0 0 0 calc(1vh / 3) #aaa inset;
+  box-shadow: 0 0 0 calc(1dvh / 3) #aaa inset;
   border-radius: 1em;
 }
 
@@ -115,7 +115,7 @@ body {
   appearance: none;
 
   outline: 0;
-  filter: drop-shadow(0px 0px calc(1vh / 3) rgba(33, 150, 243, 0.6));
+  filter: drop-shadow(0px 0px calc(1dvh / 3) rgba(33, 150, 243, 0.6));
   box-shadow: 0 0 0 1.25px rgb(33, 150, 243) inset;
 }
 .shingleShinyProbability > p,
@@ -140,7 +140,7 @@ hr {
   height:300px時の1pxに相当
   */
   border: none;
-  border-bottom: solid calc(1vh / 3) #fff;
+  border-bottom: solid calc(1dvh / 3) #fff;
 }
 
 /* `nextShinyProbabilityTitle`はクラスとidで別もの */

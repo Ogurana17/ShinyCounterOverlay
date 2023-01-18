@@ -45,7 +45,7 @@ GitHubPagesを利用して動かします。
 
 参考元|URL
 ---|---
-色違いの確率<https://wiki.xn--rckteqa2e.com/wiki/%E8%89%B2%E9%81%95%E3%81%84>
+色違いの確率|<https://wiki.xn--rckteqa2e.com/wiki/%E8%89%B2%E9%81%95%E3%81%84>
 あかし持ちの確率|<https://wiki.xn--rckteqa2e.com/wiki/%E3%81%82%E3%81%8B%E3%81%97>
 
 ### 確率計算の例
