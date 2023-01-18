@@ -14,7 +14,7 @@ html {
 body {
   font-family: "Open Sans", "Zen Maru Gothic", "Noto Color Emoji", sans-serif;
   /* height:300pxで16pxと同等。 */
-  font-size: calc((16 / 300) * 100dvh);
+  font-size: calc((16 / 300) * 100vh);
   font-weight: 700;
   color: #fff;
   text-size-adjust: 100%;
@@ -40,9 +40,9 @@ body {
 .nextShinyProbability,
 .traials,
 .shingleShinyProbability {
-  /* font-sizeよりも+10dvh大きくして置く */
-  width: 70dvh;
-  max-width: 100dvw;
+  /* `次に色違いが出る確率`の文字列がはみ出ないように調整 */
+  width: 70vh;
+  max-width: 100vw;
   position: relative;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.65);
@@ -68,22 +68,22 @@ body {
 .traialsInput,
 .shingleShinyProbabilityInput {
   /*
-    70dvhはbodyのフォントのdvhに合わせる
+    70vhはbodyのフォントのvhに合わせる
     9桁の数字が入る大きさにしておく必要がある
     ボタンの数で割る数を決める
   */
-  width: calc(70dvh / 2);
-  max-width: 70dvw;
+  width: calc(70vh / 2);
+  max-width: 70vw;
   height: 1.2em;
 }
 
 .traialsInputButton {
   /*
-    60dvhはbodyのフォントのdvhに合わせる
+    60vhはbodyのフォントのvhに合わせる
     ある程度大きくないと押しづらい
   */
-  width: calc(60dvh / 2);
-  max-width: 70dvw;
+  width: calc(60vh / 2);
+  max-width: 70vw;
   height: 1.5em;
 }
 
@@ -106,10 +106,10 @@ body {
   appearance: none;
 
   position: relative;
-  box-shadow: 0 0 0 calc(1dvh / 3) #fff inset;
+  box-shadow: 0 0 0 calc(1vh / 3) #fff inset;
   border-radius: 1em;
   /* height:300px時の1pxに相当 */
-  margin: calc(1dvh / 3);
+  margin: calc(1vh / 3);
 }
 
 .traialsInput:focus,
@@ -121,8 +121,8 @@ body {
 
   outline: 0;
   /* height:300px時の1pxに相当 */
-  filter: drop-shadow(0px 0px calc(1dvh / 3) rgba(33, 150, 243, 0.6));
-  box-shadow: 0 0 0 calc((1dvh / 3) * 1.25) rgb(33, 150, 243) inset;
+  filter: drop-shadow(0px 0px calc(1vh / 3) rgba(33, 150, 243, 0.6));
+  box-shadow: 0 0 0 calc((1vh / 3) * 1.25) rgb(33, 150, 243) inset;
 }
 
 /*
@@ -142,7 +142,7 @@ hr {
     height:300px時の1pxに相当
   */
   border: none;
-  border-bottom: solid calc(1dvh / 3) #fff;
+  border-bottom: solid calc(1vh / 3) #fff;
 }
 
 label {
@@ -152,6 +152,80 @@ label {
 /* `nextShinyProbabilityTitle`はクラスとidで別もの */
 #nextShinyProbabilityTitle {
   font-size: 2em;
+}
+
+/*
+  スマホ用
+  iPhone12Pro
+*/
+body {
+  /* height:300pxで16pxと同等。 */
+  font-size: calc((16 / 300) * 100dvh);
+}
+
+.nextShinyProbability,
+.traials,
+.shingleShinyProbability {
+  /* font-sizeよりも+10dvh大きくして置く */
+  width: 70dvh;
+  max-width: 90dvw;
+}
+
+.traialsInput,
+.traialsInputButton,
+.shingleShinyProbabilityInput {
+  font-size: 0.9em;
+}
+
+.traialsInput,
+.shingleShinyProbabilityInput {
+  /*
+    70dvhはbodyのフォントのdvhに合わせる
+    9桁の数字が入る大きさにしておく必要がある
+    ボタンの数で割る数を決める
+  */
+  width: calc(70dvh / 2);
+  max-width: 70dvw;
+}
+
+.traialsInputButton {
+  /*
+    60dvhはbodyのフォントのdvhに合わせる
+    ある程度大きくないと押しづらい
+  */
+  width: calc(60dvh / 2);
+  max-width: 70dvw;
+}
+
+.traialsInputButton {
+  /* height:300px時の1pxに相当 */
+  box-shadow: 0 0 0 calc(1dvh / 3) #fff inset;
+  margin: calc(1dvh / 3);
+}
+
+.traialsInput:focus,
+.shingleShinyProbabilityInput:focus,
+.traialsInputButton:focus {
+  /* height:300px時の1pxに相当 */
+  filter: drop-shadow(0px 0px calc(1dvh / 3) rgba(33, 150, 243, 0.6));
+  box-shadow: 0 0 0 calc((1dvh / 3) * 1.25) rgb(33, 150, 243) inset;
+}
+
+hr {
+  /*
+    border:noneでborder情報を上書き
+    height:300px時の1pxに相当
+  */
+  border-bottom: solid calc(1dvh / 3) #fff;
+}
+
+label {
+  font-size: 0.7em;
+}
+
+/* `nextShinyProbabilityTitle`はクラスとidで別もの */
+#nextShinyProbabilityTitle {
+  font-size: 1.1em;
 }
 
 /*
@@ -169,7 +243,7 @@ label {
   .shingleShinyProbability {
     /* font-sizeよりも+10dvh大きくして置く */
     width: 70vh;
-    max-width: 100vw;
+    max-width: 90vw;
   }
 
   .traialsInput,
@@ -212,30 +286,5 @@ label {
       height:300px時の1pxに相当
     */
     border-bottom: solid calc(1vh / 3) #fff;
-  }
-}
-
-/*
-  スマホ用
-  iPhone12Pro
-*/
-@media screen and (max-width: 420px) {
-  .nextShinyProbability,
-  .traials,
-  .shingleShinyProbability {
-    max-width: 90dvw;
-  }
-
-  .traialsInput,
-  .traialsInputButton,
-  .shingleShinyProbabilityInput {
-    font-size: 0.9em;
-  }
-
-  label {
-    font-size: 0.7em;
-  }
-  #nextShinyProbabilityTitle {
-    font-size: 1.1em;
   }
 }
