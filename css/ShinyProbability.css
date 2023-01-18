@@ -1,4 +1,8 @@
-/* ShinyProbability */
+/*
+ShinyProbability
+スマホの縦横比で崩れます。
+mac版ChromeとiPhone12ProのChromeとOBSは崩れないことを確認。
+*/
 
 @charset "utf-8";
 
@@ -38,6 +42,7 @@ body {
 .shingleShinyProbability {
   /* font-sizeよりも+10dvh大きくして置く */
   width: 70dvh;
+  max-width: 100dvw;
   position: relative;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.65);
@@ -45,7 +50,6 @@ body {
   border-radius: .375em;
 }
 
-.nextShinyProbability > p,
 .traials > p,
 .shingleShinyProbability > p,
 .traialsInput,
@@ -67,10 +71,11 @@ body {
 .shingleShinyProbabilityInput {
   /*
     70dvhはbodyのフォントのdvhに合わせる
-    6桁の数字が入る大きさにしておく必要がある
+    9桁の数字が入る大きさにしておく必要がある
     ボタンの数で割る数を決める
   */
   width: calc(70dvh / 2);
+  max-width: 70dvw;
   height: 1.2em;
 }
 
@@ -79,7 +84,8 @@ body {
     60dvhはbodyのフォントのdvhに合わせる
     ある程度大きくないと押しづらい
   */
-  width: calc((60dvh) / 2);
+  width: calc(60dvh / 2);
+  max-width: 70dvw;
   height: 1.5em;
 }
 
@@ -102,8 +108,10 @@ body {
   appearance: none;
 
   position: relative;
-  box-shadow: 0 0 0 calc(1dvh / 3) #aaa inset;
+  box-shadow: 0 0 0 calc(1dvh / 3) #fff inset;
   border-radius: 1em;
+  /* height:300px時の1pxに相当 */
+  margin: calc(1dvh / 3);
 }
 
 .traialsInput:focus,
@@ -114,8 +122,9 @@ body {
   appearance: none;
 
   outline: 0;
+  /* height:300px時の1pxに相当 */
   filter: drop-shadow(0px 0px calc(1dvh / 3) rgba(33, 150, 243, 0.6));
-  box-shadow: 0 0 0 1.25px rgb(33, 150, 243) inset;
+  box-shadow: 0 0 0 calc((1dvh / 3) * 1.25) rgb(33, 150, 243) inset;
 }
 .shingleShinyProbability > p,
 .traials > p {
@@ -149,4 +158,43 @@ hr {
 
 #nextShinyProbabilityTitle {
   font-size: 2em;
+}
+
+/*
+スマホ用
+iPhone12Pro
+*/
+@media screen and (max-width: 400px) {
+  .nextShinyProbability > p,
+  .traials > p,
+  .shingleShinyProbability > p,
+  .traialsInput,
+  .traialsInputButton,
+  .shingleShinyProbabilityInput {
+    font-size: 1em;
+  }
+  .nextShinyProbabilityTitle {
+    font-size: .75em;
+  }
+  #nextShinyProbabilityTitle {
+    font-size: 1.5em;
+  }
+}
+
+/* OBS用 */
+@media screen and (max-width: 300px) {
+  .nextShinyProbability > p,
+  .traials > p,
+  .shingleShinyProbability > p,
+  .traialsInput,
+  .traialsInputButton,
+  .shingleShinyProbabilityInput {
+    font-size: 1.25em;
+  }
+  .nextShinyProbabilityTitle {
+    font-size: 1em;
+  }
+  #nextShinyProbabilityTitle {
+    font-size: 2em;
+  }
 }
