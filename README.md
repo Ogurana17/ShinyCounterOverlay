@@ -37,9 +37,39 @@ GitHubPagesを利用して動かします。
 
 ### Shiny Counter Overlay側
 
-確率は下記のURLを参照ください。  
-<https://wiki.xn--rckteqa2e.com/wiki/%E8%89%B2%E9%81%95%E3%81%84#%E8%89%B2%E9%81%95%E3%81%84%E3%81%AB%E3%81%AA%E3%82%8B%E7%A2%BA%E7%8E%87%E3%83%BB%E5%88%A4%E5%AE%9A>
-
-1. 元の確率に数値を入力
-2. 試行回数に数値を入力
+1. `元の確率`に数値を入力（6桁まで入力可能）
+2. `試行回数`に数値を入力（6桁まで入力可能）
 3. `+1`ボタンを押すと1ずつ試行回数が増えていき、`-1`を押すと1ずつ試行回数が減っていきます
+
+元の確率は下記のURLを参照ください。
+
+参考元|URL
+---|---
+色違いの確率<https://wiki.xn--rckteqa2e.com/wiki/%E8%89%B2%E9%81%95%E3%81%84>
+あかし持ちの確率|<https://wiki.xn--rckteqa2e.com/wiki/%E3%81%82%E3%81%8B%E3%81%97>
+
+### 確率計算の例
+
+ニャオハの`♀`, `最小`, `色違い`を狙うとする。
+
+二つ名パワーLv3、かがやきパワーLv3（または国際孵化）、ひかるおまもり有りの場合
+
+$$
+\begin{equation}
+\begin{split}
+x &= {1 \over 8} \times {1 \over 64} \times {8 \over 4096} \\
+x &= {1 \over 262144}
+\end{split}
+\end{equation}
+$$
+
+二つ名パワーLv3、かがやきパワーLv3（または国際孵化）、ひかるおまもり有りの場合
+
+$$
+\begin{equation}
+\begin{split}
+x &= {1 \over 8} \times {1 \over 16512} \times {1 \over 4096} \\
+x &= {1 \over 541065216}
+\end{split}
+\end{equation}
+$$
