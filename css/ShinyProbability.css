@@ -1,7 +1,7 @@
 /*
-ShinyProbability
-スマホの縦横比で崩れます。
-mac版ChromeとiPhone12ProのChromeとOBSは崩れないことを確認。
+  ShinyProbability
+  スマホの縦横比で崩れます。
+  mac版ChromeとiPhone12ProのChromeとOBSは崩れないことを確認。
 */
 
 @charset "utf-8";
@@ -47,11 +47,9 @@ body {
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.65);
   padding: 0.25em;
-  border-radius: .375em;
+  border-radius: 0.375em;
 }
 
-.traials > p,
-.shingleShinyProbability > p,
 .traialsInput,
 .traialsInputButton,
 .shingleShinyProbabilityInput {
@@ -64,7 +62,7 @@ body {
 .traialsInput,
 .shingleShinyProbabilityInput {
   text-align: center;
-  margin: 0.25em auto;
+  margin: 0.3em auto;
 }
 
 .traialsInput,
@@ -99,7 +97,7 @@ body {
 
 .traialsInput,
 .shingleShinyProbabilityInput {
-  border-radius: .375em;
+  border-radius: 0.375em;
 }
 
 .traialsInputButton {
@@ -126,13 +124,9 @@ body {
   filter: drop-shadow(0px 0px calc(1dvh / 3) rgba(33, 150, 243, 0.6));
   box-shadow: 0 0 0 calc((1dvh / 3) * 1.25) rgb(33, 150, 243) inset;
 }
-.shingleShinyProbability > p,
-.traials > p {
-  margin: 0.25em;
-}
 
 /*
-スピンボタンを無効
+  スピンボタンを無効
 */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -144,57 +138,104 @@ hr {
   width: 80%;
   margin: 0.1em auto;
   /*
-  border:noneでborder情報を上書き
-  height:300px時の1pxに相当
+    border:noneでborder情報を上書き
+    height:300px時の1pxに相当
   */
   border: none;
   border-bottom: solid calc(1dvh / 3) #fff;
 }
 
-/* `nextShinyProbabilityTitle`はクラスとidで別もの */
-.nextShinyProbabilityTitle > p {
+label {
   font-size: 1em;
 }
 
+/* `nextShinyProbabilityTitle`はクラスとidで別もの */
 #nextShinyProbabilityTitle {
   font-size: 2em;
 }
 
 /*
-スマホ用
-iPhone12Pro
+  OBS用
+  OBSは`dvh`や`dvw`に対応していないため、`vh`や`vw`に置き換える必要がある
 */
-@media screen and (max-width: 400px) {
-  .nextShinyProbability > p,
-  .traials > p,
-  .shingleShinyProbability > p,
+@media screen and (aspect-ratio: 7/10) {
+  body {
+    /* height:300pxで16pxと同等。 */
+    font-size: calc((16 / 300) * 100vh);
+  }
+
+  .nextShinyProbability,
+  .traials,
+  .shingleShinyProbability {
+    /* font-sizeよりも+10dvh大きくして置く */
+    width: 70vh;
+    max-width: 100vw;
+  }
+
   .traialsInput,
-  .traialsInputButton,
   .shingleShinyProbabilityInput {
-    font-size: 1em;
+    /*
+      70dvhはbodyのフォントのdvhに合わせる
+      9桁の数字が入る大きさにしておく必要がある
+      ボタンの数で割る数を決める
+    */
+    width: calc(70vh / 2);
+    max-width: 70vw;
   }
-  .nextShinyProbabilityTitle {
-    font-size: .75em;
+
+  .traialsInputButton {
+    /*
+      60dvhはbodyのフォントのdvhに合わせる
+      ある程度大きくないと押しづらい
+    */
+    width: calc(60vh / 2);
+    max-width: 70vw;
   }
-  #nextShinyProbabilityTitle {
-    font-size: 1.5em;
+
+  .traialsInputButton {
+    box-shadow: 0 0 0 calc(1vh / 3) #fff inset;
+    /* height:300px時の1pxに相当 */
+    margin: calc(1vh / 3);
+  }
+
+  .traialsInput:focus,
+  .shingleShinyProbabilityInput:focus,
+  .traialsInputButton:focus {
+    /* height:300px時の1pxに相当 */
+    filter: drop-shadow(0px 0px calc(1vh / 3) rgba(33, 150, 243, 0.6));
+    box-shadow: 0 0 0 calc((1vh / 3) * 1.25) rgb(33, 150, 243) inset;
+  }
+
+  hr {
+    /*
+      border:noneでborder情報を上書き
+      height:300px時の1pxに相当
+    */
+    border-bottom: solid calc(1vh / 3) #fff;
   }
 }
 
-/* OBS用 */
-@media screen and (max-width: 300px) {
-  .nextShinyProbability > p,
-  .traials > p,
-  .shingleShinyProbability > p,
+/*
+  スマホ用
+  iPhone12Pro
+*/
+@media screen and (max-width: 420px) {
+  .nextShinyProbability,
+  .traials,
+  .shingleShinyProbability {
+    max-width: 90dvw;
+  }
+
   .traialsInput,
   .traialsInputButton,
   .shingleShinyProbabilityInput {
-    font-size: 1.25em;
+    font-size: 0.9em;
   }
-  .nextShinyProbabilityTitle {
-    font-size: 1em;
+
+  label {
+    font-size: 0.7em;
   }
   #nextShinyProbabilityTitle {
-    font-size: 2em;
+    font-size: 1.1em;
   }
 }
