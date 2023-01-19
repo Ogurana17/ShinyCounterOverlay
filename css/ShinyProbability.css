@@ -70,6 +70,7 @@ label {
   margin: 0.3rem auto;
 }
 
+select,
 .traialsInput,
 .shinyProbabilityInput {
   /*
@@ -92,6 +93,7 @@ label {
   height: 1.5rem;
 }
 
+select,
 .traialsInput,
 .shinyProbabilityInput,
 .traialsInputButton {
@@ -100,6 +102,7 @@ label {
   border: none;
 }
 
+select,
 .traialsInput,
 .shinyProbabilityInput {
   border-radius: 0.375rem;
@@ -153,6 +156,24 @@ hr {
 /* `encounterProbabilityTitle`はクラスとidで別もの */
 #encounterProbabilityTitle {
   font-size: 2rem;
+}
+
+select {
+  color: inherit;
+  text-align: inherit;
+  font-size: 0.8em;
+}
+
+details {
+  /* 謎の空白があるのでマイナスマージン（やり方他にあるはず） */
+  margin-bottom: -1em;
+}
+
+#checkboxs {
+  font-size: 0.8em;
+  text-align: left;
+  display: inline-block;
+  border: none;
 }
 
 /*

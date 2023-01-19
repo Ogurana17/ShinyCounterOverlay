@@ -29,8 +29,7 @@
     試行回数を考慮した確率
 -->
     <div class="encounterProbability">
-      <label class="encounterProbabilityTitle">遭遇する確率</label
-      ><br />
+      <label class="encounterProbabilityTitle">遭遇する確率</label><br />
       ✨ <span id="encounterProbabilityTitle">0.000</span> % ✨
     </div>
     <!--
@@ -65,7 +64,28 @@
     国際孵化ひかおま有なら1/512等
 -->
     <div class="shinyProbability">
-      <label class="shinyProbabilityTitle">色違いになる確率</label><br />
+      <!-- <label class="shinyProbabilityTitle">色違いになる確率</label> -->
+      <details>
+        <summary>
+          色違いになる確率
+        </summary>
+        <!-- 世代選択 選択次第でチェックボックを変化させる -->
+        <select name="generation" id="generationSelector">
+          <option value="">世代を選択してください</option>
+          <option value="1">1世代 RGBP</option>
+          <option value="2">2世代 GSC</option>
+          <option value="3">3世代 RSE,FRLG</option>
+          <option value="4">4世代 DPt,HGSS</option>
+          <option value="5">5世代 BW,BW2</option>
+          <option value="6">6世代 XY,ORAS</option>
+          <option value="7">7世代 SM,USUM</option>
+          <option value="8">8世代 SWSH,BDSP,LA</option>
+          <option value="9">9世代 SV</option>
+        </select>
+        <!-- 生成したチェックボックスを格納するスペース -->
+        <div><fieldset id="checkboxs"></fieldset></div>
+      </details>
+      <br />
       <input
         type="number"
         inputmode="numeric"
