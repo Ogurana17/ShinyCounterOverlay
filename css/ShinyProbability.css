@@ -44,9 +44,9 @@ label {
 .encounterProbability,
 .traials,
 .shinyProbability {
-  /* `次に色違いが出る確率`の文字列がはみ出ないように調整 */
+  /* `遭遇する確率`の文字列がはみ出ないように調整 */
   width: 70vh;
-  max-width: 100vw;
+  max-width: 90vw;
   position: relative;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.65);
@@ -73,7 +73,7 @@ label {
 .traialsInput,
 .shinyProbabilityInput {
   /*
-    70vhはbodyのフォントのvhに合わせる
+    70vhは.encounterProbabilityのvhに合わせる
     9桁の数字が入る大きさにしておく必要がある
     ボタンの数で割る数を決める
   */
@@ -84,12 +84,11 @@ label {
 
 .traialsInputButton {
   /*
-    60dvhはbodyのフォントのdvhに合わせる
     `- (1vh / 3) * 4`は、marginの値
     ある程度大きくないと押しづらい
   */
   width: calc((60vh / 2) - (1vh / 3) * 4);
-  max-width: 70vw;
+  max-width: 60vw;
   height: 1.5rem;
 }
 
@@ -171,7 +170,7 @@ label {
 .encounterProbability,
 .traials,
 .shinyProbability {
-  /* font-sizeよりも+10dvh大きくして置く */
+  /* `遭遇する確率`の文字列がはみ出ないように調整 */
   width: 70dvh;
   max-width: 90dvw;
   font-size: 0.6em;
@@ -186,7 +185,7 @@ label {
 .traialsInput,
 .shinyProbabilityInput {
   /*
-    70dvhはbodyのフォントのdvhに合わせる
+    70dvhは.encounterProbabilityのdvhに合わせる
     9桁の数字が入る大きさにしておく必要がある
     ボタンの数で割る数を決める
   */
@@ -196,12 +195,11 @@ label {
 
 .traialsInputButton {
   /*
-    60dvhはbodyのフォントのdvhに合わせる
     `- (1vh / 3) * 4`は、marginの値
     ある程度大きくないと押しづらい
   */
   width: calc((60dvh / 2) - (1dvh / 3) * 4);
-  max-width: 70dvw;
+  max-width: 60dvw;
 }
 
 .traialsInputButton {
@@ -244,7 +242,7 @@ hr {
   .encounterProbability,
   .traials,
   .shinyProbability {
-    /* font-sizeよりも+10dvh大きくして置く */
+    /* `遭遇する確率`の文字列がはみ出ないように調整 */
     width: 70vh;
     max-width: 90vw;
   }
@@ -252,7 +250,7 @@ hr {
   .traialsInput,
   .shinyProbabilityInput {
     /*
-      70dvhはbodyのフォントのdvhに合わせる
+      70vhは.encounterProbabilityのvhに合わせる
       9桁の数字が入る大きさにしておく必要がある
       ボタンの数で割る数を決める
     */
@@ -262,12 +260,11 @@ hr {
 
   .traialsInputButton {
     /*
-      60dvhはbodyのフォントのdvhに合わせる
       `- (1vh / 3) * 4`は、marginの値
       ある程度大きくないと押しづらい
     */
     width: calc((60vh / 2) - (1vh / 3) * 4);
-    max-width: 70vw;
+    max-width: 60vw;
   }
 
   .traialsInputButton {

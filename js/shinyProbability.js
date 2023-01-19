@@ -29,12 +29,12 @@ document.getElementById('traialsInput').oninput = function sliceMaxLength() {
     traialsInput.value = traialsInput.value.slice(0, 9);
 }
 
-document.getElementById('shingleShinyProbabilityNumerator').oninput = function sliceMaxLength() {
-    shingleShinyProbabilityNumerator.value = shingleShinyProbabilityNumerator.value.slice(0, 9);
+document.getElementById('shinyProbabilityNumerator').oninput = function sliceMaxLength() {
+    shinyProbabilityNumerator.value = shinyProbabilityNumerator.value.slice(0, 9);
 }
 
-document.getElementById('shingleShinyProbabilityDenominator').oninput = function sliceMaxLength() {
-    shingleShinyProbabilityDenominator.value = shingleShinyProbabilityDenominator.value.slice(0, 9);
+document.getElementById('shinyProbabilityDenominator').oninput = function sliceMaxLength() {
+    shinyProbabilityDenominator.value = shinyProbabilityDenominator.value.slice(0, 9);
 }
 
 //カーソルが外れたら再計算
@@ -44,11 +44,11 @@ document.getElementById('traialsInput').onblur = function reCalc() {
     shinyProbability();
 }
 
-document.getElementById('shingleShinyProbabilityNumerator').onblur = function reCalc() {
+document.getElementById('shinyProbabilityNumerator').onblur = function reCalc() {
     shinyProbability();
 }
 
-document.getElementById('shingleShinyProbabilityDenominator').onblur = function reCalc() {
+document.getElementById('shinyProbabilityDenominator').onblur = function reCalc() {
     shinyProbability();
 }
 
@@ -73,16 +73,16 @@ window.onload = function onload() {
             //試行回数をページに反映
             traialsInput.value = decodeURIComponent(cookieValue);
             console.log('cookie試行回数: ' + cookieValue);
-        } else if (elem[0].trim() == 'shingleShinyProbabilityNumerator') {
+        } else if (elem[0].trim() == 'shinyProbabilityNumerator') {
             cookieValue = unescape(elem[1]);
             //分子をページに反映
-            shingleShinyProbabilityNumerator.value = decodeURIComponent(cookieValue);
+            shinyProbabilityNumerator.value = decodeURIComponent(cookieValue);
             console.log('cookie分子: ' + cookieValue);
-        } else if (elem[0].trim() == 'shingleShinyProbabilityDenominator') {
+        } else if (elem[0].trim() == 'shinyProbabilityDenominator') {
             cookieValue = unescape(elem[1]);
             //分母をページに反映
-            shingleShinyProbabilityDenominator.value = decodeURIComponent(cookieValue);
-            console.log('cookie_分母: ' + cookieValue);
+            shinyProbabilityDenominator.value = decodeURIComponent(cookieValue);
+            console.log('cookie分母: ' + cookieValue);
         } else {
             continue;
       }
@@ -93,24 +93,24 @@ window.onload = function onload() {
 
 function shinyProbability() {
     //HTML要素から要素を読み込み
-    const nextShinyProbabilityTitle = document.getElementById('nextShinyProbabilityTitle');
-    const shingleShinyProbabilityNumerator = document.getElementById('shingleShinyProbabilityNumerator');
-    const shingleShinyProbabilityDenominator = document.getElementById('shingleShinyProbabilityDenominator');
+    const encounterProbabilityTitle = document.getElementById('encounterProbabilityTitle');
+    const shinyProbabilityNumerator = document.getElementById('shinyProbabilityNumerator');
+    const shinyProbabilityDenominator = document.getElementById('shinyProbabilityDenominator');
 
     //演算
     //toLocaleStringで小数点以下の有効桁数を3桁に制限
-    var shinyProbabilityNum = ((1 - (Math.pow(1 - (shingleShinyProbabilityNumerator.value / shingleShinyProbabilityDenominator.value), traialsInput.value))) * 100);
+    var shinyProbabilityNum = ((1 - (Math.pow(1 - (shinyProbabilityNumerator.value / shinyProbabilityDenominator.value), traialsInput.value))) * 100);
     var shinyProbabilityValue = shinyProbabilityNum.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 });
-    nextShinyProbabilityTitle.innerHTML = shinyProbabilityValue;
+    encounterProbabilityTitle.innerHTML = shinyProbabilityValue;
 
     //cookie書き込み
     //cookieの有効期限は1年（これが妥当かは分かりかねますが...）
     document.cookie = 'traialsInput=' + encodeURIComponent(traialsInput.value) + '; max-age=' + 60 * 60 * 24 * 365;
-    document.cookie = 'shingleShinyProbabilityNumerator=' + encodeURIComponent(shingleShinyProbabilityNumerator.value) + '; max-age=' + 60 * 60 * 24 * 365;
-    document.cookie = 'shingleShinyProbabilityDenominator=' + encodeURIComponent(shingleShinyProbabilityDenominator.value) + '; max-age=' + 60 * 60 * 24 * 365;
+    document.cookie = 'shinyProbabilityNumerator=' + encodeURIComponent(shinyProbabilityNumerator.value) + '; max-age=' + 60 * 60 * 24 * 365;
+    document.cookie = 'shinyProbabilityDenominator=' + encodeURIComponent(shinyProbabilityDenominator.value) + '; max-age=' + 60 * 60 * 24 * 365;
 
     //log書き込み
     //consoleで確認する用途
     console.log('試行回数: ' + traialsInput.value);
-    console.log('次に色違いが出る確率: ' + nextShinyProbabilityTitle.innerHTML);
+    console.log('次に色違いが出る確率: ' + encounterProbabilityTitle.innerHTML);
 }
