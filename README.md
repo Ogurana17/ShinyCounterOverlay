@@ -52,18 +52,18 @@ GitHubPagesを利用して動かします。
 
 ニャオハの`♀`, `最小`, `色違い`を狙うとする。
 
-二つ名パワーLv3、かがやきパワーLv3（または国際孵化）、ひかるおまもり有りの場合
+ちびちびパワーLv3、かがやきパワーLv3（または国際孵化）、ひかるおまもり有りの場合
 
 $$
 \begin{equation}
 \begin{split}
-x &= {1 \over 8} \times {1 \over 64} \times {8 \over 4096} \\
+x &= {1 \over 8} \times {1 \over 64} \times {1 \over } \times {8 \over 4096} \\
 x &= {1 \over 262144}
 \end{split}
 \end{equation}
 $$
 
-二つ名パワーLv3無し、かがやきパワーLv3（または国際孵化）無し、ひかるおまもり無しの場合
+ちびちびパワーLv3無し、かがやきパワーLv3（または国際孵化）無し、ひかるおまもり無しの場合
 
 $$
 \begin{equation}

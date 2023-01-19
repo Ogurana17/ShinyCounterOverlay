@@ -25,13 +25,13 @@
 
   <body>
     <!--
-    次に色違いが出る確率
+    遭遇する確率
     試行回数を考慮した確率
 -->
-    <div class="nextShinyProbability">
-      <label class="nextShinyProbabilityTitle">次に色違いが出る確率</label
+    <div class="encounterProbability">
+      <label class="encounterProbabilityTitle">遭遇する確率</label
       ><br />
-      ✨ <span id="nextShinyProbabilityTitle">0.000</span> % ✨
+      ✨ <span id="encounterProbabilityTitle">0.000</span> % ✨
     </div>
     <!--
     試行回数
@@ -61,24 +61,24 @@
     </div>
 
     <!--
-    元の確率
+    色違いになる確率
     国際孵化ひかおま有なら1/512等
 -->
-    <div class="shingleShinyProbability">
-      <label class="shingleShinyProbabilityTitle">元の確率</label><br />
+    <div class="shinyProbability">
+      <label class="shinyProbabilityTitle">色違いになる確率</label><br />
       <input
         type="number"
         inputmode="numeric"
-        class="shingleShinyProbabilityInput"
-        id="shingleShinyProbabilityNumerator"
+        class="shinyProbabilityInput"
+        id="shinyProbabilityNumerator"
         value="1"
       />
       <hr />
       <input
         type="number"
         inputmode="numeric"
-        class="shingleShinyProbabilityInput"
-        id="shingleShinyProbabilityDenominator"
+        class="shinyProbabilityInput"
+        id="shinyProbabilityDenominator"
         value="4096"
       />
     </div>
