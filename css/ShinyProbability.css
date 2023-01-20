@@ -37,8 +37,9 @@ body {
   transform: translateY(-50%) translateX(-50%); */
 }
 
-label {
-  font-size: 0.7rem;
+.traialsTitle,
+.encounterProbabilityTitle {
+  font-size: 0.6rem;
 }
 
 .encounterProbability,
@@ -158,10 +159,10 @@ hr {
   font-size: 2rem;
 }
 
-select {
+select > option {
   color: inherit;
   text-align: inherit;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 
 details {
@@ -172,8 +173,21 @@ details {
 #checkboxs {
   font-size: 0.8em;
   text-align: left;
-  display: inline-block;
   border: none;
+}
+
+#generationSelector {
+  font-size: 0.8em;
+}
+
+.genLabel {
+  display: block;
+}
+
+.genFieldset {
+  margin: 5px 0;
+  padding: 2px 10px 10px 10px;
+  border: 1px dashed #777;
 }
 
 /*
@@ -184,7 +198,9 @@ body {
   /* height:300pxで16pxと同等。 */
   font-size: calc((16 / 300) * 100dvh);
 }
-label {
+
+.traialsTitle,
+.encounterProbabilityTitle {
   font-size: 0.6rem;
 }
 
