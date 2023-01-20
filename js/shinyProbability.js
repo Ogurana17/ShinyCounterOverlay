@@ -218,11 +218,25 @@ function shinyProbability() {
     "shinyProbabilityDenominator"
   );
 
+  let numerator = shinyProbabilityNumerator.value;
+  let denominator = shinyProbabilityDenominator.value;
+
+  // 約分処理
+  // 配列で受け取る
+  let numArr = irreducible(numerator, denominator);
+  numerator = numArr[0];
+  denominator = numArr[1];
+  console.log(numerator + ' / ' + denominator);
+
+  // 約分した結果をHTMLに反映
+  shinyProbabilityNumerator.value = numerator;
+  shinyProbabilityDenominator.value = denominator;
+
   // 演算
   var shinyProbabilityNum =
     (1 -
       Math.pow(
-        1 - shinyProbabilityNumerator.value / shinyProbabilityDenominator.value,
+        1 - numerator / denominator,
         traialsInput.value
       )) *
     100;
