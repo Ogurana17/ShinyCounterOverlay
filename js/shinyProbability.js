@@ -65,6 +65,13 @@ document.getElementById("calcProbabilityButton").onclick =
     // ひかるおまもりと国際孵化では-1になる公式の例外処理
     if (gen9Radio[1].checked && gen9Radio[2].checked) numerator -= 1;
 
+    // 約分処理
+    // 配列で受け取る
+    let numArr = irreducible(numerator, denominator);
+    numerator = numArr[0];
+    denominator = numArr[1];
+    console.log(numerator + ' / ' + denominator);
+
     // HTMLを書き換え
     shinyProbabilityNumerator.value = numerator;
     shinyProbabilityDenominator.value = denominator;
@@ -89,12 +96,33 @@ document.getElementById("calcProbabilityButton").onclick =
 // 特定のボタンにチェックが入ったらチェックを外す
 function disableCheckbox() {
   // SV
-  const gen9Radio = document.getElementsByName('gen9Radio');
+  const gen9Radio = document.getElementsByName("gen9Radio");
   if (gen9Radio[1].checked) {
     gen9Radio[3].checked = false;
     gen9Radio[4].checked = false;
-  };
-  console.log('a');
+  }
+}
+
+// 約分する関数
+function gcd(a, b) {
+  if (a < b) [a, b] = [b, a];
+  let r = 1;
+  while (r != 0) {
+    r = a % b;
+    a = b;
+    b = r;
+  }
+  return a;
+}
+function irreducible(a, b) {
+  let GCD = gcd(a, b);
+  while (GCD > 1) {
+    a /= GCD;
+    b /= GCD;
+    GCD = gcd(a, b);
+  }
+  // 呼び出し元に配列で返す
+  return [a, b];
 }
 
 // inputNumberの有効桁数制限
@@ -200,7 +228,8 @@ function shinyProbability() {
     100;
   // 小数点以下の有効桁数を3桁に制限
   const digit = 3;
-  var shinyProbabilityValue = Math.floor(shinyProbabilityNum * Math.pow(10,digit)) / Math.pow(10,digit);
+  var shinyProbabilityValue =
+    Math.floor(shinyProbabilityNum * Math.pow(10, digit)) / Math.pow(10, digit);
   encounterProbabilityTitle.innerHTML = shinyProbabilityValue;
 
   // cookie書き込み
