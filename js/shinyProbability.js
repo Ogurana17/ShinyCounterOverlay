@@ -26,22 +26,76 @@ document.getElementById("traialsDecrementButton").onclick = function subCnt() {
 };
 
 // 世代の確率を押すと確率を反映
-// document.getElementById('').onclick = function setProbability() {
-//   const shinyProbabilityNumerator = document.getElementById(
-//     'shinyProbabilityNumerator'
-//   );
-//   const shinyProbabilityDenominator = document.getElementById(
-//     'shinyProbabilityDenominator'
-//   );
+document.getElementById("calcProbabilityButton").onclick =
+  function setProbability() {
+    // 計算に不要なチェックボックスを外す
+    disableCheckbox();
 
-//   // iを取り出す
-//   for (let i = 0; i < gen1radio.length; i++) {
-//     if (gen1radio[i].checked) {
-//       str = gen1radio[i].value;
-//       break;
-//     }
-//   }
-// }
+    const gen9Radio = document.getElementsByName("gen9Radio");
+    const shinyProbabilityNumerator = document.getElementById(
+      "shinyProbabilityNumerator"
+    );
+    const shinyProbabilityDenominator = document.getElementById(
+      "shinyProbabilityDenominator"
+    );
+
+    // calc SV
+    let numerator = 0;
+    let denominator = 0;
+
+    // 自然遭遇
+    if (gen9Radio[0].checked) {
+      numerator = 1;
+      denominator = 4096;
+    }
+    // 国際孵化
+    if (gen9Radio[1].checked) {
+      numerator = 1 + 6;
+      denominator = 4096;
+    }
+    // ひかるおまもり
+    if (gen9Radio[2].checked) numerator += 2;
+
+    // 大量発生
+    if (gen9Radio[3].checked) numerator += 2;
+
+    // かがやきパワーLv3
+    if (gen9Radio[4].checked) numerator += 3;
+
+    // ひかるおまもりと国際孵化では-1になる公式の例外処理
+    if (gen9Radio[1].checked && gen9Radio[2].checked) numerator -= 1;
+
+    // HTMLを書き換え
+    shinyProbabilityNumerator.value = numerator;
+    shinyProbabilityDenominator.value = denominator;
+
+    // Cookieに記述
+    document.cookie =
+      "numerator=" +
+      encodeURIComponent(numerator) +
+      "; max-age=" +
+      60 * 60 * 24 * 365;
+    document.cookie =
+      "denominator=" +
+      encodeURIComponent(denominator) +
+      "; max-age=" +
+      60 * 60 * 24 * 365;
+
+    // 再計算
+    shinyProbability();
+  };
+
+// 入力制限
+// 特定のボタンにチェックが入ったらチェックを外す
+function disableCheckbox() {
+  // SV
+  const gen9Radio = document.getElementsByName('gen9Radio');
+  if (gen9Radio[1].checked) {
+    gen9Radio[3].checked = false;
+    gen9Radio[4].checked = false;
+  };
+  console.log('a');
+}
 
 // inputNumberの有効桁数制限
 // デフォルトでは有効桁数を6桁に設定
@@ -137,7 +191,6 @@ function shinyProbability() {
   );
 
   // 演算
-  // toLocaleStringで小数点以下の有効桁数を3桁に制限
   var shinyProbabilityNum =
     (1 -
       Math.pow(
@@ -145,10 +198,9 @@ function shinyProbability() {
         traialsInput.value
       )) *
     100;
-  var shinyProbabilityValue = shinyProbabilityNum.toLocaleString(undefined, {
-    minimumFractionDigits: 3,
-    maximumFractionDigits: 3,
-  });
+  // 小数点以下の有効桁数を3桁に制限
+  const digit = 3;
+  var shinyProbabilityValue = Math.floor(shinyProbabilityNum * Math.pow(10,digit)) / Math.pow(10,digit);
   encounterProbabilityTitle.innerHTML = shinyProbabilityValue;
 
   // cookie書き込み
@@ -194,15 +246,14 @@ document.getElementById("generationSelector").onchange =
       case 2:
         // RGBP, GSC
         // feildset
-        var gen1RGBPFieldset = document.createElement('fieldset');
-        gen1RGBPFieldset.setAttribute('class', 'genFieldset');
-        gen1RGBPFieldset.setAttribute('id', 'gen1RGBPId');
+        var gen1RGBPFieldset = document.createElement("fieldset");
+        gen1RGBPFieldset.setAttribute("class", "genFieldset");
+        gen1RGBPFieldset.setAttribute("id", "gen1RGBPId");
         checkboxs.appendChild(gen1RGBPFieldset);
-        const gen1RGBPFieldsets =
-          document.getElementById('gen1RGBPId');
+        const gen1RGBPFieldsets = document.getElementById("gen1RGBPId");
         // legend
-        var gen1RGBPlegend = document.createElement('legend');
-        gen1RGBPlegend.innerHTML = 'RGBP, GSC';
+        var gen1RGBPlegend = document.createElement("legend");
+        gen1RGBPlegend.innerHTML = "RGBP, GSC";
         gen1RGBPFieldsets.appendChild(gen1RGBPlegend);
 
         // gen1Naturalを生成
@@ -242,15 +293,14 @@ document.getElementById("generationSelector").onchange =
       case 3:
         // RSE, FRLG
         // feildset
-        var gen3RSEFieldset = document.createElement('fieldset');
-        gen3RSEFieldset.setAttribute('class', 'genFieldset');
-        gen3RSEFieldset.setAttribute('id', 'gen3RSEId');
+        var gen3RSEFieldset = document.createElement("fieldset");
+        gen3RSEFieldset.setAttribute("class", "genFieldset");
+        gen3RSEFieldset.setAttribute("id", "gen3RSEId");
         checkboxs.appendChild(gen3RSEFieldset);
-        const gen3RSEFieldsets =
-          document.getElementById('gen3RSEId');
+        const gen3RSEFieldsets = document.getElementById("gen3RSEId");
         // legend
-        var gen3RSElegend = document.createElement('legend');
-        gen3RSElegend.innerHTML = 'RSE, FRLG';
+        var gen3RSElegend = document.createElement("legend");
+        gen3RSElegend.innerHTML = "RSE, FRLG";
         gen3RSEFieldsets.appendChild(gen3RSElegend);
 
         // gen3Naturalを生成
@@ -273,15 +323,14 @@ document.getElementById("generationSelector").onchange =
       case 4:
         // DPt, HGSS
         // feildset
-        var gen4DptFieldset = document.createElement('fieldset');
-        gen4DptFieldset.setAttribute('class', 'genFieldset');
-        gen4DptFieldset.setAttribute('id', 'gen4DptId');
+        var gen4DptFieldset = document.createElement("fieldset");
+        gen4DptFieldset.setAttribute("class", "genFieldset");
+        gen4DptFieldset.setAttribute("id", "gen4DptId");
         checkboxs.appendChild(gen4DptFieldset);
-        const gen4DptFieldsets =
-          document.getElementById('gen4DptId');
+        const gen4DptFieldsets = document.getElementById("gen4DptId");
         // legend
-        var gen4Dptlegend = document.createElement('legend');
-        gen4Dptlegend.innerHTML = 'DPt, HGSS';
+        var gen4Dptlegend = document.createElement("legend");
+        gen4Dptlegend.innerHTML = "DPt, HGSS";
         gen4DptFieldsets.appendChild(gen4Dptlegend);
 
         // gen4Naturalを生成
@@ -339,15 +388,14 @@ document.getElementById("generationSelector").onchange =
       case 5:
         // BW,BW2
         // feildset
-        var gen5BWBW2Fieldset = document.createElement('fieldset');
-        gen5BWBW2Fieldset.setAttribute('class', 'genFieldset');
-        gen5BWBW2Fieldset.setAttribute('id', 'gen5BWBW2Id');
+        var gen5BWBW2Fieldset = document.createElement("fieldset");
+        gen5BWBW2Fieldset.setAttribute("class", "genFieldset");
+        gen5BWBW2Fieldset.setAttribute("id", "gen5BWBW2Id");
         checkboxs.appendChild(gen5BWBW2Fieldset);
-        const gen5BWBW2Fieldsets =
-          document.getElementById('gen5BWBW2Id');
+        const gen5BWBW2Fieldsets = document.getElementById("gen5BWBW2Id");
         // legend
-        var gen5BWBW2legend = document.createElement('legend');
-        gen5BWBW2legend.innerHTML = 'BW, BW2';
+        var gen5BWBW2legend = document.createElement("legend");
+        gen5BWBW2legend.innerHTML = "BW, BW2";
         gen5BWBW2Fieldsets.appendChild(gen5BWBW2legend);
 
         // gen5Naturalを生成
@@ -406,15 +454,14 @@ document.getElementById("generationSelector").onchange =
       case 6:
         // XY
         // feildset
-        var gen6XYFieldset = document.createElement('fieldset');
-        gen6XYFieldset.setAttribute('class', 'genFieldset');
-        gen6XYFieldset.setAttribute('id', 'gen6XYId');
+        var gen6XYFieldset = document.createElement("fieldset");
+        gen6XYFieldset.setAttribute("class", "genFieldset");
+        gen6XYFieldset.setAttribute("id", "gen6XYId");
         checkboxs.appendChild(gen6XYFieldset);
-        const gen6XYFieldsets =
-          document.getElementById('gen6XYId');
+        const gen6XYFieldsets = document.getElementById("gen6XYId");
         // legend
-        var gen6XYlegend = document.createElement('legend');
-        gen6XYlegend.innerHTML = 'XY';
+        var gen6XYlegend = document.createElement("legend");
+        gen6XYlegend.innerHTML = "XY";
         gen6XYFieldsets.appendChild(gen6XYlegend);
 
         // gen6Naturalを生成
@@ -541,15 +588,14 @@ document.getElementById("generationSelector").onchange =
 
         // ORAS
         // feildset
-        var gen6ORASFieldset = document.createElement('fieldset');
-        gen6ORASFieldset.setAttribute('class', 'genFieldset');
-        gen6ORASFieldset.setAttribute('id', 'gen6ORASId');
+        var gen6ORASFieldset = document.createElement("fieldset");
+        gen6ORASFieldset.setAttribute("class", "genFieldset");
+        gen6ORASFieldset.setAttribute("id", "gen6ORASId");
         checkboxs.appendChild(gen6ORASFieldset);
-        const gen6ORASFieldsets =
-          document.getElementById('gen6ORASId');
+        const gen6ORASFieldsets = document.getElementById("gen6ORASId");
         // legend
-        var gen6ORASlegend = document.createElement('legend');
-        gen6ORASlegend.innerHTML = 'ORAS';
+        var gen6ORASlegend = document.createElement("legend");
+        gen6ORASlegend.innerHTML = "ORAS";
         gen6ORASFieldsets.appendChild(gen6ORASlegend);
         break;
       case 7:
@@ -720,15 +766,14 @@ document.getElementById("generationSelector").onchange =
       case 8:
         // SW,SH
         // feildset
-        var gen8SWSHFieldset = document.createElement('fieldset');
-        gen8SWSHFieldset.setAttribute('class', 'genFieldset');
-        gen8SWSHFieldset.setAttribute('id', 'gen8SWSHId');
+        var gen8SWSHFieldset = document.createElement("fieldset");
+        gen8SWSHFieldset.setAttribute("class", "genFieldset");
+        gen8SWSHFieldset.setAttribute("id", "gen8SWSHId");
         checkboxs.appendChild(gen8SWSHFieldset);
-        const gen8SWSHFieldsets =
-          document.getElementById('gen8SWSHId');
+        const gen8SWSHFieldsets = document.getElementById("gen8SWSHId");
         // legend
-        var gen8SWSHlegend = document.createElement('legend');
-        gen8SWSHlegend.innerHTML = 'SW, SH';
+        var gen8SWSHlegend = document.createElement("legend");
+        gen8SWSHlegend.innerHTML = "SW, SH";
         gen8SWSHFieldsets.appendChild(gen8SWSHlegend);
 
         // gen8Naturalを生成
@@ -786,15 +831,14 @@ document.getElementById("generationSelector").onchange =
 
         // BD,SP
         // feildset
-        var gen8BDSPFieldset = document.createElement('fieldset');
-        gen8BDSPFieldset.setAttribute('class', 'genFieldset');
-        gen8BDSPFieldset.setAttribute('id', 'gen8BDSPId');
+        var gen8BDSPFieldset = document.createElement("fieldset");
+        gen8BDSPFieldset.setAttribute("class", "genFieldset");
+        gen8BDSPFieldset.setAttribute("id", "gen8BDSPId");
         checkboxs.appendChild(gen8BDSPFieldset);
-        const gen8BDSPFieldsets =
-          document.getElementById('gen8BDSPId');
+        const gen8BDSPFieldsets = document.getElementById("gen8BDSPId");
         // legend
-        var gen8BDSPlegend = document.createElement('legend');
-        gen8BDSPlegend.innerHTML = 'BD, SP';
+        var gen8BDSPlegend = document.createElement("legend");
+        gen8BDSPlegend.innerHTML = "BD, SP";
         gen8BDSPFieldsets.appendChild(gen8BDSPlegend);
 
         // gen8ShinyCharmBDSPを生成
@@ -804,8 +848,9 @@ document.getElementById("generationSelector").onchange =
         gen8ShinyCharmBDSPLabel.setAttribute("class", "genLabel");
         gen8ShinyCharmBDSPLabel.setAttribute("id", "gen8ShinyCharmBDSPId");
         gen8BDSPFieldsets.appendChild(gen8ShinyCharmBDSPLabel);
-        const gen8ShinyCharmBDSPLabels =
-          document.getElementById("gen8ShinyCharmBDSPId");
+        const gen8ShinyCharmBDSPLabels = document.getElementById(
+          "gen8ShinyCharmBDSPId"
+        );
         // checkbox
         var gen8ShinyCharmBDSP = document.createElement("input");
         gen8ShinyCharmBDSP.setAttribute("type", "checkbox");
@@ -817,29 +862,27 @@ document.getElementById("generationSelector").onchange =
 
         // LA
         // feildset
-        var gen8LAFieldset = document.createElement('fieldset');
-        gen8LAFieldset.setAttribute('class', 'genFieldset');
-        gen8LAFieldset.setAttribute('id', 'gen8LAId');
+        var gen8LAFieldset = document.createElement("fieldset");
+        gen8LAFieldset.setAttribute("class", "genFieldset");
+        gen8LAFieldset.setAttribute("id", "gen8LAId");
         checkboxs.appendChild(gen8LAFieldset);
-        const gen8LAFieldsets =
-          document.getElementById('gen8LAId');
+        const gen8LAFieldsets = document.getElementById("gen8LAId");
         // legend
-        var gen8LAlegend = document.createElement('legend');
-        gen8LAlegend.innerHTML = 'LA';
+        var gen8LAlegend = document.createElement("legend");
+        gen8LAlegend.innerHTML = "LA";
         gen8LAFieldsets.appendChild(gen8LAlegend);
         break;
       case 9:
         // SV
         // feildset
-        var gen8SVFieldset = document.createElement('fieldset');
-        gen8SVFieldset.setAttribute('class', 'genFieldset');
-        gen8SVFieldset.setAttribute('id', 'gen8SVId');
+        var gen8SVFieldset = document.createElement("fieldset");
+        gen8SVFieldset.setAttribute("class", "genFieldset");
+        gen8SVFieldset.setAttribute("id", "gen9SVId");
         checkboxs.appendChild(gen8SVFieldset);
-        const gen9SVFieldsets =
-          document.getElementById('gen8SVId');
+        const gen9SVFieldsets = document.getElementById("gen9SVId");
         // legend
-        var gen8SVlegend = document.createElement('legend');
-        gen8SVlegend.innerHTML = 'SV';
+        var gen8SVlegend = document.createElement("legend");
+        gen8SVlegend.innerHTML = "SV";
         gen9SVFieldsets.appendChild(gen8SVlegend);
 
         // gen9Naturalを生成
@@ -890,7 +933,7 @@ document.getElementById("generationSelector").onchange =
         var gen9ShinyCharmSV = document.createElement("input");
         gen9ShinyCharmSV.setAttribute("type", "checkbox");
         gen9ShinyCharmSV.setAttribute("id", "gen9ShinyCharmSV");
-        gen9ShinyCharmSV.setAttribute("name", "gen9checkbox");
+        gen9ShinyCharmSV.setAttribute("name", "gen9Radio");
         gen9ShinyCharmSVLabels.appendChild(gen9ShinyCharmSV);
         // 名称
         gen9ShinyCharmSVLabel.innerHTML += "ひかるおまもり";
@@ -902,13 +945,14 @@ document.getElementById("generationSelector").onchange =
         gen9MassOutbreakSVLabel.setAttribute("class", "genLabel");
         gen9MassOutbreakSVLabel.setAttribute("id", "gen9MassOutbreakSVId");
         gen9SVFieldsets.appendChild(gen9MassOutbreakSVLabel);
-        const gen9MassOutbreakSVLabels =
-          document.getElementById("gen9MassOutbreakSVId");
+        const gen9MassOutbreakSVLabels = document.getElementById(
+          "gen9MassOutbreakSVId"
+        );
         // checkbox
         var gen9MassOutbreakSV = document.createElement("input");
         gen9MassOutbreakSV.setAttribute("type", "checkbox");
         gen9MassOutbreakSV.setAttribute("id", "gen9MassOutbreakSV");
-        gen9MassOutbreakSV.setAttribute("name", "gen9checkbox");
+        gen9MassOutbreakSV.setAttribute("name", "gen9Radio");
         gen9MassOutbreakSVLabels.appendChild(gen9MassOutbreakSV);
         // 名称
         gen9MassOutbreakSVLabel.innerHTML += "大量発生";
@@ -920,13 +964,14 @@ document.getElementById("generationSelector").onchange =
         gen9SparklingPowerSVLabel.setAttribute("class", "genLabel");
         gen9SparklingPowerSVLabel.setAttribute("id", "gen9SparklingPowerSVId");
         gen9SVFieldsets.appendChild(gen9SparklingPowerSVLabel);
-        const gen9SparklingPowerSVLabels =
-          document.getElementById("gen9SparklingPowerSVId");
+        const gen9SparklingPowerSVLabels = document.getElementById(
+          "gen9SparklingPowerSVId"
+        );
         // checkbox
         var gen9SparklingPowerSV = document.createElement("input");
         gen9SparklingPowerSV.setAttribute("type", "checkbox");
         gen9SparklingPowerSV.setAttribute("id", "gen9SparklingPowerSV");
-        gen9SparklingPowerSV.setAttribute("name", "gen9checkbox");
+        gen9SparklingPowerSV.setAttribute("name", "gen9Radio");
         gen9SparklingPowerSVLabels.appendChild(gen9SparklingPowerSV);
         // 名称
         gen9SparklingPowerSVLabel.innerHTML += "かがやきパワーLv3";
