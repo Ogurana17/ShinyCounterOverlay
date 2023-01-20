@@ -1,7 +1,4 @@
 // ShinyProbability
-// メモ
-// ・ラジオボタンで確率をセットしたい
-// ・ラジオボタンの配置を完了させたい
 
 document.getElementById("traialsIncrementButton").onclick = function addCnt() {
   // HTML要素から要素を読み込み
@@ -28,51 +25,68 @@ document.getElementById("traialsDecrementButton").onclick = function subCnt() {
 // 世代の確率を押すと確率を反映
 document.getElementById("calcProbabilityButton").onclick =
   function setProbability() {
-    // 計算に不要なチェックボックスを外す
-    disableCheckbox();
+    // 世代を特定
+    const generationSelector = document.getElementById("generationSelector");
+    var genRadio = "";
 
-    const gen9Radio = document.getElementsByName("gen9Radio");
+    // 世代ごと確率合算
+    var rateArr = "";
+    switch (Number(generationSelector.value)) {
+      case 1:
+      case 2:
+        genRadio = document.getElementsByName("gen1Radio");
+        rateArr = calcGen1(genRadio);
+        break;
+      case 3:
+        genRadio = document.getElementsByName("gen3Radio");
+        rateArr = calcGen3(genRadio);
+        break;
+      case 4:
+        genRadio = document.getElementsByName("gen4Radio");
+        rateArr = calcGen4(genRadio);
+        break;
+      case 5:
+        genRadio = document.getElementsByName("gen5Radio");
+        rateArr = calcGen5(genRadio);
+        break;
+      case 6:
+        genRadio = document.getElementsByName("gen6Radio");
+        rateArr = calcGen6(genRadio);
+        break;
+      case 7:
+        disableCheckboxGen7();
+        genRadio = document.getElementsByName("gen7Radio");
+        rateArr = calcGen7(genRadio);
+        break;
+      case 8:
+        disableCheckboxGen8()
+        genRadio = document.getElementsByName("gen8Radio");
+        rateArr = calcGen8(genRadio);
+        break;
+      case 9:
+        disableCheckboxGen9();
+        genRadio = document.getElementsByName("gen9Radio");
+        rateArr = calcGen9(genRadio);
+        break;
+      default:
+        return 0;
+    }
+    let numerator = rateArr[0];
+    let denominator = rateArr[1];
+
+    // 約分処理
+    let numArr = irreducible(numerator, denominator);
+    numerator = numArr[0];
+    denominator = numArr[1];
+    console.log(numerator + " / " + denominator);
+
+    // HTMLを書き換え
     const shinyProbabilityNumerator = document.getElementById(
       "shinyProbabilityNumerator"
     );
     const shinyProbabilityDenominator = document.getElementById(
       "shinyProbabilityDenominator"
     );
-
-    // calc SV
-    let numerator = 0;
-    let denominator = 0;
-
-    // 自然遭遇
-    if (gen9Radio[0].checked) {
-      numerator = 1;
-      denominator = 4096;
-    }
-    // 国際孵化
-    if (gen9Radio[1].checked) {
-      numerator = 1 + 6;
-      denominator = 4096;
-    }
-    // ひかるおまもり
-    if (gen9Radio[2].checked) numerator += 2;
-
-    // 大量発生
-    if (gen9Radio[3].checked) numerator += 2;
-
-    // かがやきパワーLv3
-    if (gen9Radio[4].checked) numerator += 3;
-
-    // ひかるおまもりと国際孵化では-1になる公式の例外処理
-    if (gen9Radio[1].checked && gen9Radio[2].checked) numerator -= 1;
-
-    // 約分処理
-    // 配列で受け取る
-    let numArr = irreducible(numerator, denominator);
-    numerator = numArr[0];
-    denominator = numArr[1];
-    console.log(numerator + ' / ' + denominator);
-
-    // HTMLを書き換え
     shinyProbabilityNumerator.value = numerator;
     shinyProbabilityDenominator.value = denominator;
 
@@ -92,15 +106,236 @@ document.getElementById("calcProbabilityButton").onclick =
     shinyProbability();
   };
 
-// 入力制限
 // 特定のボタンにチェックが入ったらチェックを外す
-function disableCheckbox() {
+function disableCheckboxGen7() {
+  // SM, USUM, LGP, LGE
+  const gen7Radio = document.getElementsByName("gen7Radio");
+  // LGP, LGEには`国際孵化`,`乱入バトル`は存在しない
+  if (gen7Radio[1].checked || gen7Radio[2].checked) {
+    gen7Radio[4].checked = false;
+    gen7Radio[5].checked = false;
+  }
+}
+function disableCheckboxGen8() {
+  // SWSH, BDSP, LA
+  const gen8Radio = document.getElementsByName("gen8Radio");
+  // LAには`国際孵化`,`ポケトレ`,`戦った数（500匹以上）`,`ダイマックスアドベンチャー`は存在しない
+  if (gen8Radio[1].checked || gen8Radio[2].checked || gen8Radio[3].checked || gen8Radio[4].checked) {
+    gen8Radio[6].checked = false;
+    gen8Radio[7].checked = false;
+    gen8Radio[8].checked = false;
+    gen8Radio[9].checked = false;
+    gen8Radio[10].checked = false;
+  }
+  // ダイマックスアドベンチャーはひかるおまもりの効果はない
+  if (gen8Radio[4].checked) gen8Radio[5].checked = false;
+  // ひかるおまもりが両方計算されるのを防ぐ
+  if (gen8Radio[0].checked && gen8Radio[5].checked && gen8Radio[6].checked) {
+    gen8Radio[5].checked = false;
+    gen8Radio[6].checked = false;
+  }
+}
+function disableCheckboxGen9() {
   // SV
   const gen9Radio = document.getElementsByName("gen9Radio");
+  // 国際孵化では`大量発生`はあり得ない。また`かがやきパワーLv3`の効果もない。
   if (gen9Radio[1].checked) {
     gen9Radio[3].checked = false;
     gen9Radio[4].checked = false;
   }
+}
+
+// 世代ごとの確率合算
+function calcGen1(gen1Radio) {
+  // 自然遭遇
+  if (gen1Radio[0].checked) {
+    numerator = 1;
+    denominator = 8192;
+  }
+  // 遺伝
+  if (gen1Radio[1].checked) {
+    numerator = 1;
+    denominator = 64;
+  }
+  return [numerator, denominator];
+}
+function calcGen3(gen3Radio) {
+  // 自然遭遇
+  if (gen3Radio[0].checked) {
+    numerator = 1;
+    denominator = 8192;
+  }
+  return [numerator, denominator];
+}
+function calcGen4(gen4Radio) {
+  // 自然遭遇
+  if (gen4Radio[0].checked) {
+    numerator = 1;
+    denominator = 8192;
+  }
+  // 国際孵化
+  if (gen4Radio[1].checked) {
+    numerator = 5;
+    denominator = 8192;
+  }
+  // ポケトレ
+  if (gen4Radio[2].checked) {
+    numerator = 41;
+    denominator = 8192;
+  }
+  return [numerator, denominator];
+}
+function calcGen5(gen5Radio) {
+  // 自然遭遇
+  if (gen5Radio[0].checked) {
+    numerator = 1;
+    denominator = 8192;
+  }
+  // 国際孵化
+  if (gen5Radio[1].checked) {
+    numerator = 6;
+    denominator = 8192;
+  }
+  // ひかるおまもり
+  if (gen5Radio[2].checked) {
+    numerator += 2;
+  }
+  return [numerator, denominator];
+}
+function calcGen6(gen6Radio) {
+  // 自然遭遇
+  if (gen6Radio[0].checked) {
+    numerator = 1;
+    denominator = 4096;
+  }
+  // 国際孵化
+  if (gen6Radio[1].checked) {
+    numerator = 6;
+    denominator = 4096;
+  }
+  // ポケトレ
+  if (gen6Radio[2].checked) {
+    numerator = 1;
+    denominator = 100;
+  }
+  // フレンドサファリ
+  if (gen6Radio[3].checked) {
+    numerator = 5;
+    denominator = 4096;
+  }
+  // 連続釣り
+  if (gen6Radio[4].checked) {
+    numerator = 41;
+    denominator = 4096;
+  }
+  // ひかるおまもり
+  if (gen6Radio[5].checked) {
+    numerator += 2;
+  }
+  return [numerator, denominator];
+}
+function calcGen7(gen7Radio) {
+  // 自然遭遇
+  if (gen7Radio[0].checked) {
+    numerator = 1;
+    denominator = 4096;
+  }
+  // 国際孵化
+  if (gen7Radio[1].checked) {
+    numerator = 6;
+    denominator = 4096;
+  }
+  // 乱入バトル
+  if (gen7Radio[2].checked) {
+    numerator = 13;
+    denominator = 4096;
+  }
+  // ひかるおまもり
+  if (gen7Radio[3].checked) {
+    numerator += 2;
+  }
+  // 31連鎖（捕獲）
+  if (gen7Radio[4].checked) {
+    numerator += 11;
+  }
+  // むしよせコロン
+  if (gen7Radio[5].checked) {
+    numerator += 1;
+  }
+  return [numerator, denominator];
+}
+function calcGen8(gen7Radio) {
+  // 自然遭遇
+  if (gen7Radio[0].checked) {
+    numerator = 1;
+    denominator = 4096;
+  }
+  // 国際孵化
+  if (gen7Radio[1].checked) {
+    numerator = 6;
+    denominator = 4096;
+  }
+  // ポケトレ
+  if (gen7Radio[2].checked) {
+    numerator = 1;
+    denominator = 99;
+  }
+  // 戦った数（500匹以上）
+  if (gen7Radio[3].checked) {
+    numerator = 1;
+    denominator = 3472;
+  }
+  // ダイマックスアドベンチャー
+  if (gen7Radio[4].checked) {
+    numerator = 1;
+    denominator = 300;
+  }
+  // ひかるおまもり SWSH, BDSP
+  if (gen7Radio[5].checked) {
+    numerator += 2;
+  }
+  // ひかるおまもり LA
+  if (gen7Radio[6].checked) {
+    numerator += 3;
+  }
+  // 大量発生
+  if (gen7Radio[6].checked) {
+    numerator += 25;
+  }
+  // 大大大発生
+  if (gen7Radio[7].checked) {
+    numerator += 12;
+  }
+  // 図鑑研究レベル10
+  if (gen7Radio[8].checked) {
+    numerator += 1;
+  }
+  // 図鑑タスク完璧
+  if (gen7Radio[9].checked) {
+    numerator += 2;
+  }
+  return [numerator, denominator];
+}
+function calcGen9(gen9Radio) {
+  let numerator = 0;
+  let denominator = 0;
+  // 自然遭遇
+  if (gen9Radio[0].checked) {
+    numerator = 1;
+    denominator = 4096;
+  }
+  // 国際孵化
+  if (gen9Radio[1].checked) {
+    numerator = 6;
+    denominator = 4096;
+  }
+  // ひかるおまもり
+  if (gen9Radio[2].checked) numerator += 2;
+  // 大量発生
+  if (gen9Radio[3].checked) numerator += 2;
+  // かがやきパワーLv3
+  if (gen9Radio[4].checked) numerator += 3;
+  return [numerator, denominator];
 }
 
 // 約分する関数
@@ -226,7 +461,7 @@ function shinyProbability() {
   let numArr = irreducible(numerator, denominator);
   numerator = numArr[0];
   denominator = numArr[1];
-  console.log(numerator + ' / ' + denominator);
+  console.log(numerator + " / " + denominator);
 
   // 約分した結果をHTMLに反映
   shinyProbabilityNumerator.value = numerator;
@@ -234,16 +469,17 @@ function shinyProbability() {
 
   // 演算
   var shinyProbabilityNum =
-    (1 -
-      Math.pow(
-        1 - numerator / denominator,
-        traialsInput.value
-      )) *
-    100;
+    (1 - Math.pow(1 - numerator / denominator, traialsInput.value)) * 100;
   // 小数点以下の有効桁数を3桁に制限
   const digit = 3;
+  // 小数点有効桁3桁で切り捨て
   var shinyProbabilityValue =
     Math.floor(shinyProbabilityNum * Math.pow(10, digit)) / Math.pow(10, digit);
+  // 小数点有効桁3桁固定表示
+  var shinyProbabilityValue = shinyProbabilityValue.toLocaleString(undefined, {
+    minimumFractionDigits: digit,
+    maximumFractionDigits: digit,
+  });
   encounterProbabilityTitle.innerHTML = shinyProbabilityValue;
 
   // cookie書き込み
@@ -279,9 +515,7 @@ document.getElementById("generationSelector").onchange =
     console.log("generation: " + generationSelector.value);
 
     // 生成済みのチェックボックスを削除
-    while (checkboxs.firstChild) {
-      checkboxs.removeChild(checkboxs.firstChild);
-    }
+    while (checkboxs.firstChild) checkboxs.removeChild(checkboxs.firstChild);
 
     switch (Number(generationSelector.value)) {
       case 1:
@@ -312,6 +546,7 @@ document.getElementById("generationSelector").onchange =
         gen1Natural.setAttribute("type", "radio");
         gen1Natural.setAttribute("id", "gen1Natural");
         gen1Natural.setAttribute("name", "gen1Radio");
+        gen1Natural.setAttribute("checked", "");
         gen1NaturalLabels.appendChild(gen1Natural);
         // 名称
         gen1NaturalLabel.innerHTML += "自然遭遇";
@@ -359,6 +594,7 @@ document.getElementById("generationSelector").onchange =
         gen3Natural.setAttribute("type", "radio");
         gen3Natural.setAttribute("id", "gen3Natural");
         gen3Natural.setAttribute("name", "gen3Radio");
+        gen3Natural.setAttribute("checked", "");
         gen3NaturalLabels.appendChild(gen3Natural);
         // 名称
         gen3NaturalLabel.innerHTML += "自然遭遇";
@@ -389,6 +625,7 @@ document.getElementById("generationSelector").onchange =
         gen4Natural.setAttribute("type", "radio");
         gen4Natural.setAttribute("id", "gen4Natural");
         gen4Natural.setAttribute("name", "gen4Radio");
+        gen4Natural.setAttribute("checked", "");
         gen4NaturalLabels.appendChild(gen4Natural);
         // 名称
         gen4NaturalLabel.innerHTML += "自然遭遇";
@@ -454,6 +691,7 @@ document.getElementById("generationSelector").onchange =
         gen5Natural.setAttribute("type", "radio");
         gen5Natural.setAttribute("id", "gen5Natural");
         gen5Natural.setAttribute("name", "gen5Radio");
+        gen5Natural.setAttribute("checked", "");
         gen5NaturalLabels.appendChild(gen5Natural);
         // 名称
         gen5NaturalLabel.innerHTML += "自然遭遇";
@@ -489,13 +727,13 @@ document.getElementById("generationSelector").onchange =
         var gen5ShinyCharm = document.createElement("input");
         gen5ShinyCharm.setAttribute("type", "checkbox");
         gen5ShinyCharm.setAttribute("id", "gen5ShinyCharm");
-        gen5ShinyCharm.setAttribute("name", "gen5checkbox");
+        gen5ShinyCharm.setAttribute("name", "gen5Radio");
         gen5ShinyCharmLabels.appendChild(gen5ShinyCharm);
         // 名称
         gen5ShinyCharmLabel.innerHTML += "ひかるおまもり";
         break;
       case 6:
-        // XY
+        // XY, ORAS
         // feildset
         var gen6XYFieldset = document.createElement("fieldset");
         gen6XYFieldset.setAttribute("class", "genFieldset");
@@ -504,7 +742,7 @@ document.getElementById("generationSelector").onchange =
         const gen6XYFieldsets = document.getElementById("gen6XYId");
         // legend
         var gen6XYlegend = document.createElement("legend");
-        gen6XYlegend.innerHTML = "XY";
+        gen6XYlegend.innerHTML = "XY, ORAS";
         gen6XYFieldsets.appendChild(gen6XYlegend);
 
         // gen6Naturalを生成
@@ -520,9 +758,11 @@ document.getElementById("generationSelector").onchange =
         gen6Natural.setAttribute("type", "radio");
         gen6Natural.setAttribute("id", "gen6Natural");
         gen6Natural.setAttribute("name", "gen6Radio");
+        gen6Natural.setAttribute("checked", "");
         gen6NaturalLabels.appendChild(gen6Natural);
         // 名称
         gen6NaturalLabel.innerHTML += "自然遭遇";
+
         // gen6MasudaMethodを生成
         // label
         var gen6MasudaMethodLabel = document.createElement("label");
@@ -594,23 +834,6 @@ document.getElementById("generationSelector").onchange =
         // 名称
         gen6ChainFishingLabel.innerHTML += "連続釣り";
 
-        // gen6IndexNaviを生成
-        // label
-        var gen6IndexNaviLabel = document.createElement("label");
-        gen6IndexNaviLabel.setAttribute("for", "gen6IndexNavi");
-        gen6IndexNaviLabel.setAttribute("class", "genLabel");
-        gen6IndexNaviLabel.setAttribute("id", "gen6IndexNaviId");
-        gen6XYFieldsets.appendChild(gen6IndexNaviLabel);
-        const gen6IndexNaviLabels = document.getElementById("gen6IndexNaviId");
-        // checkbox
-        var gen6IndexNavi = document.createElement("input");
-        gen6IndexNavi.setAttribute("type", "radio");
-        gen6IndexNavi.setAttribute("id", "gen6IndexNavi");
-        gen6IndexNavi.setAttribute("name", "gen6Radio");
-        gen6IndexNaviLabels.appendChild(gen6IndexNavi);
-        // 名称
-        gen6IndexNaviLabel.innerHTML += "ずかんナビ";
-
         // gen6ShinyCharmを生成
         // label
         var gen6ShinyCharmLabel = document.createElement("label");
@@ -624,22 +847,10 @@ document.getElementById("generationSelector").onchange =
         var gen6ShinyCharm = document.createElement("input");
         gen6ShinyCharm.setAttribute("type", "checkbox");
         gen6ShinyCharm.setAttribute("id", "gen6ShinyCharm");
-        gen6ShinyCharm.setAttribute("name", "gen6checkbox");
+        gen6ShinyCharm.setAttribute("name", "gen6Radio");
         gen6ShinyCharmLabels.appendChild(gen6ShinyCharm);
         // 名称
         gen6ShinyCharmLabel.innerHTML += "ひかるおまもり";
-
-        // ORAS
-        // feildset
-        var gen6ORASFieldset = document.createElement("fieldset");
-        gen6ORASFieldset.setAttribute("class", "genFieldset");
-        gen6ORASFieldset.setAttribute("id", "gen6ORASId");
-        checkboxs.appendChild(gen6ORASFieldset);
-        const gen6ORASFieldsets = document.getElementById("gen6ORASId");
-        // legend
-        var gen6ORASlegend = document.createElement("legend");
-        gen6ORASlegend.innerHTML = "ORAS";
-        gen6ORASFieldsets.appendChild(gen6ORASlegend);
         break;
       case 7:
         // SM,USUM
@@ -651,7 +862,7 @@ document.getElementById("generationSelector").onchange =
         const gen7SMUSUMFieldsets = document.getElementById("gen7SMUSUMId");
         // legend
         var gen7SMUSUMlegend = document.createElement("legend");
-        gen7SMUSUMlegend.innerHTML = "SM, USUM";
+        gen7SMUSUMlegend.innerHTML = "SM, USUM, LGP, LGE";
         gen7SMUSUMFieldsets.appendChild(gen7SMUSUMlegend);
 
         // gen7Naturalを生成
@@ -667,6 +878,7 @@ document.getElementById("generationSelector").onchange =
         gen7Natural.setAttribute("type", "radio");
         gen7Natural.setAttribute("id", "gen7Natural");
         gen7Natural.setAttribute("name", "gen7Radio");
+        gen7Natural.setAttribute("checked", "");
         gen7NaturalLabels.appendChild(gen7Natural);
         // 名称
         gen7NaturalLabel.innerHTML += "自然遭遇";
@@ -719,57 +931,10 @@ document.getElementById("generationSelector").onchange =
         var gen7ShinyCharm = document.createElement("input");
         gen7ShinyCharm.setAttribute("type", "checkbox");
         gen7ShinyCharm.setAttribute("id", "gen7ShinyCharm");
-        gen7ShinyCharm.setAttribute("name", "gen7checkbox");
+        gen7ShinyCharm.setAttribute("name", "gen7Radio");
         gen7ShinyCharmLabels.appendChild(gen7ShinyCharm);
         // 名称
         gen7ShinyCharmLabel.innerHTML += "ひかるおまもり";
-
-        // LGP,LGE
-        // feildset
-        var gen7LGPLGEFieldset = document.createElement("fieldset");
-        gen7LGPLGEFieldset.setAttribute("class", "genFieldset");
-        gen7LGPLGEFieldset.setAttribute("id", "gen7LGPLGEId");
-        checkboxs.appendChild(gen7LGPLGEFieldset);
-        const gen7LGPLGEFieldsets = document.getElementById("gen7LGPLGEId");
-        // legend
-        var gen7LGPLGElegend = document.createElement("legend");
-        gen7LGPLGElegend.innerHTML = "LGP, LGE";
-        gen7LGPLGEFieldsets.appendChild(gen7LGPLGElegend);
-
-        // gen7NaturalLGを生成
-        // label
-        var gen7NaturalLGLabel = document.createElement("label");
-        gen7NaturalLGLabel.setAttribute("for", "gen7NaturalLG");
-        gen7NaturalLGLabel.setAttribute("class", "genLabel");
-        gen7NaturalLGLabel.setAttribute("id", "gen7NaturalLGId");
-        gen7LGPLGEFieldsets.appendChild(gen7NaturalLGLabel);
-        const gen7NaturalLGLabels = document.getElementById("gen7NaturalLGId");
-        // checkbox
-        var gen7NaturalLG = document.createElement("input");
-        gen7NaturalLG.setAttribute("type", "radio");
-        gen7NaturalLG.setAttribute("id", "gen7NaturalLG");
-        gen7NaturalLG.setAttribute("name", "gen7Radio");
-        gen7NaturalLGLabels.appendChild(gen7NaturalLG);
-        // 名称
-        gen7NaturalLGLabel.innerHTML += "自然遭遇";
-
-        // gen7ShinyCharmLGを生成
-        // label
-        var gen7ShinyCharmLGLabel = document.createElement("label");
-        gen7ShinyCharmLGLabel.setAttribute("for", "gen7ShinyCharmLG");
-        gen7ShinyCharmLGLabel.setAttribute("class", "genLabel");
-        gen7ShinyCharmLGLabel.setAttribute("id", "gen7ShinyCharmLGId");
-        gen7LGPLGEFieldsets.appendChild(gen7ShinyCharmLGLabel);
-        const gen7ShinyCharmLGLabels =
-          document.getElementById("gen7ShinyCharmLGId");
-        // checkbox
-        var gen7ShinyCharmLG = document.createElement("input");
-        gen7ShinyCharmLG.setAttribute("type", "checkbox");
-        gen7ShinyCharmLG.setAttribute("id", "gen7ShinyCharmLG");
-        gen7ShinyCharmLG.setAttribute("name", "gen7checkbox");
-        gen7ShinyCharmLGLabels.appendChild(gen7ShinyCharmLG);
-        // 名称
-        gen7ShinyCharmLGLabel.innerHTML += "ひかるおまもり";
 
         // gen7CatchComboLGを生成
         // label
@@ -777,14 +942,14 @@ document.getElementById("generationSelector").onchange =
         gen7CatchComboLGLabel.setAttribute("for", "gen7CatchComboLG");
         gen7CatchComboLGLabel.setAttribute("class", "genLabel");
         gen7CatchComboLGLabel.setAttribute("id", "gen7CatchComboLGId");
-        gen7LGPLGEFieldsets.appendChild(gen7CatchComboLGLabel);
+        gen7SMUSUMFieldsets.appendChild(gen7CatchComboLGLabel);
         const gen7CatchComboLGLabels =
           document.getElementById("gen7CatchComboLGId");
         // checkbox
         var gen7CatchComboLG = document.createElement("input");
         gen7CatchComboLG.setAttribute("type", "checkbox");
         gen7CatchComboLG.setAttribute("id", "gen7CatchComboLG");
-        gen7CatchComboLG.setAttribute("name", "gen7checkbox");
+        gen7CatchComboLG.setAttribute("name", "gen7Radio");
         gen7CatchComboLGLabels.appendChild(gen7CatchComboLG);
         // 名称
         gen7CatchComboLGLabel.innerHTML += "31連鎖（捕獲）";
@@ -795,13 +960,13 @@ document.getElementById("generationSelector").onchange =
         gen7LureLGLabel.setAttribute("for", "gen7LureLG");
         gen7LureLGLabel.setAttribute("class", "genLabel");
         gen7LureLGLabel.setAttribute("id", "gen7LureLGId");
-        gen7LGPLGEFieldsets.appendChild(gen7LureLGLabel);
+        gen7SMUSUMFieldsets.appendChild(gen7LureLGLabel);
         const gen7LureLGLabels = document.getElementById("gen7LureLGId");
         // checkbox
         var gen7LureLG = document.createElement("input");
         gen7LureLG.setAttribute("type", "checkbox");
         gen7LureLG.setAttribute("id", "gen7LureLG");
-        gen7LureLG.setAttribute("name", "gen7checkbox");
+        gen7LureLG.setAttribute("name", "gen7Radio");
         gen7LureLGLabels.appendChild(gen7LureLG);
         // 名称
         gen7LureLGLabel.innerHTML += "むしよせコロン";
@@ -816,7 +981,7 @@ document.getElementById("generationSelector").onchange =
         const gen8SWSHFieldsets = document.getElementById("gen8SWSHId");
         // legend
         var gen8SWSHlegend = document.createElement("legend");
-        gen8SWSHlegend.innerHTML = "SW, SH";
+        gen8SWSHlegend.innerHTML = "SWSH, BDSP, LA";
         gen8SWSHFieldsets.appendChild(gen8SWSHlegend);
 
         // gen8Naturalを生成
@@ -832,6 +997,7 @@ document.getElementById("generationSelector").onchange =
         gen8Natural.setAttribute("type", "radio");
         gen8Natural.setAttribute("id", "gen8Natural");
         gen8Natural.setAttribute("name", "gen8Radio");
+        gen8Natural.setAttribute("checked", "");
         gen8NaturalLabels.appendChild(gen8Natural);
         // 名称
         gen8NaturalLabel.innerHTML += "自然遭遇";
@@ -854,66 +1020,160 @@ document.getElementById("generationSelector").onchange =
         // 名称
         gen8MasudaMethodLabel.innerHTML += "国際孵化";
 
-        // gen8ShinyCharmを生成
+        // gen8PokeRadarを生成
         // label
-        var gen8ShinyCharmLabel = document.createElement("label");
-        gen8ShinyCharmLabel.setAttribute("for", "gen8ShinyCharm");
-        gen8ShinyCharmLabel.setAttribute("class", "genLabel");
-        gen8ShinyCharmLabel.setAttribute("id", "gen8ShinyCharmId");
-        gen8SWSHFieldsets.appendChild(gen8ShinyCharmLabel);
-        const gen8ShinyCharmLabels =
-          document.getElementById("gen8ShinyCharmId");
+        var gen8PokeRadarLabel = document.createElement("label");
+        gen8PokeRadarLabel.setAttribute("for", "gen8PokeRadar");
+        gen8PokeRadarLabel.setAttribute("class", "genLabel");
+        gen8PokeRadarLabel.setAttribute("id", "gen8PokeRadarId");
+        gen8SWSHFieldsets.appendChild(gen8PokeRadarLabel);
+        const gen8PokeRadarLabels = document.getElementById("gen8PokeRadarId");
         // checkbox
-        var gen8ShinyCharm = document.createElement("input");
-        gen8ShinyCharm.setAttribute("type", "checkbox");
-        gen8ShinyCharm.setAttribute("id", "gen8ShinyCharm");
-        gen8ShinyCharm.setAttribute("name", "gen8checkbox");
-        gen8ShinyCharmLabels.appendChild(gen8ShinyCharm);
+        var gen8PokeRadar = document.createElement("input");
+        gen8PokeRadar.setAttribute("type", "radio");
+        gen8PokeRadar.setAttribute("id", "gen8PokeRadar");
+        gen8PokeRadar.setAttribute("name", "gen8Radio");
+        gen8PokeRadarLabels.appendChild(gen8PokeRadar);
         // 名称
-        gen8ShinyCharmLabel.innerHTML += "ひかるおまもり";
+        gen8PokeRadarLabel.innerHTML += "ポケトレ";
 
-        // BD,SP
-        // feildset
-        var gen8BDSPFieldset = document.createElement("fieldset");
-        gen8BDSPFieldset.setAttribute("class", "genFieldset");
-        gen8BDSPFieldset.setAttribute("id", "gen8BDSPId");
-        checkboxs.appendChild(gen8BDSPFieldset);
-        const gen8BDSPFieldsets = document.getElementById("gen8BDSPId");
-        // legend
-        var gen8BDSPlegend = document.createElement("legend");
-        gen8BDSPlegend.innerHTML = "BD, SP";
-        gen8BDSPFieldsets.appendChild(gen8BDSPlegend);
-
-        // gen8ShinyCharmBDSPを生成
+        // gen8KOを生成
         // label
-        var gen8ShinyCharmBDSPLabel = document.createElement("label");
-        gen8ShinyCharmBDSPLabel.setAttribute("for", "gen8ShinyCharmBDSP");
-        gen8ShinyCharmBDSPLabel.setAttribute("class", "genLabel");
-        gen8ShinyCharmBDSPLabel.setAttribute("id", "gen8ShinyCharmBDSPId");
-        gen8BDSPFieldsets.appendChild(gen8ShinyCharmBDSPLabel);
-        const gen8ShinyCharmBDSPLabels = document.getElementById(
-          "gen8ShinyCharmBDSPId"
-        );
+        var gen8KOLabel = document.createElement("label");
+        gen8KOLabel.setAttribute("for", "gen8KO");
+        gen8KOLabel.setAttribute("class", "genLabel");
+        gen8KOLabel.setAttribute("id", "gen8KOId");
+        gen8SWSHFieldsets.appendChild(gen8KOLabel);
+        const gen8KOLabels = document.getElementById("gen8KOId");
         // checkbox
-        var gen8ShinyCharmBDSP = document.createElement("input");
-        gen8ShinyCharmBDSP.setAttribute("type", "checkbox");
-        gen8ShinyCharmBDSP.setAttribute("id", "gen8ShinyCharmBDSP");
-        gen8ShinyCharmBDSP.setAttribute("name", "gen8checkbox");
-        gen8ShinyCharmBDSPLabels.appendChild(gen8ShinyCharmBDSP);
+        var gen8KO = document.createElement("input");
+        gen8KO.setAttribute("type", "radio");
+        gen8KO.setAttribute("id", "gen8KO");
+        gen8KO.setAttribute("name", "gen8Radio");
+        gen8KOLabels.appendChild(gen8KO);
         // 名称
-        gen8ShinyCharmBDSPLabel.innerHTML += "ひかるおまもり";
+        gen8KOLabel.innerHTML += "戦った数（500匹以上）";
 
-        // LA
-        // feildset
-        var gen8LAFieldset = document.createElement("fieldset");
-        gen8LAFieldset.setAttribute("class", "genFieldset");
-        gen8LAFieldset.setAttribute("id", "gen8LAId");
-        checkboxs.appendChild(gen8LAFieldset);
-        const gen8LAFieldsets = document.getElementById("gen8LAId");
-        // legend
-        var gen8LAlegend = document.createElement("legend");
-        gen8LAlegend.innerHTML = "LA";
-        gen8LAFieldsets.appendChild(gen8LAlegend);
+        // gen8DynamaxAdventureを生成
+        // label
+        var gen8DynamaxAdventureLabel = document.createElement("label");
+        gen8DynamaxAdventureLabel.setAttribute("for", "gen8DynamaxAdventure");
+        gen8DynamaxAdventureLabel.setAttribute("class", "genLabel");
+        gen8DynamaxAdventureLabel.setAttribute("id", "gen8DynamaxAdventureId");
+        gen8SWSHFieldsets.appendChild(gen8DynamaxAdventureLabel);
+        const gen8DynamaxAdventureLabels = document.getElementById("gen8DynamaxAdventureId");
+        // checkbox
+        var gen8DynamaxAdventure = document.createElement("input");
+        gen8DynamaxAdventure.setAttribute("type", "radio");
+        gen8DynamaxAdventure.setAttribute("id", "gen8DynamaxAdventure");
+        gen8DynamaxAdventure.setAttribute("name", "gen8Radio");
+        gen8DynamaxAdventureLabels.appendChild(gen8DynamaxAdventure);
+        // 名称
+        gen8DynamaxAdventureLabel.innerHTML += "ダイマックスアドベンチャー";
+
+        // gen8ShinyCharmSWSHを生成
+        // label
+        var gen8ShinyCharmSWSHLabel = document.createElement("label");
+        gen8ShinyCharmSWSHLabel.setAttribute("for", "gen8ShinyCharmSWSH");
+        gen8ShinyCharmSWSHLabel.setAttribute("class", "genLabel");
+        gen8ShinyCharmSWSHLabel.setAttribute("id", "gen8ShinyCharmSWSHId");
+        gen8SWSHFieldsets.appendChild(gen8ShinyCharmSWSHLabel);
+        const gen8ShinyCharmSWSHLabels =
+          document.getElementById("gen8ShinyCharmSWSHId");
+        // checkbox
+        var gen8ShinyCharmSWSH = document.createElement("input");
+        gen8ShinyCharmSWSH.setAttribute("type", "checkbox");
+        gen8ShinyCharmSWSH.setAttribute("id", "gen8ShinyCharmSWSH");
+        gen8ShinyCharmSWSH.setAttribute("name", "gen8Radio");
+        gen8ShinyCharmSWSHLabels.appendChild(gen8ShinyCharmSWSH);
+        // 名称
+        gen8ShinyCharmSWSHLabel.innerHTML += "ひかるおまもり SWSH, BDSP";
+
+        // gen8ShinyCharmLAを生成
+        // label
+        var gen8ShinyCharmLALabel = document.createElement("label");
+        gen8ShinyCharmLALabel.setAttribute("for", "gen8ShinyCharmLA");
+        gen8ShinyCharmLALabel.setAttribute("class", "genLabel");
+        gen8ShinyCharmLALabel.setAttribute("id", "gen8ShinyCharmLAId");
+        gen8SWSHFieldsets.appendChild(gen8ShinyCharmLALabel);
+        const gen8ShinyCharmLALabels =
+          document.getElementById("gen8ShinyCharmLAId");
+        // checkbox
+        var gen8ShinyCharmLA = document.createElement("input");
+        gen8ShinyCharmLA.setAttribute("type", "checkbox");
+        gen8ShinyCharmLA.setAttribute("id", "gen8ShinyCharmLA");
+        gen8ShinyCharmLA.setAttribute("name", "gen8Radio");
+        gen8ShinyCharmLALabels.appendChild(gen8ShinyCharmLA);
+        // 名称
+        gen8ShinyCharmLALabel.innerHTML += "ひかるおまもり LA";
+
+        // gen8MassOutbreaksを生成
+        // label
+        var gen8MassOutbreaksLabel = document.createElement("label");
+        gen8MassOutbreaksLabel.setAttribute("for", "gen8MassOutbreaks");
+        gen8MassOutbreaksLabel.setAttribute("class", "genLabel");
+        gen8MassOutbreaksLabel.setAttribute("id", "gen8MassOutbreaksId");
+        gen8SWSHFieldsets.appendChild(gen8MassOutbreaksLabel);
+        const gen8MassOutbreaksLabels = document.getElementById("gen8MassOutbreaksId");
+        // checkbox
+        var gen8MassOutbreaks = document.createElement("input");
+        gen8MassOutbreaks.setAttribute("type", "checkbox");
+        gen8MassOutbreaks.setAttribute("id", "gen8MassOutbreaks");
+        gen8MassOutbreaks.setAttribute("name", "gen8Radio");
+        gen8MassOutbreaksLabels.appendChild(gen8MassOutbreaks);
+        // 名称
+        gen8MassOutbreaksLabel.innerHTML += "大量発生";
+
+        // gen8MassiveMassOutbreaksを生成
+        // label
+        var gen8MassiveMassOutbreaksLabel = document.createElement("label");
+        gen8MassiveMassOutbreaksLabel.setAttribute("for", "gen8MassiveMassOutbreaks");
+        gen8MassiveMassOutbreaksLabel.setAttribute("class", "genLabel");
+        gen8MassiveMassOutbreaksLabel.setAttribute("id", "gen8MassiveMassOutbreaksId");
+        gen8SWSHFieldsets.appendChild(gen8MassiveMassOutbreaksLabel);
+        const gen8MassiveMassOutbreaksLabels = document.getElementById("gen8MassiveMassOutbreaksId");
+        // checkbox
+        var gen8MassiveMassOutbreaks = document.createElement("input");
+        gen8MassiveMassOutbreaks.setAttribute("type", "checkbox");
+        gen8MassiveMassOutbreaks.setAttribute("id", "gen8MassiveMassOutbreaks");
+        gen8MassiveMassOutbreaks.setAttribute("name", "gen8Radio");
+        gen8MassiveMassOutbreaksLabels.appendChild(gen8MassiveMassOutbreaks);
+        // 名称
+        gen8MassiveMassOutbreaksLabel.innerHTML += "大大大発生";
+
+        // gen8Rankを生成
+        // label
+        var gen8RankLabel = document.createElement("label");
+        gen8RankLabel.setAttribute("for", "gen8Rank");
+        gen8RankLabel.setAttribute("class", "genLabel");
+        gen8RankLabel.setAttribute("id", "gen8RankId");
+        gen8SWSHFieldsets.appendChild(gen8RankLabel);
+        const gen8RankLabels = document.getElementById("gen8RankId");
+        // checkbox
+        var gen8Rank = document.createElement("input");
+        gen8Rank.setAttribute("type", "checkbox");
+        gen8Rank.setAttribute("id", "gen8Rank");
+        gen8Rank.setAttribute("name", "gen8Radio");
+        gen8RankLabels.appendChild(gen8Rank);
+        // 名称
+        gen8RankLabel.innerHTML += "図鑑研究レベル10";
+
+        // gen8ResearchTaskを生成
+        // label
+        var gen8ResearchTaskLabel = document.createElement("label");
+        gen8ResearchTaskLabel.setAttribute("for", "gen8ResearchTask");
+        gen8ResearchTaskLabel.setAttribute("class", "genLabel");
+        gen8ResearchTaskLabel.setAttribute("id", "gen8ResearchTaskId");
+        gen8SWSHFieldsets.appendChild(gen8ResearchTaskLabel);
+        const gen8ResearchTaskLabels = document.getElementById("gen8ResearchTaskId");
+        // checkbox
+        var gen8ResearchTask = document.createElement("input");
+        gen8ResearchTask.setAttribute("type", "checkbox");
+        gen8ResearchTask.setAttribute("id", "gen8ResearchTask");
+        gen8ResearchTask.setAttribute("name", "gen8Radio");
+        gen8ResearchTaskLabels.appendChild(gen8ResearchTask);
+        // 名称
+        gen8ResearchTaskLabel.innerHTML += "図鑑タスク完璧";
         break;
       case 9:
         // SV
@@ -941,6 +1201,7 @@ document.getElementById("generationSelector").onchange =
         gen9Natural.setAttribute("type", "radio");
         gen9Natural.setAttribute("id", "gen9Natural");
         gen9Natural.setAttribute("name", "gen9Radio");
+        gen9Natural.setAttribute("checked", "");
         gen9NaturalLabels.appendChild(gen9Natural);
         // 名称
         gen9NaturalLabel.innerHTML += "自然遭遇";
