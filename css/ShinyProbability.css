@@ -37,6 +37,11 @@ body {
   transform: translateY(-50%) translateX(-50%); */
 }
 
+/* scrollbarを非表示 */
+body::-webkit-scrollbar{
+  display: none;
+}
+
 .encounterProbability,
 .traials {
   display: flex;
