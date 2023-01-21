@@ -371,7 +371,7 @@ function irreducible(a, b) {
 }
 
 // inputNumberの有効桁数制限
-// デフォルトでは有効桁数を6桁に設定
+// デフォルトでは有効桁数を9桁に設定
 // 足を切り捨てする動作
 // 似た動作なのでイベントをまとめたい
 document.getElementById("traialsInput").oninput = function sliceMaxLength() {
@@ -453,10 +453,12 @@ window.onload = function onload() {
 // 確率演算処理
 function shinyProbability() {
   let startTime = performance.now();
+
   // HTML要素から要素を読み込み
   const encounterProbabilityTitle = document.getElementById(
     "encounterProbabilityTitle"
   );
+  const traialsInput = document.getElementById("traialsInput");
   const shinyProbabilityNumerator = document.getElementById(
     "shinyProbabilityNumerator"
   );
@@ -466,6 +468,11 @@ function shinyProbability() {
 
   let numerator = shinyProbabilityNumerator.value;
   let denominator = shinyProbabilityDenominator.value;
+  let traials = traialsInput.value;
+
+  // 分子と分母のいずれかが空または0の時、演算しない
+  // 変数がnull, undefined, '', 0だった場合はfalse
+  if (!(traials) || !(numerator) || !(denominator)) return 0;
 
   // 約分処理
   // 配列で受け取る
