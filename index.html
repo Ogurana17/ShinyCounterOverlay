@@ -20,6 +20,8 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Sans+JP:wght@400;700&family=Open+Sans:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <!-- bignumber.jsを使う場合のみコメントアウトを外す -->
+    <!-- <script src="js/bignumber.js" defer type="text/javascript"></script> -->
     <script src="js/shinyProbability.js" defer type="text/javascript"></script>
   </head>
 
@@ -29,33 +31,33 @@
     試行回数を考慮した確率
 -->
     <div class="encounterProbability">
-      <label class="encounterProbabilityTitle">遭遇する確率</label><br />
-      ✨ <span id="encounterProbabilityTitle">0.000</span> % ✨
+      <label class="encounterProbabilityTitle">遭遇する確率</label>
+      <div>✨ <span id="encounterProbabilityTitle">0.000</span> % ✨</div>
     </div>
     <!--
     試行回数
     出会うまでに繰り返した数
 -->
     <div class="traials">
-      <label class="traialsTitle">試行回数</label><br />
+      <label class="traialsTitle">試行回数</label>
       <input
         type="number"
         inputmode="numeric"
         class="traialsInput"
         id="traialsInput"
         value="0"
-      />回
-      <input
-        type="button"
-        class="traialsInputButton"
-        id="traialsDecrementButton"
-        value="-1"
       />
       <input
         type="button"
         class="traialsInputButton"
         id="traialsIncrementButton"
         value="+1"
+      />
+      <input
+        type="button"
+        class="traialsInputButton"
+        id="traialsDecrementButton"
+        value="-1"
       />
     </div>
 
@@ -81,11 +83,7 @@
           <option value="9">9世代 SV</option>
         </select>
         <!-- 選択した項目から確率を計算するボタン -->
-        <input
-        type="button"
-        id="calcProbabilityButton"
-        value="確率に反映"
-      />
+        <input type="button" id="calcProbabilityButton" value="確率に反映" />
         <!-- 生成したチェックボックスを格納するスペース -->
         <div><fieldset id="checkboxs"></fieldset></div>
       </details>

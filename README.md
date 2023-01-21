@@ -17,17 +17,8 @@ GitHubPagesを利用して動かします。
 - [x] 1匹のときの計算結果を出力する
 - [x] cookieによる保存機能
 - [x] 約分機能の追加
-- [ ] **色違いの確率のプリセットを用意する←←←**
-  - [x] 9世代
-  - [x] 8世代
-  - [x] 7世代
-  - [x] 6世代
-  - [x] 5世代
-  - [x] 4世代
-  - [x] 3世代
-  - [x] 2世代
-  - [x] 1世代
-- [ ] デザインを整える
+- [x] 色違いの確率のプリセットを用意する
+- [ ] **デザインを整える←←←**
 - [ ] ~~背景をグリーンにするオプション~~
 
 ### 検討中
@@ -54,10 +45,10 @@ GitHubPagesを利用して動かします。
 
 元の確率は下記のURLを参照ください。
 
-参考元|URL
----|---
-色違いの確率|<https://wiki.xn--rckteqa2e.com/wiki/%E8%89%B2%E9%81%95%E3%81%84>
-あかし持ちの確率|<https://wiki.xn--rckteqa2e.com/wiki/%E3%81%82%E3%81%8B%E3%81%97>
+| 参考元      | URL                                                               |
+| -------- | ----------------------------------------------------------------- |
+| 色違いの確率   | <https://wiki.xn--rckteqa2e.com/wiki/%E8%89%B2%E9%81%95%E3%81%84> |
+| あかし持ちの確率 | <https://wiki.xn--rckteqa2e.com/wiki/%E3%81%82%E3%81%8B%E3%81%97> |
 
 ### 確率計算の例
 
@@ -66,21 +57,21 @@ GitHubPagesを利用して動かします。
 ちびちびパワーLv3、かがやきパワーLv3（または国際孵化）、ひかるおまもり有りの場合
 
 $$
-\begin{equation}
-\begin{split}
-x &= {1 \over 8} \times {1 \over 64} \times {1 \over } \times {8 \over 4096} \\
-x &= {1 \over 262144}
-\end{split}
-\end{equation}
+\\begin{equation}
+\\begin{split}
+x &= {1 \\over 8} \\times {1 \\over 64} \\times {1 \\over } \\times {8 \\over 4096} \\
+x &= {1 \\over 262144}
+\\end{split}
+\\end{equation}
 $$
 
 ちびちびパワーLv3無し、かがやきパワーLv3（または国際孵化）無し、ひかるおまもり無しの場合
 
 $$
-\begin{equation}
-\begin{split}
-x &= {1 \over 8} \times {1 \over 16512} \times {1 \over 4096} \\
-x &= {1 \over 541065216}
-\end{split}
-\end{equation}
+\\begin{equation}
+\\begin{split}
+x &= {1 \\over 8} \\times {1 \\over 16512} \\times {1 \\over 4096} \\
+x &= {1 \\over 541065216}
+\\end{split}
+\\end{equation}
 $$

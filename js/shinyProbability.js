@@ -59,7 +59,7 @@ document.getElementById("calcProbabilityButton").onclick =
         rateArr = calcGen7(genRadio);
         break;
       case 8:
-        disableCheckboxGen8()
+        disableCheckboxGen8();
         genRadio = document.getElementsByName("gen8Radio");
         rateArr = calcGen8(genRadio);
         break;
@@ -120,7 +120,12 @@ function disableCheckboxGen8() {
   // SWSH, BDSP, LA
   const gen8Radio = document.getElementsByName("gen8Radio");
   // LAには`国際孵化`,`ポケトレ`,`戦った数（500匹以上）`,`ダイマックスアドベンチャー`は存在しない
-  if (gen8Radio[1].checked || gen8Radio[2].checked || gen8Radio[3].checked || gen8Radio[4].checked) {
+  if (
+    gen8Radio[1].checked ||
+    gen8Radio[2].checked ||
+    gen8Radio[3].checked ||
+    gen8Radio[4].checked
+  ) {
     gen8Radio[6].checked = false;
     gen8Radio[7].checked = false;
     gen8Radio[8].checked = false;
@@ -133,6 +138,11 @@ function disableCheckboxGen8() {
   if (gen8Radio[0].checked && gen8Radio[5].checked && gen8Radio[6].checked) {
     gen8Radio[5].checked = false;
     gen8Radio[6].checked = false;
+  }
+  // 大量発生と大大大発生は重複しない
+  if (gen8Radio[7].checked && gen8Radio[8].checked) {
+    gen8Radio[7].checked = false;
+    gen8Radio[8].checked = false;
   }
 }
 function disableCheckboxGen9() {
@@ -442,6 +452,7 @@ window.onload = function onload() {
 
 // 確率演算処理
 function shinyProbability() {
+  let startTime = performance.now();
   // HTML要素から要素を読み込み
   const encounterProbabilityTitle = document.getElementById(
     "encounterProbabilityTitle"
@@ -461,17 +472,21 @@ function shinyProbability() {
   let numArr = irreducible(numerator, denominator);
   numerator = numArr[0];
   denominator = numArr[1];
-  console.log(numerator + " / " + denominator);
+  console.log("約分した結果: " + numerator + " / " + denominator);
 
   // 約分した結果をHTMLに反映
   shinyProbabilityNumerator.value = numerator;
   shinyProbabilityDenominator.value = denominator;
 
   // 演算
-  var shinyProbabilityNum =
-    (1 - Math.pow(1 - numerator / denominator, traialsInput.value)) * 100;
   // 小数点以下の有効桁数を3桁に制限
   const digit = 3;
+
+  // DefaultJS版: 小数点以下の有効桁数は15桁まで 処理早い(0.65ms/call)
+  // `色違いになる確率:1/512`の時、`試行回数:19145`までは維持するが、19146以降は100%になってしまう
+  var shinyProbabilityNum =
+    (1 - Math.pow(1 - numerator / denominator, traialsInput.value)) * 100;
+  console.log("jsでの遭遇する確率: " + shinyProbabilityNum);
   // 小数点有効桁3桁で切り捨て
   var shinyProbabilityValue =
     Math.floor(shinyProbabilityNum * Math.pow(10, digit)) / Math.pow(10, digit);
@@ -481,6 +496,11 @@ function shinyProbability() {
     maximumFractionDigits: digit,
   });
   encounterProbabilityTitle.innerHTML = shinyProbabilityValue;
+
+  // // bignumber.js: 小数点以下の有効桁数は20桁まで 処理遅い(1180ms/call)
+  // var shinyProbabilityBicNum = new BigNumber(new BigNumber(1).minus(new BigNumber(new BigNumber(1).minus(new BigNumber(numerator).div(denominator))).pow(traialsInput.value))).times(100).dp(digit, BigNumber.ROUND_DOWN);
+  // console.log('bignumber.jsでの遭遇する確率: ' + shinyProbabilityBicNum);
+  // encounterProbabilityTitle.innerHTML = shinyProbabilityBicNum;
 
   // cookie書き込み
   // cookieの有効期限は1年（これが妥当かは分かりかねますが...）
@@ -502,7 +522,9 @@ function shinyProbability() {
 
   // 確認用
   console.log("試行回数: " + traialsInput.value);
-  console.log("次に色違いが出る確率: " + encounterProbabilityTitle.innerHTML);
+  console.log("色違いになる確率: " + encounterProbabilityTitle.innerHTML);
+  let endTime = performance.now();
+  console.log(endTime - startTime + " ms/call");
 }
 
 // 世代の選択によってチェックボックスを作成
@@ -1061,7 +1083,9 @@ document.getElementById("generationSelector").onchange =
         gen8DynamaxAdventureLabel.setAttribute("class", "genLabel");
         gen8DynamaxAdventureLabel.setAttribute("id", "gen8DynamaxAdventureId");
         gen8SWSHFieldsets.appendChild(gen8DynamaxAdventureLabel);
-        const gen8DynamaxAdventureLabels = document.getElementById("gen8DynamaxAdventureId");
+        const gen8DynamaxAdventureLabels = document.getElementById(
+          "gen8DynamaxAdventureId"
+        );
         // checkbox
         var gen8DynamaxAdventure = document.createElement("input");
         gen8DynamaxAdventure.setAttribute("type", "radio");
@@ -1078,8 +1102,9 @@ document.getElementById("generationSelector").onchange =
         gen8ShinyCharmSWSHLabel.setAttribute("class", "genLabel");
         gen8ShinyCharmSWSHLabel.setAttribute("id", "gen8ShinyCharmSWSHId");
         gen8SWSHFieldsets.appendChild(gen8ShinyCharmSWSHLabel);
-        const gen8ShinyCharmSWSHLabels =
-          document.getElementById("gen8ShinyCharmSWSHId");
+        const gen8ShinyCharmSWSHLabels = document.getElementById(
+          "gen8ShinyCharmSWSHId"
+        );
         // checkbox
         var gen8ShinyCharmSWSH = document.createElement("input");
         gen8ShinyCharmSWSH.setAttribute("type", "checkbox");
@@ -1114,7 +1139,9 @@ document.getElementById("generationSelector").onchange =
         gen8MassOutbreaksLabel.setAttribute("class", "genLabel");
         gen8MassOutbreaksLabel.setAttribute("id", "gen8MassOutbreaksId");
         gen8SWSHFieldsets.appendChild(gen8MassOutbreaksLabel);
-        const gen8MassOutbreaksLabels = document.getElementById("gen8MassOutbreaksId");
+        const gen8MassOutbreaksLabels = document.getElementById(
+          "gen8MassOutbreaksId"
+        );
         // checkbox
         var gen8MassOutbreaks = document.createElement("input");
         gen8MassOutbreaks.setAttribute("type", "checkbox");
@@ -1127,11 +1154,19 @@ document.getElementById("generationSelector").onchange =
         // gen8MassiveMassOutbreaksを生成
         // label
         var gen8MassiveMassOutbreaksLabel = document.createElement("label");
-        gen8MassiveMassOutbreaksLabel.setAttribute("for", "gen8MassiveMassOutbreaks");
+        gen8MassiveMassOutbreaksLabel.setAttribute(
+          "for",
+          "gen8MassiveMassOutbreaks"
+        );
         gen8MassiveMassOutbreaksLabel.setAttribute("class", "genLabel");
-        gen8MassiveMassOutbreaksLabel.setAttribute("id", "gen8MassiveMassOutbreaksId");
+        gen8MassiveMassOutbreaksLabel.setAttribute(
+          "id",
+          "gen8MassiveMassOutbreaksId"
+        );
         gen8SWSHFieldsets.appendChild(gen8MassiveMassOutbreaksLabel);
-        const gen8MassiveMassOutbreaksLabels = document.getElementById("gen8MassiveMassOutbreaksId");
+        const gen8MassiveMassOutbreaksLabels = document.getElementById(
+          "gen8MassiveMassOutbreaksId"
+        );
         // checkbox
         var gen8MassiveMassOutbreaks = document.createElement("input");
         gen8MassiveMassOutbreaks.setAttribute("type", "checkbox");
@@ -1165,7 +1200,8 @@ document.getElementById("generationSelector").onchange =
         gen8ResearchTaskLabel.setAttribute("class", "genLabel");
         gen8ResearchTaskLabel.setAttribute("id", "gen8ResearchTaskId");
         gen8SWSHFieldsets.appendChild(gen8ResearchTaskLabel);
-        const gen8ResearchTaskLabels = document.getElementById("gen8ResearchTaskId");
+        const gen8ResearchTaskLabels =
+          document.getElementById("gen8ResearchTaskId");
         // checkbox
         var gen8ResearchTask = document.createElement("input");
         gen8ResearchTask.setAttribute("type", "checkbox");
