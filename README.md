@@ -3,7 +3,7 @@
 ![screenshot](src/2023-01-21_13-20-33.mkv_snapshot_00.00.381.jpg)
 
 ポケットモンスターシリーズの色違いのポケモンが出現する確率をOBS等のオーバーレイとして表示するためのリポジトリ。
-GitHubPagesを利用して動いています。
+GitHubPagesを利用して動かしています。
 
 ## 特徴
 
@@ -96,12 +96,12 @@ JavaScriptが扱える小数点桁数は約17桁までとなっています。
 
 ### 1. コメントアウト
 
-<https://github.com/Ogurana17/ShinyCounterOverlay/blob/20d1627e0ba75c2905905c9030afe98d3b8a917c/js/shinyProbability.js#L492-L505>
+<https://github.com/Ogurana17/ShinyCounterOverlay/blob/1c8760ce10b056abe89a9422aea634c00815ac66/js/shinyProbability.js#L496-L509>
 
 ### 2. アンコメント
 
-<https://github.com/Ogurana17/ShinyCounterOverlay/blob/20d1627e0ba75c2905905c9030afe98d3b8a917c/js/shinyProbability.js#L507-L510>
+<https://github.com/Ogurana17/ShinyCounterOverlay/blob/1c8760ce10b056abe89a9422aea634c00815ac66/js/shinyProbability.js#L511-L514>
 
-<https://github.com/Ogurana17/ShinyCounterOverlay/blob/20d1627e0ba75c2905905c9030afe98d3b8a917c/index.html#L24>
+<https://github.com/Ogurana17/ShinyCounterOverlay/blob/7f2ff5be3812abb44dbcab4db328c136e9e3fd00/index.html#L113>
 
 需要があればオプションとして実装しますが、「計算速度が遅い」「発生事例が稀」であることから現段階では正式な実装予定はありません。
