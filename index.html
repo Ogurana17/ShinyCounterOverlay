@@ -7,6 +7,13 @@
       name="viewport"
       content="width=device-width,initial-scale=1.0,minimum-scale=1.0"
     />
+    <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/bootstrap-select.css" />
+    <!-- ShinyProbability.css -->
     <link
       rel="stylesheet"
       href="css/ShinyProbability.css"
@@ -20,9 +27,6 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Sans+JP:wght@400;700&family=Open+Sans:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <!-- bignumber.jsを使う場合のみコメントアウトを外す -->
-    <!-- <script src="js/bignumber.js" defer type="text/javascript"></script> -->
-    <script src="js/shinyProbability.js" defer type="text/javascript"></script>
   </head>
 
   <body>
@@ -70,8 +74,8 @@
       <details>
         <summary>色違いになる確率</summary>
         <!-- 世代選択 選択次第でチェックボックを変化させる -->
-        <select name="generation" id="generationSelector">
-          <option value="">世代を選択してください</option>
+        <select name="generation" id="generationSelector" class="selectpicker">
+          <option hidden>世代を選択してください</option>
           <option value="1">1世代 RGBP</option>
           <option value="2">2世代 GSC</option>
           <option value="3">3世代 RSE,FRLG</option>
@@ -104,5 +108,15 @@
         value="4096"
       />
     </div>
+
+    <!-- bignumber.jsを使う場合のみコメントアウトを外す -->
+    <!-- <script src="js/bignumber.js" defer type="text/javascript"></script> -->
+    <!-- ShinyProbability.js -->
+    <script src="js/shinyProbability.js" defer type="text/javascript"></script>
+    <!-- jquey: bootstorapを動かすのに必要 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
   </body>
 </html>

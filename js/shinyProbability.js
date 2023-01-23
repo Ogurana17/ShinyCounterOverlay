@@ -1,5 +1,9 @@
 // ShinyProbability
 
+$(function () {
+  $('select').selectpicker();
+});
+
 document.getElementById("traialsIncrementButton").onclick = function addCnt() {
   // HTML要素から要素を読み込み
   const traialsInput = document.getElementById("traialsInput");
@@ -78,7 +82,7 @@ document.getElementById("calcProbabilityButton").onclick =
     let numArr = irreducible(numerator, denominator);
     numerator = numArr[0];
     denominator = numArr[1];
-    console.log(numerator + " / " + denominator);
+    console.log("約分した結果: " + numerator + " / " + denominator);
 
     // HTMLを書き換え
     const shinyProbabilityNumerator = document.getElementById(
@@ -479,7 +483,6 @@ function shinyProbability() {
   let numArr = irreducible(numerator, denominator);
   numerator = numArr[0];
   denominator = numArr[1];
-  console.log("約分した結果: " + numerator + " / " + denominator);
 
   // 約分した結果をHTMLに反映
   shinyProbabilityNumerator.value = numerator;
