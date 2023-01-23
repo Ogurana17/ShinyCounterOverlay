@@ -87,6 +87,10 @@ JavaScriptが扱える小数点桁数は約17桁までとなっています。
 - ローカル環境で実行する必要があります（PC必須）
 - 演算にとても時間がかかります
 
+実施する場合は読み進めてください。
+
+### 0. 導入
+
 以下をダウンロードします。
 <https://github.com/Ogurana17/ShinyCounterOverlay/archive/refs/heads/master.zip>
 
