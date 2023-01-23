@@ -76,3 +76,28 @@ x &= {1 \\over 541065216}
 \\end{split}
 \\end{equation}
 $$
+
+## 使用上の注意
+
+JavaScriptが扱える小数点桁数は約17桁までとなっています。
+例を上げると`色違いになる確率:1/512`の時、`試行回数:19145`までは維持しますが、`19146以降`は`100%`になってしまいます。
+
+ここまで色違いが出ない事は極めて稀だとは思いますが、もう少し制度の高い数値が必要な場合は[BigNumber](https://github.com/MikeMcl/bignumber.js/)を利用して演算することもできます。ただし次の2点に注意してください。
+
+- ローカル環境で実行する必要があります（PC必須）
+- 演算にとても時間がかかります
+
+以下をダウンロードします。
+<https://github.com/Ogurana17/ShinyCounterOverlay/archive/refs/heads/master.zip>
+
+### 1. コメントアウト
+
+<https://github.com/Ogurana17/ShinyCounterOverlay/blob/20d1627e0ba75c2905905c9030afe98d3b8a917c/js/shinyProbability.js#L492-L505>
+
+### 2. アンコメント
+
+<https://github.com/Ogurana17/ShinyCounterOverlay/blob/20d1627e0ba75c2905905c9030afe98d3b8a917c/js/shinyProbability.js#L507-L510>
+
+<https://github.com/Ogurana17/ShinyCounterOverlay/blob/20d1627e0ba75c2905905c9030afe98d3b8a917c/index.html#L24>
+
+需要があればオプションとして実装しますが、「計算速度が遅い」「発生事例が稀」であることから現段階では正式な実装予定はありません。

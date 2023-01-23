@@ -527,9 +527,6 @@ function shinyProbability() {
     "; max-age=" +
     60 * 60 * 24 * 365;
 
-  // 確認用
-  console.log("試行回数: " + traialsInput.value);
-  console.log("色違いになる確率: " + encounterProbabilityTitle.innerHTML);
   let endTime = performance.now();
   console.log(endTime - startTime + " ms/call");
 }
@@ -1324,7 +1321,7 @@ document.getElementById("generationSelector").onchange =
         gen9SparklingPowerSVLabel.innerHTML += "かがやきパワーLv3";
         break;
       default:
-        console.log("case: default");
+        console.log("世代が選択されていません");
         break;
     }
   };
