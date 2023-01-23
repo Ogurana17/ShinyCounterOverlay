@@ -1,5 +1,6 @@
 // ShinyProbability
 
+//bootstrap
 $(function () {
   $('select').selectpicker();
 });
