@@ -460,12 +460,18 @@ window.onload = function onload() {
       // highPrecisionCalcをページに反映
       highPrecisionCalc.checked = toBoolean(decodeURIComponent(cookieValue));
       console.log("cookie_highPrecisionCalc: " + decodeURIComponent(cookieValue));
+    } else if (elem[0].trim() == "encounterProbabilityTitle") {
+      cookieValue = unescape(elem[1]);
+      // encounterProbabilityTitleをページに反映
+      encounterProbabilityTitle.innerHTML = decodeURIComponent(cookieValue);
+      console.log("cookie_encounterProbability: " + decodeURIComponent(cookieValue));
     } else {
       continue;
     }
   }
   // 確率計算を行って反映
-  shinyProbability();
+  // `高精度`を選択した際にページのリロードが遅くなるので廃止
+  // shinyProbability();
 };
 
 // booleanに変換
@@ -550,6 +556,12 @@ function shinyProbability() {
 
   // cookie書き込み
   // cookieの有効期限は1年（これが妥当かは分かりかねますが...）
+  // 遭遇する確率
+  document.cookie =
+    "encounterProbabilityTitle=" +
+    encodeURIComponent(encounterProbabilityTitle.innerHTML) +
+    "; max-age=" +
+    60 * 60 * 24 * 365;
   // 試行回数
   document.cookie =
     "traialsInput=" +
