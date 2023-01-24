@@ -1,11 +1,15 @@
 // ShinyProbability
 
-//bootstrap
+// ------------------------------
+// bootstrap
+// ------------------------------
 $(function () {
   $("select").selectpicker();
 });
 
-// カウントを増やす
+// ------------------------------
+// `+1`ボタンが押されたらカウントを増やす
+// ------------------------------
 document.getElementById("traialsIncrementButton").onclick = function addCnt() {
   // HTML要素から要素を読み込み
   const traialsInput = document.getElementById("traialsInput");
@@ -17,7 +21,9 @@ document.getElementById("traialsIncrementButton").onclick = function addCnt() {
   shinyProbability();
 };
 
-// カウントを減らす
+// ------------------------------
+// `-1`ボタンが押されたらカウントを減らす
+// ------------------------------
 document.getElementById("traialsDecrementButton").onclick = function subCnt() {
   // HTML要素から要素を読み込み
   const traialsInput = document.getElementById("traialsInput");
@@ -29,7 +35,9 @@ document.getElementById("traialsDecrementButton").onclick = function subCnt() {
   shinyProbability();
 };
 
+// ------------------------------
 // 世代の確率を押すと確率を反映
+// ------------------------------
 document.getElementById("calcProbabilityButton").onclick =
   function setProbability() {
     // 世代を特定
@@ -113,7 +121,9 @@ document.getElementById("calcProbabilityButton").onclick =
     shinyProbability();
   };
 
+// ------------------------------
 // 特定のボタンにチェックが入ったらチェックを外す
+// ------------------------------
 function disableCheckboxGen7() {
   // SM, USUM, LGP, LGE
   const gen7Radio = document.getElementsByName("gen7Radio");
@@ -162,7 +172,9 @@ function disableCheckboxGen9() {
   }
 }
 
+// ------------------------------
 // 世代ごとの確率合算
+// ------------------------------
 function calcGen1(gen1Radio) {
   // 自然遭遇
   if (gen1Radio[0].checked) {
@@ -355,7 +367,9 @@ function calcGen9(gen9Radio) {
   return [numerator, denominator];
 }
 
+// ------------------------------
 // 約分する関数
+// ------------------------------
 function gcd(a, b) {
   if (a < b) [a, b] = [b, a];
   let r = 1;
@@ -377,14 +391,15 @@ function irreducible(a, b) {
   return [a, b];
 }
 
+// ------------------------------
 // inputNumberの有効桁数制限
 // デフォルトでは有効桁数を9桁に設定
 // 足を切り捨てする動作
 // 似た動作なのでイベントをまとめたい
+// ------------------------------
 document.getElementById("traialsInput").oninput = function sliceMaxLength() {
   traialsInput.value = traialsInput.value.slice(0, 9);
 };
-
 document.getElementById("shinyProbabilityNumerator").oninput =
   function sliceMaxLength() {
     shinyProbabilityNumerator.value = shinyProbabilityNumerator.value.slice(
@@ -392,7 +407,6 @@ document.getElementById("shinyProbabilityNumerator").oninput =
       9
     );
   };
-
 document.getElementById("shinyProbabilityDenominator").oninput =
   function sliceMaxLength() {
     shinyProbabilityDenominator.value = shinyProbabilityDenominator.value.slice(
@@ -401,24 +415,26 @@ document.getElementById("shinyProbabilityDenominator").oninput =
     );
   };
 
+// ------------------------------
 // カーソルが外れたら再計算
 // 対象はinputNumberのみ（増えるとカウンターボタンからの再計算は過剰と判断）
 // 似た動作なのでイベントをまとめたい
+// ------------------------------
 document.getElementById("traialsInput").onblur = function reCalc() {
   shinyProbability();
 };
-
 document.getElementById("shinyProbabilityNumerator").onblur =
   function reCalc() {
     shinyProbability();
   };
-
 document.getElementById("shinyProbabilityDenominator").onblur =
   function reCalc() {
     shinyProbability();
   };
 
+// ------------------------------
 // 起動時にcookie読み込んで反映
+// ------------------------------
 window.onload = function onload() {
   // cookieの内容を`;'で分割
   // (キー1)=(値1); (キー2)=(値2);
@@ -433,7 +449,7 @@ window.onload = function onload() {
   var cookieValue = "";
   for (i = 0; i < cookieItem.length; i++) {
     var elem = cookieItem[i].split("=");
-    //
+
     if (elem[0].trim() == "traialsInput") {
       cookieValue = unescape(elem[1]);
       // 試行回数をページに反映
@@ -474,12 +490,16 @@ window.onload = function onload() {
   // shinyProbability();
 };
 
+// ------------------------------
 // booleanに変換
+// ------------------------------
 function toBoolean (data) {
   return data.toLowerCase() === 'true';
 }
 
+// ------------------------------
 // 確率演算処理
+// ------------------------------
 function shinyProbability() {
   let startTime = performance.now();
 
@@ -585,7 +605,9 @@ function shinyProbability() {
   console.log(endTime - startTime + " ms/call");
 }
 
+// ------------------------------
 // calcOptionの状態をcookieへ書き込む
+// ------------------------------
 // 高精度を選択した場合
 document.getElementById("highPrecisionCalc").onclick = function () {
   document.cookie =
@@ -600,7 +622,6 @@ document.getElementById("highPrecisionCalc").onclick = function () {
   "; max-age=" +
   60 * 60 * 24 * 365;
 }
-
 // 標準を選択した場合
 document.getElementById("defaultCalc").onclick = function () {
   document.cookie =
@@ -616,7 +637,9 @@ document.getElementById("defaultCalc").onclick = function () {
   60 * 60 * 24 * 365;
 }
 
+// ------------------------------
 // 世代の選択によってチェックボックスを作成
+// ------------------------------
 document.getElementById("generationSelector").onchange =
   function createCheckbox() {
     const generationSelector = document.getElementById("generationSelector");
