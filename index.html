@@ -35,8 +35,28 @@
     試行回数を考慮した確率
 -->
     <div class="encounterProbability">
-      <label class="encounterProbabilityTitle">遭遇する確率</label>
-      <div>✨ <span id="encounterProbabilityTitle">0.000</span> % ✨</div>
+      <details>
+        <summary class="encounterProbabilityTitle">遭遇する確率</summary>
+        <fieldset class="calcOption">
+          <legend>Calc Option</legend>
+          <label class="calcOptionLabel">
+            <input
+              type="radio"
+              name="calcOption"
+              id="defaultCalc"
+              checked
+            />標準（推奨）</label
+          >
+          <label class="calcOptionLabel">
+            <input
+              type="radio"
+              name="calcOption"
+              id="highPrecisionCalc"
+            />高精度（遅い）</label
+          >
+        </fieldset>
+      </details>
+      <div class="encounterProbabilityNum">✨ <span id="encounterProbabilityTitle">0.000</span> % ✨</div>
     </div>
     <!--
     試行回数
@@ -110,7 +130,7 @@
     </div>
 
     <!-- bignumber.jsを使う場合のみコメントアウトを外す -->
-    <!-- <script src="js/bignumber.js" defer type="text/javascript"></script> -->
+    <script src="js/bignumber.js" defer type="text/javascript"></script>
     <!-- ShinyProbability.js -->
     <script src="js/shinyProbability.js" defer type="text/javascript"></script>
     <!-- jquey: bootstorapを動かすのに必要 -->

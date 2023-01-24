@@ -164,6 +164,10 @@ hr {
   border-bottom: solid calc(1vh / 3) #fff;
 }
 
+.encounterProbabilityTitle {
+  margin: 0.5em;
+}
+
 /* `encounterProbabilityTitle`はクラスとidで別もの */
 #encounterProbabilityTitle {
   font-size: 2.2em;
@@ -180,12 +184,14 @@ details {
   margin-bottom: -1em;
 }
 
+.calcOption,
 #checkboxs {
   font-size: 0.8em;
   text-align: left;
   border: none;
 }
 
+.calcOptionLabel,
 #checkboxs > fieldset > label {
   font-weight: 400;
 }
@@ -210,10 +216,16 @@ details {
   box-shadow: 0 0 0 calc((1vh / 3) * 1.25) rgb(33, 150, 243) inset;
 }
 
+.encounterProbabilityNum {
+  margin-top: 0.5em;
+}
+
+.calcOptionLabel,
 .genLabel {
   display: block;
 }
 
+.calcOption,
 .genFieldset {
   margin: 5px 0;
   padding: 2px 10px 10px 10px;
@@ -273,10 +285,6 @@ details {
 }
 .bootstrap-select > select.mobile-device:focus + .dropdown-toggle, .bootstrap-select .dropdown-toggle:focus {
   outline: 0 !important;
-}
-
-select option[selected] {
-  background: #f00;
 }
 
 .dropdown-menu {

@@ -2,9 +2,10 @@
 
 //bootstrap
 $(function () {
-  $('select').selectpicker();
+  $("select").selectpicker();
 });
 
+// カウントを増やす
 document.getElementById("traialsIncrementButton").onclick = function addCnt() {
   // HTML要素から要素を読み込み
   const traialsInput = document.getElementById("traialsInput");
@@ -16,6 +17,7 @@ document.getElementById("traialsIncrementButton").onclick = function addCnt() {
   shinyProbability();
 };
 
+// カウントを減らす
 document.getElementById("traialsDecrementButton").onclick = function subCnt() {
   // HTML要素から要素を読み込み
   const traialsInput = document.getElementById("traialsInput");
@@ -436,17 +438,28 @@ window.onload = function onload() {
       cookieValue = unescape(elem[1]);
       // 試行回数をページに反映
       traialsInput.value = decodeURIComponent(cookieValue);
-      console.log("cookie試行回数: " + cookieValue);
+      console.log("cookie_試行回数: " + decodeURIComponent(cookieValue));
     } else if (elem[0].trim() == "shinyProbabilityNumerator") {
       cookieValue = unescape(elem[1]);
       // 分子をページに反映
       shinyProbabilityNumerator.value = decodeURIComponent(cookieValue);
-      console.log("cookie分子: " + cookieValue);
+      console.log("cookie_分子: " + decodeURIComponent(cookieValue));
     } else if (elem[0].trim() == "shinyProbabilityDenominator") {
       cookieValue = unescape(elem[1]);
       // 分母をページに反映
       shinyProbabilityDenominator.value = decodeURIComponent(cookieValue);
-      console.log("cookie分母: " + cookieValue);
+      console.log("cookie_分母: " + decodeURIComponent(cookieValue));
+    } else if (elem[0].trim() == "defaultCalc") {
+      cookieValue = unescape(elem[1]);
+      // defaultCalcをページに反映
+      const defaultCalc = document.getElementById("defaultCalc");
+      defaultCalc.checked = toBoolean(decodeURIComponent(cookieValue));
+      console.log("cookie_defaultCalc: " + decodeURIComponent(cookieValue));
+    } else if (elem[0].trim() == "highPrecisionCalc") {
+      cookieValue = unescape(elem[1]);
+      // highPrecisionCalcをページに反映
+      highPrecisionCalc.checked = toBoolean(decodeURIComponent(cookieValue));
+      console.log("cookie_highPrecisionCalc: " + decodeURIComponent(cookieValue));
     } else {
       continue;
     }
@@ -454,6 +467,11 @@ window.onload = function onload() {
   // 確率計算を行って反映
   shinyProbability();
 };
+
+// booleanに変換
+function toBoolean (data) {
+  return data.toLowerCase() === 'true';
+}
 
 // 確率演算処理
 function shinyProbability() {
@@ -477,7 +495,7 @@ function shinyProbability() {
 
   // 分子と分母のいずれかが空または0の時、演算しない
   // 変数がnull, undefined, '', 0だった場合はfalse
-  if (!(traials) || !(numerator) || !(denominator)) return 0;
+  if (!traials || !numerator || !denominator) return 0;
 
   // 約分処理
   // 配列で受け取る
@@ -493,38 +511,58 @@ function shinyProbability() {
   // 小数点以下の有効桁数を3桁に制限
   const digit = 3;
 
-  // DefaultJS版: 小数点以下の有効桁数は15桁まで 処理早い(0.65ms/call)
-  // `色違いになる確率:1/512`の時、`試行回数:19145`までは維持するが、19146以降は100%になってしまう
-  var shinyProbabilityNum =
-    (1 - Math.pow(1 - numerator / denominator, traialsInput.value)) * 100;
-  console.log("jsでの遭遇する確率: " + shinyProbabilityNum);
-  // 小数点有効桁3桁で切り捨て
-  var shinyProbabilityValue =
-    Math.floor(shinyProbabilityNum * Math.pow(10, digit)) / Math.pow(10, digit);
-  // 小数点有効桁3桁固定表示
-  var shinyProbabilityValue = shinyProbabilityValue.toLocaleString(undefined, {
-    minimumFractionDigits: digit,
-    maximumFractionDigits: digit,
-  });
-  encounterProbabilityTitle.innerHTML = shinyProbabilityValue;
+  // calcOptionの選択によって演算方式を変更
+  const highPrecisionCalc = document.getElementById("highPrecisionCalc");
 
-  // // bignumber.js: 小数点以下の有効桁数は20桁まで 処理遅い(1180ms/call)
-  // var shinyProbabilityBicNum = new BigNumber(new BigNumber(1).minus(new BigNumber(new BigNumber(1).minus(new BigNumber(numerator).div(denominator))).pow(traialsInput.value))).times(100).dp(digit, BigNumber.ROUND_DOWN);
-  // console.log('bignumber.jsでの遭遇する確率: ' + shinyProbabilityBicNum);
-  // encounterProbabilityTitle.innerHTML = shinyProbabilityBicNum;
+  if (highPrecisionCalc.checked) {
+    // bignumber.js: 小数点以下の有効桁数は20桁まで 処理遅い(1180ms/call)
+    var shinyProbabilityBicNum = new BigNumber(
+      new BigNumber(1).minus(
+        new BigNumber(
+          new BigNumber(1).minus(new BigNumber(numerator).div(denominator))
+        ).pow(traialsInput.value)
+      )
+    )
+      .times(100)
+      .dp(digit, BigNumber.ROUND_DOWN);
+    console.log("BigNumber.jsでの遭遇する確率: " + shinyProbabilityBicNum);
+    encounterProbabilityTitle.innerHTML = shinyProbabilityBicNum;
+  } else {
+    // DefaultJS版: 小数点以下の有効桁数は15桁まで 処理早い(0.65ms/call)
+    // `色違いになる確率:1/512`の時、`試行回数:19145`までは維持するが、19146以降は100%になってしまう
+    var shinyProbabilityNum =
+      (1 - Math.pow(1 - numerator / denominator, traialsInput.value)) * 100;
+    console.log("jsでの遭遇する確率: " + shinyProbabilityNum);
+    // 小数点有効桁3桁で切り捨て
+    var shinyProbabilityValue =
+      Math.floor(shinyProbabilityNum * Math.pow(10, digit)) /
+      Math.pow(10, digit);
+    // 小数点有効桁3桁固定表示
+    var shinyProbabilityValue = shinyProbabilityValue.toLocaleString(
+      undefined,
+      {
+        minimumFractionDigits: digit,
+        maximumFractionDigits: digit,
+      }
+    );
+    encounterProbabilityTitle.innerHTML = shinyProbabilityValue;
+  }
 
   // cookie書き込み
   // cookieの有効期限は1年（これが妥当かは分かりかねますが...）
+  // 試行回数
   document.cookie =
     "traialsInput=" +
     encodeURIComponent(traialsInput.value) +
     "; max-age=" +
     60 * 60 * 24 * 365;
+  // 分子
   document.cookie =
     "shinyProbabilityNumerator=" +
     encodeURIComponent(shinyProbabilityNumerator.value) +
     "; max-age=" +
     60 * 60 * 24 * 365;
+  // 分母
   document.cookie =
     "shinyProbabilityDenominator=" +
     encodeURIComponent(shinyProbabilityDenominator.value) +
@@ -533,6 +571,37 @@ function shinyProbability() {
 
   let endTime = performance.now();
   console.log(endTime - startTime + " ms/call");
+}
+
+// calcOptionの状態をcookieへ書き込む
+// 高精度を選択した場合
+document.getElementById("highPrecisionCalc").onclick = function () {
+  document.cookie =
+  "defaultCalc=" +
+  encodeURIComponent(defaultCalc.checked) +
+  "; max-age=" +
+  60 * 60 * 24 * 365;
+
+  document.cookie =
+  "highPrecisionCalc=" +
+  encodeURIComponent(highPrecisionCalc.checked) +
+  "; max-age=" +
+  60 * 60 * 24 * 365;
+}
+
+// 標準を選択した場合
+document.getElementById("defaultCalc").onclick = function () {
+  document.cookie =
+  "defaultCalc=" +
+  encodeURIComponent(defaultCalc.checked) +
+  "; max-age=" +
+  60 * 60 * 24 * 365;
+
+  document.cookie =
+  "highPrecisionCalc=" +
+  encodeURIComponent(highPrecisionCalc.checked) +
+  "; max-age=" +
+  60 * 60 * 24 * 365;
 }
 
 // 世代の選択によってチェックボックスを作成

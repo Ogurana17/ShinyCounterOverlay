@@ -87,21 +87,10 @@ JavaScriptが扱える小数点桁数は約17桁までとなっています。
 - ローカル環境で実行する必要があります（PC必須）
 - 演算にとても時間がかかります
 
-実施する場合は読み進めてください。
+~~実施する場合は読み進めてください。~~　　
+実装しました。`calcOption`から選択してください。
 
-### 0. 導入
-
-以下をダウンロードします。
-<https://github.com/Ogurana17/ShinyCounterOverlay/archive/refs/heads/master.zip>
-
-### 1. コメントアウト
-
-<https://github.com/Ogurana17/ShinyCounterOverlay/blob/1c8760ce10b056abe89a9422aea634c00815ac66/js/shinyProbability.js#L496-L509>
-
-### 2. アンコメント
-
-<https://github.com/Ogurana17/ShinyCounterOverlay/blob/1c8760ce10b056abe89a9422aea634c00815ac66/js/shinyProbability.js#L511-L514>
-
-<https://github.com/Ogurana17/ShinyCounterOverlay/blob/7f2ff5be3812abb44dbcab4db328c136e9e3fd00/index.html#L113>
-
-需要があればオプションとして実装しますが、「計算速度が遅い」「発生事例が稀」であることから現段階では正式な実装予定はありません。
+項目|メリット|デメリット|動力
+---|---|---|---
+標準（推奨）|処理時間の速さ|演算結果の精度|標準のJavaScript
+高精度（遅い）|演算結果の精度|処理時間の長さ|BigNumber.js
