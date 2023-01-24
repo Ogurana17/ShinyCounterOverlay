@@ -493,7 +493,7 @@ window.onload = function onload() {
 // ------------------------------
 // booleanに変換
 // ------------------------------
-function toBoolean (data) {
+function toBoolean(data) {
   return data.toLowerCase() === 'true';
 }
 
@@ -611,30 +611,30 @@ function shinyProbability() {
 // 高精度を選択した場合
 document.getElementById("highPrecisionCalc").onclick = function () {
   document.cookie =
-  "defaultCalc=" +
-  encodeURIComponent(defaultCalc.checked) +
-  "; max-age=" +
-  60 * 60 * 24 * 365;
+    "defaultCalc=" +
+    encodeURIComponent(defaultCalc.checked) +
+    "; max-age=" +
+    60 * 60 * 24 * 365;
 
   document.cookie =
-  "highPrecisionCalc=" +
-  encodeURIComponent(highPrecisionCalc.checked) +
-  "; max-age=" +
-  60 * 60 * 24 * 365;
+    "highPrecisionCalc=" +
+    encodeURIComponent(highPrecisionCalc.checked) +
+    "; max-age=" +
+    60 * 60 * 24 * 365;
 }
 // 標準を選択した場合
 document.getElementById("defaultCalc").onclick = function () {
   document.cookie =
-  "defaultCalc=" +
-  encodeURIComponent(defaultCalc.checked) +
-  "; max-age=" +
-  60 * 60 * 24 * 365;
+    "defaultCalc=" +
+    encodeURIComponent(defaultCalc.checked) +
+    "; max-age=" +
+    60 * 60 * 24 * 365;
 
   document.cookie =
-  "highPrecisionCalc=" +
-  encodeURIComponent(highPrecisionCalc.checked) +
-  "; max-age=" +
-  60 * 60 * 24 * 365;
+    "highPrecisionCalc=" +
+    encodeURIComponent(highPrecisionCalc.checked) +
+    "; max-age=" +
+    60 * 60 * 24 * 365;
 }
 
 // ------------------------------

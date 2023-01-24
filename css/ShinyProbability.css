@@ -38,7 +38,7 @@ body {
 }
 
 /* scrollbarを非表示 */
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   display: none;
 }
 
@@ -173,7 +173,7 @@ hr {
   font-size: 2.2em;
 }
 
-select > option {
+select>option {
   color: inherit;
   text-align: inherit;
   font-size: 1em;
@@ -192,7 +192,7 @@ details {
 }
 
 .calcOptionLabel,
-#checkboxs > fieldset > label {
+#checkboxs>fieldset>label {
   font-weight: 400;
 }
 
@@ -270,7 +270,7 @@ details {
   margin: 1em auto;
 }
 
-.btn:focus{
+.btn:focus {
   box-shadow: 0 0 0 calc((1vh / 3) * 1.25) rgb(33, 150, 243) inset;
 }
 
@@ -279,11 +279,14 @@ details {
   background-color: rgba(33, 33, 33, 0.65);
   color: #fff;
 }
+
 .show>.btn-light.dropdown-toggle {
   background-color: rgba(33, 33, 33, 0.65);
   color: inherit;
 }
-.bootstrap-select > select.mobile-device:focus + .dropdown-toggle, .bootstrap-select .dropdown-toggle:focus {
+
+.bootstrap-select>select.mobile-device:focus+.dropdown-toggle,
+.bootstrap-select .dropdown-toggle:focus {
   outline: 0 !important;
 }
 
@@ -307,11 +310,15 @@ details {
   display: none;
 }
 
-button, input, optgroup, select, textarea{
+button,
+input,
+optgroup,
+select,
+textarea {
   line-height: initial;
 }
 
-legend{
+legend {
   font-size: inherit;
 }
 
@@ -445,6 +452,7 @@ hr {
     /* height:300px時の1pxに相当 */
     box-shadow: 0 0 0 calc((1vh / 3) * 1.25) rgb(33, 150, 243) inset;
   }
+
   .traialsInput:active,
   .shinyProbabilityInput:active,
   .traialsInputButton:active {
