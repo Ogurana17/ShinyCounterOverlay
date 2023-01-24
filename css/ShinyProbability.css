@@ -79,7 +79,7 @@ body::-webkit-scrollbar{
 .traialsInput,
 .shinyProbabilityInput {
   text-align: center;
-  margin: 0.5em auto;
+  margin: 0.3em auto;
 }
 
 .traialsInput,
@@ -122,8 +122,7 @@ body::-webkit-scrollbar{
   position: relative;
   box-shadow: 0 0 0 calc(1vh / 3) #fff inset;
   border-radius: 1.2em;
-  /* height:300px時の1pxに相当 */
-  margin: calc(1vh / 3) auto;
+  margin: 0.1em auto;
 }
 
 .traialsInput:focus,
@@ -361,7 +360,7 @@ body {
   max-width: 60dvw;
   /* height:300px時の1pxに相当 */
   box-shadow: 0 0 0 calc(1svh / 3) #fff inset;
-  margin: calc(1svh / 3) auto;
+  margin: 0.1em auto;
 }
 
 .traialsInput:focus,
