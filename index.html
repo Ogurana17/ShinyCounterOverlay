@@ -25,13 +25,13 @@
 -->
   <div class="encounterProbability">
     <details>
-      <summary class="encounterProbabilityTitle">遭遇する確率</summary>
+      <summary class="encounterProbabilityTitle" glot-model="encounterProbabilityTitle">遭遇する確率</summary>
       <fieldset class="calcOption">
-        <legend>Calc Option</legend>
+        <legend glot-model="calcOption">演算オプション</legend>
         <label class="calcOptionLabel">
-          <input type="radio" name="calcOption" id="defaultCalc" checked />標準（推奨）</label>
+          <input type="radio" name="calcOption" id="defaultCalc" checked /><span glot-model="calcOptionDefault">標準（推奨）</span></label>
         <label class="calcOptionLabel">
-          <input type="radio" name="calcOption" id="highPrecisionCalc" />高精度（遅い）</label>
+          <input type="radio" name="calcOption" id="highPrecisionCalc" /><span glot-model="calcOptionHighPrecision">高精度（遅い）</span></label>
       </fieldset>
     </details>
     <div class="encounterProbabilityNum">✨ <span id="encounterProbabilityTitle">0.000</span> % ✨</div>
@@ -41,7 +41,7 @@
     出会うまでに繰り返した数
 -->
   <div class="traials">
-    <label class="traialsTitle">試行回数</label>
+    <label class="traialsTitle" glot-model="traialsTitle">試行回数</label>
     <input type="number" inputmode="numeric" class="traialsInput" id="traialsInput" value="0" />
     <input type="button" class="traialsInputButton" id="traialsIncrementButton" value="+1" />
     <input type="button" class="traialsInputButton" id="traialsDecrementButton" value="-1" />
@@ -54,22 +54,22 @@
   <div class="shinyProbability">
     <!-- <label class="shinyProbabilityTitle">色違いになる確率</label> -->
     <details>
-      <summary>色違いになる確率</summary>
+      <summary glot-model="shinyProbability">色違いになる確率</summary>
       <!-- 世代選択 選択次第でチェックボックを変化させる -->
       <select name="generation" id="generationSelector" class="selectpicker">
-        <option hidden>世代を選択してください</option>
-        <option value="1">1世代 RGBP</option>
-        <option value="2">2世代 GSC</option>
-        <option value="3">3世代 RSE,FRLG</option>
-        <option value="4">4世代 DPt,HGSS</option>
-        <option value="5">5世代 BW,BW2</option>
-        <option value="6">6世代 XY,ORAS</option>
-        <option value="7">7世代 SM,USUM,LGP,LGE</option>
-        <option value="8">8世代 SWSH,BDSP,LA</option>
-        <option value="9">9世代 SV</option>
+        <option value="" glot-model="generationSelectorHidden">世代を選択してください</option>
+        <option value="1" glot-model="generationSelector1">1世代 RGBP</option>
+        <option value="2" glot-model="generationSelector2">2世代 GSC</option>
+        <option value="3" glot-model="generationSelector3">3世代 RSE,FRLG</option>
+        <option value="4" glot-model="generationSelector4">4世代 DPt,HGSS</option>
+        <option value="5" glot-model="generationSelector5">5世代 BW,BW2</option>
+        <option value="6" glot-model="generationSelector6">6世代 XY,ORAS</option>
+        <option value="7" glot-model="generationSelector7">7世代 SM,USUM,LGP,LGE</option>
+        <option value="8" glot-model="generationSelector8">8世代 SWSH,BDSP,LA</option>
+        <option value="9" glot-model="generationSelector9">9世代 SV</option>
       </select>
       <!-- 選択した項目から確率を計算するボタン -->
-      <input type="button" id="calcProbabilityButton" value="確率に反映" />
+      <input type="button" id="calcProbabilityButton" class="traialsInputButton" value="OK" glot-model="calcProbabilityButton" />
       <!-- 生成したチェックボックスを格納するスペース -->
       <div>
         <fieldset id="checkboxs"></fieldset>
@@ -82,15 +82,17 @@
       value="4096" />
   </div>
 
-  <!-- bignumber.jsを使う場合のみコメントアウトを外す -->
-  <script src="js/bignumber.js" defer type="text/javascript"></script>
-  <!-- ShinyProbability.js -->
-  <script src="js/shinyProbability.js" defer type="text/javascript"></script>
   <!-- jquey: bootstorapを動かすのに必要 -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- bootstrap -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
-  <script src="js/bootstrap-select.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+  <!-- bootstrap-select -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/bootstrap-select.js" defer></script>
+  <!-- Glottologist: 翻訳機能 -->
+  <script src="https://unpkg.com/glottologist" defer></script>
+  <!-- bignumber.js -->
+  <script src="js/bignumber.js" defer></script>
+  <!-- ShinyProbability.js -->
+  <script src="js/shinyProbability.js" defer></script>
 </body>
 
 </html>

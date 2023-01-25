@@ -1,11 +1,21 @@
 // ShinyProbability
 
 // ------------------------------
-// bootstrap
+// 翻訳
 // ------------------------------
-$(function () {
-  $("select").selectpicker();
-});
+const glot = new Glottologist();
+// lang.jsonを読み込む
+glot.import("lang.json").then(() => {
+  glot.render();
+  console.log("load: lang.js");
+})
+
+// ------------------------------
+// bootstrap-select
+// ------------------------------
+// $(function () {
+//   $("select").selectpicker();
+// });
 
 // ------------------------------
 // `+1`ボタンが押されたらカウントを増やす
@@ -435,7 +445,7 @@ document.getElementById("shinyProbabilityDenominator").onblur =
 // ------------------------------
 // 起動時にcookie読み込んで反映
 // ------------------------------
-window.onload = function onload() {
+window.onload = function readCookie() {
   // cookieの内容を`;'で分割
   // (キー1)=(値1); (キー2)=(値2);
   // ↓
@@ -683,7 +693,10 @@ document.getElementById("generationSelector").onchange =
         gen1Natural.setAttribute("checked", "");
         gen1NaturalLabels.appendChild(gen1Natural);
         // 名称
-        gen1NaturalLabel.innerHTML += "自然遭遇";
+        var gen1NaturalSpan = document.createElement("span");
+        gen1NaturalSpan.setAttribute("glot-model", "gen1Natural");
+        gen1NaturalLabels.appendChild(gen1NaturalSpan);
+        gen1NaturalSpan.innerHTML += "自然遭遇";
 
         // gen1Heredityを生成
         // label
@@ -700,7 +713,10 @@ document.getElementById("generationSelector").onchange =
         gen1Heredity.setAttribute("name", "gen1Radio");
         gen1HeredityLabels.appendChild(gen1Heredity);
         // 名称
-        gen1HeredityLabel.innerHTML += "遺伝";
+        var gen1HereditySpan = document.createElement("span");
+        gen1HereditySpan.setAttribute("glot-model", "gen1Heredity");
+        gen1HeredityLabel.appendChild(gen1HereditySpan);
+        gen1HereditySpan.innerHTML += "遺伝";
         break;
       case 3:
         // RSE, FRLG
@@ -731,7 +747,10 @@ document.getElementById("generationSelector").onchange =
         gen3Natural.setAttribute("checked", "");
         gen3NaturalLabels.appendChild(gen3Natural);
         // 名称
-        gen3NaturalLabel.innerHTML += "自然遭遇";
+        var gen3NaturalSpan = document.createElement("span");
+        gen3NaturalSpan.setAttribute("glot-model", "gen3Natural");
+        gen3NaturalLabels.appendChild(gen3NaturalSpan);
+        gen3NaturalSpan.innerHTML += "自然遭遇";
         break;
       case 4:
         // DPt, HGSS
@@ -762,7 +781,10 @@ document.getElementById("generationSelector").onchange =
         gen4Natural.setAttribute("checked", "");
         gen4NaturalLabels.appendChild(gen4Natural);
         // 名称
-        gen4NaturalLabel.innerHTML += "自然遭遇";
+        var gen4NaturalSpan = document.createElement("span");
+        gen4NaturalSpan.setAttribute("glot-model", "gen4Natural");
+        gen4NaturalLabels.appendChild(gen4NaturalSpan);
+        gen4NaturalSpan.innerHTML += "自然遭遇";
 
         // gen4MasudaMethodを生成
         // label
@@ -780,7 +802,10 @@ document.getElementById("generationSelector").onchange =
         gen4MasudaMethod.setAttribute("name", "gen4Radio");
         gen4MasudaMethodLabels.appendChild(gen4MasudaMethod);
         // 名称
-        gen4MasudaMethodLabel.innerHTML += "国際孵化";
+        var gen4MasudaMethodSpan = document.createElement("span");
+        gen4MasudaMethodSpan.setAttribute("glot-model", "gen4MasudaMethod");
+        gen4MasudaMethodLabels.appendChild(gen4MasudaMethodSpan);
+        gen4MasudaMethodSpan.innerHTML += "国際孵化";
 
         // gen4PokeRadarを生成
         // label
@@ -797,7 +822,10 @@ document.getElementById("generationSelector").onchange =
         gen4PokeRadar.setAttribute("name", "gen4Radio");
         gen4PokeRadarLabels.appendChild(gen4PokeRadar);
         // 名称
-        gen4PokeRadarLabel.innerHTML += "ポケトレ";
+        var gen4PokeRadarSpan = document.createElement("span");
+        gen4PokeRadarSpan.setAttribute("glot-model", "gen4PokeRadar");
+        gen4PokeRadarLabels.appendChild(gen4PokeRadarSpan);
+        gen4PokeRadarSpan.innerHTML += "ポケトレ";
         break;
       case 5:
         // BW,BW2
@@ -828,7 +856,10 @@ document.getElementById("generationSelector").onchange =
         gen5Natural.setAttribute("checked", "");
         gen5NaturalLabels.appendChild(gen5Natural);
         // 名称
-        gen5NaturalLabel.innerHTML += "自然遭遇";
+        var gen5NaturalSpan = document.createElement("span");
+        gen5NaturalSpan.setAttribute("glot-model", "gen5Natural");
+        gen5NaturalLabels.appendChild(gen5NaturalSpan);
+        gen5NaturalSpan.innerHTML += "自然遭遇";
 
         // gen5MasudaMethodを生成
         // label
@@ -846,7 +877,10 @@ document.getElementById("generationSelector").onchange =
         gen5MasudaMethod.setAttribute("name", "gen5Radio");
         gen5MasudaMethodLabels.appendChild(gen5MasudaMethod);
         // 名称
-        gen5MasudaMethodLabel.innerHTML += "国際孵化";
+        var gen5MasudaMethodSpan = document.createElement("span");
+        gen5MasudaMethodSpan.setAttribute("glot-model", "gen5MasudaMethod");
+        gen5MasudaMethodLabels.appendChild(gen5MasudaMethodSpan);
+        gen5MasudaMethodSpan.innerHTML += "国際孵化";
 
         // gen5ShinyCharmを生成
         // label
@@ -864,7 +898,10 @@ document.getElementById("generationSelector").onchange =
         gen5ShinyCharm.setAttribute("name", "gen5Radio");
         gen5ShinyCharmLabels.appendChild(gen5ShinyCharm);
         // 名称
-        gen5ShinyCharmLabel.innerHTML += "ひかるおまもり";
+        var gen5ShinyCharmSpan = document.createElement("span");
+        gen5ShinyCharmSpan.setAttribute("glot-model", "gen5ShinyCharm");
+        gen5ShinyCharmLabels.appendChild(gen5ShinyCharmSpan);
+        gen5ShinyCharmSpan.innerHTML += "ひかるおまもり";
         break;
       case 6:
         // XY, ORAS
@@ -1352,7 +1389,10 @@ document.getElementById("generationSelector").onchange =
         gen9Natural.setAttribute("checked", "");
         gen9NaturalLabels.appendChild(gen9Natural);
         // 名称
-        gen9NaturalLabel.innerHTML += "自然遭遇";
+        var gen9NaturalSpan = document.createElement("span");
+        gen9NaturalSpan.setAttribute("glot-model", "gen9Natural");
+        gen9NaturalLabels.appendChild(gen9NaturalSpan);
+        gen9NaturalSpan.innerHTML += "自然遭遇";
 
         // gen9MasudaMethodを生成
         // label
@@ -1370,7 +1410,10 @@ document.getElementById("generationSelector").onchange =
         gen9MasudaMethod.setAttribute("name", "gen9Radio");
         gen9MasudaMethodLabels.appendChild(gen9MasudaMethod);
         // 名称
-        gen9MasudaMethodLabel.innerHTML += "国際孵化";
+        var gen9MasudaMethodSpan = document.createElement("span");
+        gen9MasudaMethodSpan.setAttribute("glot-model", "gen9MasudaMethod");
+        gen9MasudaMethodLabels.appendChild(gen9MasudaMethodSpan);
+        gen9MasudaMethodSpan.innerHTML += "国際孵化";
 
         // gen9ShinyCharmSVを生成
         // label
@@ -1388,7 +1431,10 @@ document.getElementById("generationSelector").onchange =
         gen9ShinyCharmSV.setAttribute("name", "gen9Radio");
         gen9ShinyCharmSVLabels.appendChild(gen9ShinyCharmSV);
         // 名称
-        gen9ShinyCharmSVLabel.innerHTML += "ひかるおまもり";
+        var gen9ShinyCharmSVSpan = document.createElement("span");
+        gen9ShinyCharmSVSpan.setAttribute("glot-model", "gen9ShinyCharmSV");
+        gen9ShinyCharmSVLabels.appendChild(gen9ShinyCharmSVSpan);
+        gen9ShinyCharmSVSpan.innerHTML += "ひかるおまもり";
 
         // gen9MassOutbreakSVを生成
         // label
@@ -1407,7 +1453,10 @@ document.getElementById("generationSelector").onchange =
         gen9MassOutbreakSV.setAttribute("name", "gen9Radio");
         gen9MassOutbreakSVLabels.appendChild(gen9MassOutbreakSV);
         // 名称
-        gen9MassOutbreakSVLabel.innerHTML += "大量発生";
+        var gen9MassOutbreakSVSpan = document.createElement("span");
+        gen9MassOutbreakSVSpan.setAttribute("glot-model", "gen9MassOutBreakSV");
+        gen9MassOutbreakSVLabels.appendChild(gen9MassOutbreakSVSpan);
+        gen9MassOutbreakSVSpan.innerHTML += "大量発生";
 
         // gen9SparklingPowerSVを生成
         // label
@@ -1426,10 +1475,15 @@ document.getElementById("generationSelector").onchange =
         gen9SparklingPowerSV.setAttribute("name", "gen9Radio");
         gen9SparklingPowerSVLabels.appendChild(gen9SparklingPowerSV);
         // 名称
-        gen9SparklingPowerSVLabel.innerHTML += "かがやきパワーLv3";
+        var gen9SparklingPowerSVSpan = document.createElement("span");
+        gen9SparklingPowerSVSpan.setAttribute("glot-model", "gen9SparklingPowerSV");
+        gen9SparklingPowerSVLabels.appendChild(gen9SparklingPowerSVSpan);
+        gen9SparklingPowerSVSpan.innerHTML += "かがやきパワーLv3";
         break;
       default:
         console.log("世代が選択されていません");
         break;
     }
+    // 翻訳
+    glot.render();
   };

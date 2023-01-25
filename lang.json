@@ -1,0 +1,129 @@
+{
+  "$Comment":{
+    "1":"コメントアウトは`$`で対応（YAML使いたい）"
+  },
+  "encounterProbabilityTitle": {
+    "ja": "遭遇する確率",
+    "en": "Encounter Probability"
+  },
+  "calcOption": {
+    "ja": "演算オプション",
+    "en": "Calc Option"
+  },
+  "calcOptionDefault": {
+    "ja": "標準（推奨）",
+    "en": "Default"
+  },
+  "calcOptionHighPrecision": {
+    "ja": "高精度（遅い）",
+    "en": "High Precision(Delay)"
+  },
+  "traialsTitle": {
+    "ja": "試行回数",
+    "en": "Counter"
+  },
+  "shinyProbability": {
+    "ja": "色違いになる確率",
+    "en": "Shiny Probability"
+  },
+  "calcProbabilityButton": {
+    "ja": "確率に反映",
+    "en": "Enter"
+  },
+  "generationSelectorHidden": {
+    "ja": "世代を選択してください",
+    "en": "Select Generation"
+  },
+  "generationSelector1": {
+    "ja": "1世代 RGBP",
+    "en": "Gen1 RGBP"
+  },
+  "generationSelector2": {
+    "ja": "2世代 GSC",
+    "en": "Gen2 GSC"
+  },
+  "generationSelector3": {
+    "ja": "3世代 RSE,FRLG",
+    "en": "Gen3 RSE,FRLG"
+  },
+  "generationSelector4": {
+    "ja": "4世代 DPt,HGSS",
+    "en": "Gen4 DPt,HGSS"
+  },
+  "generationSelector5": {
+    "ja": "5世代 BW,BW2",
+    "en": "Gen5 BW,BW2"
+  },
+  "generationSelector6": {
+    "ja": "6世代 XY,ORAS",
+    "en": "Gen6 XY,ORAS"
+  },
+  "generationSelector7": {
+    "ja": "7世代 SM,USUM,LGP,LGE",
+    "en": "Gen7 SM,USUM,LGP,LGE"
+  },
+  "generationSelector8": {
+    "ja": "8世代 SWSH,BDSP,LA",
+    "en": "Gen8 SWSH,BDSP,LA"
+  },
+  "generationSelector9": {
+    "ja": "9世代 SV",
+    "en": "Gen9 SV"
+  },
+  "gen1Natural": {
+    "ja": "自然遭遇",
+    "en": "Nature Encounter"
+  },
+  "gen1Heredity": {
+    "ja": "遺伝",
+    "en": "Heredity"
+  },
+  "gen3Natural": {
+    "ja": "自然遭遇",
+    "en": "Nature Encounter"
+  },
+  "gen4Natural": {
+    "ja" : "自然遭遇",
+    "en" : "Nature Encounter"
+  },
+  "gen4MasudaMethod": {
+    "ja" : "国際孵化",
+    "en" : "Masuda Method"
+  },
+  "gen4PokeRadar": {
+    "ja" : "ポケトレ",
+    "en" : "Poke Radar"
+  },
+  "gen5Natural": {
+    "ja" : "自然遭遇",
+    "en" : "Nature Encounter"
+  },
+  "gen5MasudaMethod": {
+    "ja" : "国際孵化",
+    "en" : "Masuda Method"
+  },
+  "gen5ShinyCharm": {
+    "ja" : "ひかるおまもり",
+    "en" : "Shiny Charm"
+  },
+  "gen9Natural" : {
+    "ja" : "自然遭遇",
+    "en" : "Nature Encounter"
+  },
+  "gen9MasudaMethod" : {
+    "ja" : "国際孵化",
+    "en" : "Masuda Method"
+  },
+  "gen9ShinyCharmSV" : {
+    "ja" : "ひかるおまもり",
+    "en" : "Shiny Charm"
+  },
+  "gen9MassOutBreakSV" : {
+    "ja" : "大量発生",
+    "en" : "Mass Outbreak"
+  },
+  "gen9SparklingPowerSV" : {
+    "ja" : "かがやきパワーLv3",
+    "en" : "Sparkling Power Lv3"
+  }
+}
