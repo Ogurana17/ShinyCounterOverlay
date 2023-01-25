@@ -7,7 +7,6 @@ const glot = new Glottologist();
 // lang.jsonを読み込む
 glot.import("lang.json").then(() => {
   glot.render();
-  console.log("load: lang.js");
 })
 
 // ------------------------------
@@ -445,7 +444,7 @@ document.getElementById("shinyProbabilityDenominator").onblur =
 // ------------------------------
 // 起動時にcookie読み込んで反映
 // ------------------------------
-window.onload = function readCookie() {
+window.addEventListener("load", function readCookie() {
   // cookieの内容を`;'で分割
   // (キー1)=(値1); (キー2)=(値2);
   // ↓
@@ -498,7 +497,7 @@ window.onload = function readCookie() {
   // 確率計算を行って反映
   // `高精度`を選択した際にページのリロードが遅くなるので廃止
   // shinyProbability();
-};
+});
 
 // ------------------------------
 // booleanに変換
@@ -677,26 +676,26 @@ document.getElementById("generationSelector").onchange =
         gen1RGBPlegend.innerHTML = "RGBP, GSC";
         gen1RGBPFieldsets.appendChild(gen1RGBPlegend);
 
-        // gen1Naturalを生成
+        // gen1Normalを生成
         // label
-        var gen1NaturalLabel = document.createElement("label");
-        gen1NaturalLabel.setAttribute("for", "gen1Natural");
-        gen1NaturalLabel.setAttribute("class", "genLabel");
-        gen1NaturalLabel.setAttribute("id", "gen1NaturalId");
-        gen1RGBPFieldsets.appendChild(gen1NaturalLabel);
-        const gen1NaturalLabels = document.getElementById("gen1NaturalId");
+        var gen1NormalLabel = document.createElement("label");
+        gen1NormalLabel.setAttribute("for", "gen1Normal");
+        gen1NormalLabel.setAttribute("class", "genLabel");
+        gen1NormalLabel.setAttribute("id", "gen1NormalId");
+        gen1RGBPFieldsets.appendChild(gen1NormalLabel);
+        const gen1NormalLabels = document.getElementById("gen1NormalId");
         // checkbox
-        var gen1Natural = document.createElement("input");
-        gen1Natural.setAttribute("type", "radio");
-        gen1Natural.setAttribute("id", "gen1Natural");
-        gen1Natural.setAttribute("name", "gen1Radio");
-        gen1Natural.setAttribute("checked", "");
-        gen1NaturalLabels.appendChild(gen1Natural);
+        var gen1Normal = document.createElement("input");
+        gen1Normal.setAttribute("type", "radio");
+        gen1Normal.setAttribute("id", "gen1Normal");
+        gen1Normal.setAttribute("name", "gen1Radio");
+        gen1Normal.setAttribute("checked", "");
+        gen1NormalLabels.appendChild(gen1Normal);
         // 名称
-        var gen1NaturalSpan = document.createElement("span");
-        gen1NaturalSpan.setAttribute("glot-model", "gen1Natural");
-        gen1NaturalLabels.appendChild(gen1NaturalSpan);
-        gen1NaturalSpan.innerHTML += "自然遭遇";
+        var gen1NormalSpan = document.createElement("span");
+        gen1NormalSpan.setAttribute("glot-model", "gen1Normal");
+        gen1NormalLabels.appendChild(gen1NormalSpan);
+        gen1NormalSpan.innerHTML += "自然遭遇";
 
         // gen1Heredityを生成
         // label
@@ -731,26 +730,26 @@ document.getElementById("generationSelector").onchange =
         gen3RSElegend.innerHTML = "RSE, FRLG";
         gen3RSEFieldsets.appendChild(gen3RSElegend);
 
-        // gen3Naturalを生成
+        // gen3Normalを生成
         // label
-        var gen3NaturalLabel = document.createElement("label");
-        gen3NaturalLabel.setAttribute("for", "gen3Natural");
-        gen3NaturalLabel.setAttribute("class", "genLabel");
-        gen3NaturalLabel.setAttribute("id", "gen3NaturalId");
-        gen3RSEFieldsets.appendChild(gen3NaturalLabel);
-        const gen3NaturalLabels = document.getElementById("gen3NaturalId");
+        var gen3NormalLabel = document.createElement("label");
+        gen3NormalLabel.setAttribute("for", "gen3Normal");
+        gen3NormalLabel.setAttribute("class", "genLabel");
+        gen3NormalLabel.setAttribute("id", "gen3NormalId");
+        gen3RSEFieldsets.appendChild(gen3NormalLabel);
+        const gen3NormalLabels = document.getElementById("gen3NormalId");
         // checkbox
-        var gen3Natural = document.createElement("input");
-        gen3Natural.setAttribute("type", "radio");
-        gen3Natural.setAttribute("id", "gen3Natural");
-        gen3Natural.setAttribute("name", "gen3Radio");
-        gen3Natural.setAttribute("checked", "");
-        gen3NaturalLabels.appendChild(gen3Natural);
+        var gen3Normal = document.createElement("input");
+        gen3Normal.setAttribute("type", "radio");
+        gen3Normal.setAttribute("id", "gen3Normal");
+        gen3Normal.setAttribute("name", "gen3Radio");
+        gen3Normal.setAttribute("checked", "");
+        gen3NormalLabels.appendChild(gen3Normal);
         // 名称
-        var gen3NaturalSpan = document.createElement("span");
-        gen3NaturalSpan.setAttribute("glot-model", "gen3Natural");
-        gen3NaturalLabels.appendChild(gen3NaturalSpan);
-        gen3NaturalSpan.innerHTML += "自然遭遇";
+        var gen3NormalSpan = document.createElement("span");
+        gen3NormalSpan.setAttribute("glot-model", "gen3Normal");
+        gen3NormalLabels.appendChild(gen3NormalSpan);
+        gen3NormalSpan.innerHTML += "自然遭遇";
         break;
       case 4:
         // DPt, HGSS
@@ -765,26 +764,26 @@ document.getElementById("generationSelector").onchange =
         gen4Dptlegend.innerHTML = "DPt, HGSS";
         gen4DptFieldsets.appendChild(gen4Dptlegend);
 
-        // gen4Naturalを生成
+        // gen4Normalを生成
         // label
-        var gen4NaturalLabel = document.createElement("label");
-        gen4NaturalLabel.setAttribute("for", "gen4Natural");
-        gen4NaturalLabel.setAttribute("class", "genLabel");
-        gen4NaturalLabel.setAttribute("id", "gen4NaturalId");
-        gen4DptFieldsets.appendChild(gen4NaturalLabel);
-        const gen4NaturalLabels = document.getElementById("gen4NaturalId");
+        var gen4NormalLabel = document.createElement("label");
+        gen4NormalLabel.setAttribute("for", "gen4Normal");
+        gen4NormalLabel.setAttribute("class", "genLabel");
+        gen4NormalLabel.setAttribute("id", "gen4NormalId");
+        gen4DptFieldsets.appendChild(gen4NormalLabel);
+        const gen4NormalLabels = document.getElementById("gen4NormalId");
         // checkbox
-        var gen4Natural = document.createElement("input");
-        gen4Natural.setAttribute("type", "radio");
-        gen4Natural.setAttribute("id", "gen4Natural");
-        gen4Natural.setAttribute("name", "gen4Radio");
-        gen4Natural.setAttribute("checked", "");
-        gen4NaturalLabels.appendChild(gen4Natural);
+        var gen4Normal = document.createElement("input");
+        gen4Normal.setAttribute("type", "radio");
+        gen4Normal.setAttribute("id", "gen4Normal");
+        gen4Normal.setAttribute("name", "gen4Radio");
+        gen4Normal.setAttribute("checked", "");
+        gen4NormalLabels.appendChild(gen4Normal);
         // 名称
-        var gen4NaturalSpan = document.createElement("span");
-        gen4NaturalSpan.setAttribute("glot-model", "gen4Natural");
-        gen4NaturalLabels.appendChild(gen4NaturalSpan);
-        gen4NaturalSpan.innerHTML += "自然遭遇";
+        var gen4NormalSpan = document.createElement("span");
+        gen4NormalSpan.setAttribute("glot-model", "gen4Normal");
+        gen4NormalLabels.appendChild(gen4NormalSpan);
+        gen4NormalSpan.innerHTML += "自然遭遇";
 
         // gen4MasudaMethodを生成
         // label
@@ -840,26 +839,26 @@ document.getElementById("generationSelector").onchange =
         gen5BWBW2legend.innerHTML = "BW, BW2";
         gen5BWBW2Fieldsets.appendChild(gen5BWBW2legend);
 
-        // gen5Naturalを生成
+        // gen5Normalを生成
         // label
-        var gen5NaturalLabel = document.createElement("label");
-        gen5NaturalLabel.setAttribute("for", "gen5Natural");
-        gen5NaturalLabel.setAttribute("class", "genLabel");
-        gen5NaturalLabel.setAttribute("id", "gen5NaturalId");
-        gen5BWBW2Fieldsets.appendChild(gen5NaturalLabel);
-        const gen5NaturalLabels = document.getElementById("gen5NaturalId");
+        var gen5NormalLabel = document.createElement("label");
+        gen5NormalLabel.setAttribute("for", "gen5Normal");
+        gen5NormalLabel.setAttribute("class", "genLabel");
+        gen5NormalLabel.setAttribute("id", "gen5NormalId");
+        gen5BWBW2Fieldsets.appendChild(gen5NormalLabel);
+        const gen5NormalLabels = document.getElementById("gen5NormalId");
         // checkbox
-        var gen5Natural = document.createElement("input");
-        gen5Natural.setAttribute("type", "radio");
-        gen5Natural.setAttribute("id", "gen5Natural");
-        gen5Natural.setAttribute("name", "gen5Radio");
-        gen5Natural.setAttribute("checked", "");
-        gen5NaturalLabels.appendChild(gen5Natural);
+        var gen5Normal = document.createElement("input");
+        gen5Normal.setAttribute("type", "radio");
+        gen5Normal.setAttribute("id", "gen5Normal");
+        gen5Normal.setAttribute("name", "gen5Radio");
+        gen5Normal.setAttribute("checked", "");
+        gen5NormalLabels.appendChild(gen5Normal);
         // 名称
-        var gen5NaturalSpan = document.createElement("span");
-        gen5NaturalSpan.setAttribute("glot-model", "gen5Natural");
-        gen5NaturalLabels.appendChild(gen5NaturalSpan);
-        gen5NaturalSpan.innerHTML += "自然遭遇";
+        var gen5NormalSpan = document.createElement("span");
+        gen5NormalSpan.setAttribute("glot-model", "gen5Normal");
+        gen5NormalLabels.appendChild(gen5NormalSpan);
+        gen5NormalSpan.innerHTML += "自然遭遇";
 
         // gen5MasudaMethodを生成
         // label
@@ -916,23 +915,23 @@ document.getElementById("generationSelector").onchange =
         gen6XYlegend.innerHTML = "XY, ORAS";
         gen6XYFieldsets.appendChild(gen6XYlegend);
 
-        // gen6Naturalを生成
+        // gen6Normalを生成
         // label
-        var gen6NaturalLabel = document.createElement("label");
-        gen6NaturalLabel.setAttribute("for", "gen6Natural");
-        gen6NaturalLabel.setAttribute("class", "genLabel");
-        gen6NaturalLabel.setAttribute("id", "gen6NaturalId");
-        gen6XYFieldsets.appendChild(gen6NaturalLabel);
-        const gen6NaturalLabels = document.getElementById("gen6NaturalId");
+        var gen6NormalLabel = document.createElement("label");
+        gen6NormalLabel.setAttribute("for", "gen6Normal");
+        gen6NormalLabel.setAttribute("class", "genLabel");
+        gen6NormalLabel.setAttribute("id", "gen6NormalId");
+        gen6XYFieldsets.appendChild(gen6NormalLabel);
+        const gen6NormalLabels = document.getElementById("gen6NormalId");
         // checkbox
-        var gen6Natural = document.createElement("input");
-        gen6Natural.setAttribute("type", "radio");
-        gen6Natural.setAttribute("id", "gen6Natural");
-        gen6Natural.setAttribute("name", "gen6Radio");
-        gen6Natural.setAttribute("checked", "");
-        gen6NaturalLabels.appendChild(gen6Natural);
+        var gen6Normal = document.createElement("input");
+        gen6Normal.setAttribute("type", "radio");
+        gen6Normal.setAttribute("id", "gen6Normal");
+        gen6Normal.setAttribute("name", "gen6Radio");
+        gen6Normal.setAttribute("checked", "");
+        gen6NormalLabels.appendChild(gen6Normal);
         // 名称
-        gen6NaturalLabel.innerHTML += "自然遭遇";
+        gen6NormalLabel.innerHTML += "自然遭遇";
 
         // gen6MasudaMethodを生成
         // label
@@ -1036,23 +1035,23 @@ document.getElementById("generationSelector").onchange =
         gen7SMUSUMlegend.innerHTML = "SM, USUM, LGP, LGE";
         gen7SMUSUMFieldsets.appendChild(gen7SMUSUMlegend);
 
-        // gen7Naturalを生成
+        // gen7Normalを生成
         // label
-        var gen7NaturalLabel = document.createElement("label");
-        gen7NaturalLabel.setAttribute("for", "gen7Natural");
-        gen7NaturalLabel.setAttribute("class", "genLabel");
-        gen7NaturalLabel.setAttribute("id", "gen7NaturalId");
-        gen7SMUSUMFieldsets.appendChild(gen7NaturalLabel);
-        const gen7NaturalLabels = document.getElementById("gen7NaturalId");
+        var gen7NormalLabel = document.createElement("label");
+        gen7NormalLabel.setAttribute("for", "gen7Normal");
+        gen7NormalLabel.setAttribute("class", "genLabel");
+        gen7NormalLabel.setAttribute("id", "gen7NormalId");
+        gen7SMUSUMFieldsets.appendChild(gen7NormalLabel);
+        const gen7NormalLabels = document.getElementById("gen7NormalId");
         // checkbox
-        var gen7Natural = document.createElement("input");
-        gen7Natural.setAttribute("type", "radio");
-        gen7Natural.setAttribute("id", "gen7Natural");
-        gen7Natural.setAttribute("name", "gen7Radio");
-        gen7Natural.setAttribute("checked", "");
-        gen7NaturalLabels.appendChild(gen7Natural);
+        var gen7Normal = document.createElement("input");
+        gen7Normal.setAttribute("type", "radio");
+        gen7Normal.setAttribute("id", "gen7Normal");
+        gen7Normal.setAttribute("name", "gen7Radio");
+        gen7Normal.setAttribute("checked", "");
+        gen7NormalLabels.appendChild(gen7Normal);
         // 名称
-        gen7NaturalLabel.innerHTML += "自然遭遇";
+        gen7NormalLabel.innerHTML += "自然遭遇";
 
         // gen7MasudaMethodを生成
         // label
@@ -1155,23 +1154,23 @@ document.getElementById("generationSelector").onchange =
         gen8SWSHlegend.innerHTML = "SWSH, BDSP, LA";
         gen8SWSHFieldsets.appendChild(gen8SWSHlegend);
 
-        // gen8Naturalを生成
+        // gen8Normalを生成
         // label
-        var gen8NaturalLabel = document.createElement("label");
-        gen8NaturalLabel.setAttribute("for", "gen8Natural");
-        gen8NaturalLabel.setAttribute("class", "genLabel");
-        gen8NaturalLabel.setAttribute("id", "gen8NaturalId");
-        gen8SWSHFieldsets.appendChild(gen8NaturalLabel);
-        const gen8NaturalLabels = document.getElementById("gen8NaturalId");
+        var gen8NormalLabel = document.createElement("label");
+        gen8NormalLabel.setAttribute("for", "gen8Normal");
+        gen8NormalLabel.setAttribute("class", "genLabel");
+        gen8NormalLabel.setAttribute("id", "gen8NormalId");
+        gen8SWSHFieldsets.appendChild(gen8NormalLabel);
+        const gen8NormalLabels = document.getElementById("gen8NormalId");
         // checkbox
-        var gen8Natural = document.createElement("input");
-        gen8Natural.setAttribute("type", "radio");
-        gen8Natural.setAttribute("id", "gen8Natural");
-        gen8Natural.setAttribute("name", "gen8Radio");
-        gen8Natural.setAttribute("checked", "");
-        gen8NaturalLabels.appendChild(gen8Natural);
+        var gen8Normal = document.createElement("input");
+        gen8Normal.setAttribute("type", "radio");
+        gen8Normal.setAttribute("id", "gen8Normal");
+        gen8Normal.setAttribute("name", "gen8Radio");
+        gen8Normal.setAttribute("checked", "");
+        gen8NormalLabels.appendChild(gen8Normal);
         // 名称
-        gen8NaturalLabel.innerHTML += "自然遭遇";
+        gen8NormalLabel.innerHTML += "自然遭遇";
 
         // gen8MasudaMethodを生成
         // label
@@ -1373,26 +1372,26 @@ document.getElementById("generationSelector").onchange =
         gen8SVlegend.innerHTML = "SV";
         gen9SVFieldsets.appendChild(gen8SVlegend);
 
-        // gen9Naturalを生成
+        // gen9Normalを生成
         // label
-        var gen9NaturalLabel = document.createElement("label");
-        gen9NaturalLabel.setAttribute("for", "gen9Natural");
-        gen9NaturalLabel.setAttribute("class", "genLabel");
-        gen9NaturalLabel.setAttribute("id", "gen9NaturalId");
-        gen9SVFieldsets.appendChild(gen9NaturalLabel);
-        const gen9NaturalLabels = document.getElementById("gen9NaturalId");
+        var gen9NormalLabel = document.createElement("label");
+        gen9NormalLabel.setAttribute("for", "gen9Normal");
+        gen9NormalLabel.setAttribute("class", "genLabel");
+        gen9NormalLabel.setAttribute("id", "gen9NormalId");
+        gen9SVFieldsets.appendChild(gen9NormalLabel);
+        const gen9NormalLabels = document.getElementById("gen9NormalId");
         // checkbox
-        var gen9Natural = document.createElement("input");
-        gen9Natural.setAttribute("type", "radio");
-        gen9Natural.setAttribute("id", "gen9Natural");
-        gen9Natural.setAttribute("name", "gen9Radio");
-        gen9Natural.setAttribute("checked", "");
-        gen9NaturalLabels.appendChild(gen9Natural);
+        var gen9Normal = document.createElement("input");
+        gen9Normal.setAttribute("type", "radio");
+        gen9Normal.setAttribute("id", "gen9Normal");
+        gen9Normal.setAttribute("name", "gen9Radio");
+        gen9Normal.setAttribute("checked", "");
+        gen9NormalLabels.appendChild(gen9Normal);
         // 名称
-        var gen9NaturalSpan = document.createElement("span");
-        gen9NaturalSpan.setAttribute("glot-model", "gen9Natural");
-        gen9NaturalLabels.appendChild(gen9NaturalSpan);
-        gen9NaturalSpan.innerHTML += "自然遭遇";
+        var gen9NormalSpan = document.createElement("span");
+        gen9NormalSpan.setAttribute("glot-model", "gen9Normal");
+        gen9NormalLabels.appendChild(gen9NormalSpan);
+        gen9NormalSpan.innerHTML += "自然遭遇";
 
         // gen9MasudaMethodを生成
         // label
@@ -1436,27 +1435,27 @@ document.getElementById("generationSelector").onchange =
         gen9ShinyCharmSVLabels.appendChild(gen9ShinyCharmSVSpan);
         gen9ShinyCharmSVSpan.innerHTML += "ひかるおまもり";
 
-        // gen9MassOutbreakSVを生成
+        // gen9MassOutbreaksSVを生成
         // label
-        var gen9MassOutbreakSVLabel = document.createElement("label");
-        gen9MassOutbreakSVLabel.setAttribute("for", "gen9MassOutbreakSV");
-        gen9MassOutbreakSVLabel.setAttribute("class", "genLabel");
-        gen9MassOutbreakSVLabel.setAttribute("id", "gen9MassOutbreakSVId");
-        gen9SVFieldsets.appendChild(gen9MassOutbreakSVLabel);
-        const gen9MassOutbreakSVLabels = document.getElementById(
-          "gen9MassOutbreakSVId"
+        var gen9MassOutbreaksSVLabel = document.createElement("label");
+        gen9MassOutbreaksSVLabel.setAttribute("for", "gen9MassOutbreaksSV");
+        gen9MassOutbreaksSVLabel.setAttribute("class", "genLabel");
+        gen9MassOutbreaksSVLabel.setAttribute("id", "gen9MassOutbreaksSVId");
+        gen9SVFieldsets.appendChild(gen9MassOutbreaksSVLabel);
+        const gen9MassOutbreaksSVLabels = document.getElementById(
+          "gen9MassOutbreaksSVId"
         );
         // checkbox
-        var gen9MassOutbreakSV = document.createElement("input");
-        gen9MassOutbreakSV.setAttribute("type", "checkbox");
-        gen9MassOutbreakSV.setAttribute("id", "gen9MassOutbreakSV");
-        gen9MassOutbreakSV.setAttribute("name", "gen9Radio");
-        gen9MassOutbreakSVLabels.appendChild(gen9MassOutbreakSV);
+        var gen9MassOutbreaksSV = document.createElement("input");
+        gen9MassOutbreaksSV.setAttribute("type", "checkbox");
+        gen9MassOutbreaksSV.setAttribute("id", "gen9MassOutbreaksSV");
+        gen9MassOutbreaksSV.setAttribute("name", "gen9Radio");
+        gen9MassOutbreaksSVLabels.appendChild(gen9MassOutbreaksSV);
         // 名称
-        var gen9MassOutbreakSVSpan = document.createElement("span");
-        gen9MassOutbreakSVSpan.setAttribute("glot-model", "gen9MassOutBreakSV");
-        gen9MassOutbreakSVLabels.appendChild(gen9MassOutbreakSVSpan);
-        gen9MassOutbreakSVSpan.innerHTML += "大量発生";
+        var gen9MassOutbreaksSVSpan = document.createElement("span");
+        gen9MassOutbreaksSVSpan.setAttribute("glot-model", "gen9MassOutbreaksSV");
+        gen9MassOutbreaksSVLabels.appendChild(gen9MassOutbreaksSVSpan);
+        gen9MassOutbreaksSVSpan.innerHTML += "大量発生";
 
         // gen9SparklingPowerSVを生成
         // label

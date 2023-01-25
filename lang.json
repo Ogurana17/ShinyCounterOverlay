@@ -1,6 +1,6 @@
 {
-  "$Comment":{
-    "1":"コメントアウトは`$`で対応（YAML使いたい）"
+  "$Comment": {
+    "1": "コメントアウトは`$`で対応（YAML使いたい）"
   },
   "encounterProbabilityTitle": {
     "ja": "遭遇する確率",
@@ -12,11 +12,11 @@
   },
   "calcOptionDefault": {
     "ja": "標準（推奨）",
-    "en": "Default"
+    "en": "Default(Recommend)"
   },
   "calcOptionHighPrecision": {
     "ja": "高精度（遅い）",
-    "en": "High Precision(Delay)"
+    "en": "High Precision(slow)"
   },
   "traialsTitle": {
     "ja": "試行回数",
@@ -70,60 +70,152 @@
     "ja": "9世代 SV",
     "en": "Gen9 SV"
   },
-  "gen1Natural": {
+  "gen1Normal": {
     "ja": "自然遭遇",
-    "en": "Nature Encounter"
+    "en": "Normal Encounter"
   },
   "gen1Heredity": {
     "ja": "遺伝",
     "en": "Heredity"
   },
-  "gen3Natural": {
+  "gen3Normal": {
     "ja": "自然遭遇",
-    "en": "Nature Encounter"
+    "en": "Normal Encounter"
   },
-  "gen4Natural": {
-    "ja" : "自然遭遇",
-    "en" : "Nature Encounter"
+  "gen4Normal": {
+    "ja": "自然遭遇",
+    "en": "Normal Encounter"
   },
   "gen4MasudaMethod": {
-    "ja" : "国際孵化",
-    "en" : "Masuda Method"
+    "ja": "国際孵化",
+    "en": "Masuda Method"
   },
   "gen4PokeRadar": {
-    "ja" : "ポケトレ",
-    "en" : "Poke Radar"
+    "ja": "ポケトレ",
+    "en": "Poke Radar"
   },
-  "gen5Natural": {
-    "ja" : "自然遭遇",
-    "en" : "Nature Encounter"
+  "gen5Normal": {
+    "ja": "自然遭遇",
+    "en": "Normal Encounter"
   },
   "gen5MasudaMethod": {
-    "ja" : "国際孵化",
-    "en" : "Masuda Method"
+    "ja": "国際孵化",
+    "en": "Masuda Method"
   },
   "gen5ShinyCharm": {
-    "ja" : "ひかるおまもり",
-    "en" : "Shiny Charm"
+    "ja": "ひかるおまもり",
+    "en": "Shiny Charm"
   },
-  "gen9Natural" : {
-    "ja" : "自然遭遇",
-    "en" : "Nature Encounter"
+  "gen6Normal": {
+    "jp": "自然遭遇",
+    "en": "Normal Encounter"
   },
-  "gen9MasudaMethod" : {
-    "ja" : "国際孵化",
-    "en" : "Masuda Method"
+  "gen6MasudaMethod": {
+    "jp": "国際孵化",
+    "en": "Masuda Method"
   },
-  "gen9ShinyCharmSV" : {
-    "ja" : "ひかるおまもり",
-    "en" : "Shiny Charm"
+  "gen6PokeRadar": {
+    "jp": "ポケトレ",
+    "en": "Poke Radar"
   },
-  "gen9MassOutBreakSV" : {
-    "ja" : "大量発生",
-    "en" : "Mass Outbreak"
+  "gen6FriendSafari": {
+    "jp": "フレンドサファリ",
+    "en": "Friend Safari"
   },
-  "gen9SparklingPowerSV" : {
-    "ja" : "かがやきパワーLv3",
-    "en" : "Sparkling Power Lv3"
+  "gen6ChainFishing": {
+    "jp": "連続釣り",
+    "en": "Chain Fishing"
+  },
+  "gen6ShinyCharm": {
+    "jp": "ひかるおまもり",
+    "en": "Shiny Charm"
+  },
+  "gen7Normal": {
+    "jp": "自然遭遇",
+    "en": "Normal Encounter"
+  },
+  "gen7MasudaMethod": {
+    "jp": "国際孵化",
+    "en": "Masuda Method"
+  },
+  "gen7SOSBattle": {
+    "jp": "乱入バトル",
+    "en": "SOS Battle"
+  },
+  "gen7ShinyCharm": {
+    "jp": "ひかるおまもり",
+    "en": "Shiny Charm"
+  },
+  "gen7CatchComboLG": {
+    "jp": "31連鎖（捕獲）",
+    "en": "Catch Combo(31)"
+  },
+  "gen7LureLG": {
+    "jp": "むしよせコロン",
+    "en": "Lure"
+  },
+  "gen8Normal": {
+    "jp": "自然遭遇",
+    "en": "Normal Encounter"
+  },
+  "gen8MasudaMethod": {
+    "jp": "国際孵化",
+    "en": "Masuda Method"
+  },
+  "gen8PokeRadar": {
+    "jp": "ポケトレ",
+    "en": "Poke Radar"
+  },
+  "gen8KO": {
+    "jp": "戦った数（500匹以上）",
+    "en": "KO(500)"
+  },
+  "gen8DynamaxAdventure": {
+    "jp": "ダイマックスアドベンチャー",
+    "en": "Dynamax Adventure"
+  },
+  "gen8ShinyCharmSWSH": {
+    "jp": "ひかるおまもり SWSH, BDSP",
+    "en": "Shiny Charm(SWSH, BDSP)"
+  },
+  "gen8ShinyCharmLA": {
+    "jp": "ひかるおまもり LA",
+    "en": "Shiny Charm(LA)"
+  },
+  "gen8MassOutbreaks": {
+    "jp": "大量発生",
+    "en": "MassOutbreaks"
+  },
+  "gen8MassiveMassOutbreaks": {
+    "jp": "大大大発生",
+    "en": "Massive Mass Outbreaks"
+  },
+  "gen8Rank": {
+    "jp": "図鑑研究レベル10",
+    "en": "Rank 10"
+  },
+  "gen8ResearchTask": {
+    "jp": "図鑑タスク完璧",
+    "en": "Research Task Complete"
+  },
+  "gen9Normal": {
+    "ja": "自然遭遇",
+    "en": "Normal Encounter"
+  },
+  "gen9MasudaMethod": {
+    "ja": "国際孵化",
+    "en": "Masuda Method"
+  },
+  "gen9ShinyCharmSV": {
+    "ja": "ひかるおまもり",
+    "en": "Shiny Charm"
+  },
+  "gen9MassOutbreaksSV": {
+    "ja": "大量発生",
+    "en": "Mass Outbreaks"
+  },
+  "gen9SparklingPowerSV": {
+    "ja": "かがやきパワーLv3",
+    "en": "Sparkling Power Lv3"
   }
 }
