@@ -173,7 +173,7 @@ hr {
   font-size: 2.2em;
 }
 
-select>option {
+select > option {
   color: inherit;
   text-align: inherit;
   font-size: 1em;
@@ -192,7 +192,7 @@ details {
 }
 
 .calcOptionLabel,
-#checkboxs>fieldset>label {
+#checkboxs > fieldset > label {
   font-weight: 400;
 }
 
@@ -232,7 +232,6 @@ details {
   border: 1px dashed #777;
 }
 
-
 .btn {
   height: inherit;
   margin: 1em auto;
@@ -248,12 +247,12 @@ details {
   color: #fff;
 }
 
-.show>.btn-light.dropdown-toggle {
+.show > .btn-light.dropdown-toggle {
   background-color: rgba(33, 33, 33, 0.65);
   color: inherit;
 }
 
-.bootstrap-select>select.mobile-device:focus+.dropdown-toggle,
+.bootstrap-select > select.mobile-device:focus + .dropdown-toggle,
 .bootstrap-select .dropdown-toggle:focus {
   outline: 0 !important;
 }
